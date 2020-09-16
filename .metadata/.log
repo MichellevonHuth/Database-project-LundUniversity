@@ -1,0 +1,62 @@
+
+!ENTRY org.eclipse.egit.core 4 0 2020-09-16 17:04:35.598
+!MESSAGE Git team provider configuration has gone missing.
+!STACK 0
+java.nio.file.NoSuchFileException: /Users/Michelle/Documents/LUND/Termin 3/Databaser/ht20-sysb13-db-progassignmt-ht20-sysb13-it-s-not-just-for-boys/.metadata/.plugins/org.eclipse.core.resources/.projects/RemoteSystemsTempFiles/org.eclipse.egit.core/GitProjectData.properties
+	at java.base/sun.nio.fs.UnixException.translateToIOException(UnixException.java:92)
+	at java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:111)
+	at java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:116)
+	at java.base/sun.nio.fs.UnixFileSystemProvider.newByteChannel(UnixFileSystemProvider.java:215)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:369)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:415)
+	at java.base/java.nio.file.spi.FileSystemProvider.newInputStream(FileSystemProvider.java:384)
+	at java.base/java.nio.file.Files.newInputStream(Files.java:154)
+	at org.eclipse.egit.core.project.GitProjectData.load(GitProjectData.java:620)
+	at org.eclipse.egit.core.project.GitProjectData.get(GitProjectData.java:220)
+	at org.eclipse.egit.core.GitProvider.getData(GitProvider.java:108)
+	at org.eclipse.egit.core.project.RepositoryMapping.getProjectData(RepositoryMapping.java:340)
+	at org.eclipse.egit.core.project.RepositoryMapping.findMapping(RepositoryMapping.java:356)
+	at org.eclipse.egit.core.project.RepositoryMapping.getMapping(RepositoryMapping.java:313)
+	at org.eclipse.egit.ui.Activator$RepositoryChangeScanner.lambda$0(Activator.java:941)
+	at org.eclipse.jgit.events.IndexChangedEvent.dispatch(IndexChangedEvent.java:81)
+	at org.eclipse.jgit.events.IndexChangedEvent.dispatch(IndexChangedEvent.java:1)
+	at org.eclipse.jgit.events.ListenerList.dispatch(ListenerList.java:133)
+	at org.eclipse.jgit.lib.Repository.fireEvent(Repository.java:197)
+	at org.eclipse.jgit.internal.storage.file.FileRepository.notifyIndexChanged(FileRepository.java:528)
+	at org.eclipse.jgit.internal.storage.file.FileRepository.detectIndexChanges(FileRepository.java:519)
+	at org.eclipse.jgit.internal.storage.file.FileRepository.scanForRepoChanges(FileRepository.java:500)
+	at org.eclipse.egit.ui.Activator$RepositoryChangeScanner.run(Activator.java:1059)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.core.resources 2 2 2020-09-16 17:06:10.925
+!MESSAGE Save operation warnings.
+!SUBENTRY 1 org.eclipse.core.resources 2 234 2020-09-16 17:06:10.925
+!MESSAGE The project description file (.project) for 'RemoteSystemsTempFiles' was missing.  This file contains important information about the project.  A new project description file has been created, but some information about the project may have been lost.
+
+!ENTRY org.eclipse.egit.core 4 0 2020-09-16 17:06:11.135
+!MESSAGE Git team provider configuration has gone missing.
+!STACK 0
+java.nio.file.NoSuchFileException: /Users/Michelle/Documents/LUND/Termin 3/Databaser/ht20-sysb13-db-progassignmt-ht20-sysb13-it-s-not-just-for-boys/.metadata/.plugins/org.eclipse.core.resources/.projects/RemoteSystemsTempFiles/org.eclipse.egit.core/GitProjectData.properties
+	at java.base/sun.nio.fs.UnixException.translateToIOException(UnixException.java:92)
+	at java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:111)
+	at java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:116)
+	at java.base/sun.nio.fs.UnixFileSystemProvider.newByteChannel(UnixFileSystemProvider.java:215)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:369)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:415)
+	at java.base/java.nio.file.spi.FileSystemProvider.newInputStream(FileSystemProvider.java:384)
+	at java.base/java.nio.file.Files.newInputStream(Files.java:154)
+	at org.eclipse.egit.core.project.GitProjectData.load(GitProjectData.java:620)
+	at org.eclipse.egit.core.project.GitProjectData.get(GitProjectData.java:220)
+	at org.eclipse.egit.core.internal.indexdiff.GitResourceDeltaVisitor.visit(GitResourceDeltaVisitor.java:117)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:67)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:77)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:51)
+	at org.eclipse.egit.core.internal.indexdiff.IndexDiffCacheEntry$6.resourceChanged(IndexDiffCacheEntry.java:740)
+	at org.eclipse.core.internal.events.NotificationManager$1.run(NotificationManager.java:305)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.core.internal.events.NotificationManager.notify(NotificationManager.java:295)
+	at org.eclipse.core.internal.events.NotificationManager.broadcastChanges(NotificationManager.java:158)
+	at org.eclipse.core.internal.resources.Workspace.broadcastPostChange(Workspace.java:379)
+	at org.eclipse.core.internal.resources.Workspace.endOperation(Workspace.java:1502)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:49)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
