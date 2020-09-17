@@ -20,5 +20,11 @@ public class Student {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	
+	public void addCourseForStudent(WrittenExam writtenExam) {
+		writtenExam.setCourse(this);
+		writtenExamList.add(writtenExam); 
+	}
 
 }

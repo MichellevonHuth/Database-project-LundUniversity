@@ -28,7 +28,18 @@ public class Course {
 		this.name = name;
 	}
 	
-
+	public Result findResult(Student s, WrittenExam exam) {
+		for (Result result : exam.getResultListWE()) {
+			if (result.getStudent().getStudentID().equals(s.getStudentID())) {
+				return result;
+			}
+		}
+		return null;
+	}
+	
+	public void findNotCompleted () {
+		
+	}
 	
 
 }
