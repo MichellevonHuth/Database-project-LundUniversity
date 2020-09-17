@@ -10,7 +10,7 @@ public class ApplicationWindow {
 		Course course = new Course();
 		Student student = new Student();
 		
-		System.out.println("Hej");
+
 		
 		try {
 			DataBaseConnection DAL = new DataBaseConnection();
