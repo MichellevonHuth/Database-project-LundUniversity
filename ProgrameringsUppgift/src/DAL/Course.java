@@ -1,5 +1,5 @@
 package DAL;
-/*/package grupp12;
+
 
 public class Course {
 
@@ -29,6 +29,8 @@ public class Course {
 		this.name = name;
 	}
 	
+	/*/
+	
 	public Course findCourse(String courseID) {
 		
 		for(Course c : courseList) {
@@ -40,7 +42,8 @@ public class Course {
 		return null;
 	}
 	
+	
 	public void removeCourse()
+	/*/
 
 }
-/*/

@@ -1,12 +1,15 @@
 package View;
 import java.sql.*;
 
+import DAL.*;
 import DataBase.DataBaseConnection;
 public class ApplicationWindow {
 	
 	public static void main(String[] args) {
 		try {
 			DataBaseConnection DAL = new DataBaseConnection();
+			Course course = new Course();
+			Student student = new Student();
 			
 			//Query to be executed.
 			String query = "SELECT * FROM Student";

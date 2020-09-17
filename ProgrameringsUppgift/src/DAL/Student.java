@@ -1,5 +1,5 @@
 package DAL;
-/*/package grupp12;
+
 
 public class Student {
 
@@ -21,8 +21,14 @@ public class Student {
 	public void setName(String name) {
 		this.name = name;
 	}
+}
+
+	/*/
 	
 	public Student findStudent(String studentID) {
+		
+	
+	
 		
 		for(Student s : studentList) {
 			if(s.getStudentID().equals(studentID)) {
@@ -34,6 +40,7 @@ public class Student {
 	}
 	
 	
+	
 	public void addCourseForStudent(WrittenExam writtenExam) {
 		writtenExam.setCourse(this);
 		writtenExamList.add(writtenExam); 
@@ -41,4 +48,5 @@ public class Student {
 	
 	public void removeStudent()
 
-}/*/
+}
+/*/

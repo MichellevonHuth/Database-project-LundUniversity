@@ -1,8 +1,8 @@
 package DAL;
-	/*/
-package grupp12;
+
 
 public class HasStudied {
+	/*/
 
 	public int getResult() {
 		return result;
@@ -45,7 +45,7 @@ public class HasStudied {
 	public String showInfoABoutStudentsWhoHavePassed() {
 	
 	}
+	/*/
 
 
 }
-/*/
