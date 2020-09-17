@@ -29,8 +29,8 @@ public class Student {
 			}
 		}
 		
-	return null;
-}
+		return null;
+	}
 	
 	
 	public void addCourseForStudent(WrittenExam writtenExam) {

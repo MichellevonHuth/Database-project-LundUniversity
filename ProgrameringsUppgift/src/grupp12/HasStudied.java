@@ -16,5 +16,32 @@ public class HasStudied {
 			this.result = 0;
 		}
 	}
+	
+	public Result findResultForGivenCourse(Student s, WrittenExam exam) {
+		for (Result result : exam.getResultListWE()) {
+			if (result.getStudent().getStudentID().equals(s.getStudentID())) {
+				return result;
+			}
+		}
+		return null;
+	}
+	
+	public int studentsWithGradeA(WrittenExam exam) {
+		int passedExam = 0;
+		for (Result temporaryResult : exam.getResultListWE()) {
+			if (temporaryResult.getResult() >= 50) {
+				passedExam++;
+			}
+		}
+		return passedExam;
+	}
+	
+	public String showResultForACertainStudentAndCertainCourse () {
+		
+	}
+	
+	public String showInfoABoutStudentsWhoHavePassed() {
+		
+	}
 
 }
