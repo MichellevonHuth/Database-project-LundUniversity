@@ -1,4 +1,4 @@
-package grupp12;
+package View;
 
 public class View {
 

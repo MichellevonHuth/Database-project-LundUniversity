@@ -1,5 +1,7 @@
-package grupp12;
+package View;
 import java.sql.*;
+
+import DataBase.DataAccessLayer;
 public class ApplicationWindow {
 	
 	public static void main(String[] args) {

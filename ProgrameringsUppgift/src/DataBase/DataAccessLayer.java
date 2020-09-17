@@ -1,4 +1,4 @@
-package grupp12;
+package DataBase;
 import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
