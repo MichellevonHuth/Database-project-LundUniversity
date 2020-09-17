@@ -3,7 +3,7 @@ import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class DataAccessLayer {
+public class DataBaseConnection {
 	
 	private String connectionString =				
 			"jdbc:sqlserver://" + 
@@ -23,7 +23,7 @@ public class DataAccessLayer {
 		return connection;
 	}
 	
-	public DataAccessLayer() {
+	public DataBaseConnection() {
 		try {
 			this.connection = DriverManager.getConnection(connectionString);		
 		}

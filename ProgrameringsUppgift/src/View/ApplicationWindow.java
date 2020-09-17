@@ -1,12 +1,12 @@
 package View;
 import java.sql.*;
 
-import DataBase.DataAccessLayer;
+import DataBase.DataBaseConnection;
 public class ApplicationWindow {
 	
 	public static void main(String[] args) {
 		try {
-			DataAccessLayer DAL = new DataAccessLayer();
+			DataBaseConnection DAL = new DataBaseConnection();
 			
 			//Query to be executed.
 			String query = "SELECT * FROM Student";
