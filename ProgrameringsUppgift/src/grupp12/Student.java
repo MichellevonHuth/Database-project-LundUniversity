@@ -1,4 +1,4 @@
-package grupp12;
+/*/package grupp12;
 
 public class Student {
 
@@ -37,5 +37,7 @@ public class Student {
 		writtenExam.setCourse(this);
 		writtenExamList.add(writtenExam); 
 	}
+	
+	public void removeStudent()
 
-}
+}/*/

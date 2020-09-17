@@ -1,4 +1,4 @@
-package grupp12;
+/*/package grupp12;
 
 public class Course {
 
@@ -39,5 +39,7 @@ public class Course {
 		return null;
 	}
 	
+	public void removeCourse()
 
 }
+/*/

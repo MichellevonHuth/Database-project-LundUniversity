@@ -1,16 +1,26 @@
-package grupp12;
 import java.sql.*;
-public class ApplicationWindow {
-	
+public class sqltest {
+
 	public static void main(String[] args) {
 		try {
-			DataAccessLayer DAL = new DataAccessLayer();
-			
+			// Store connection string as variable.
+			String connectionString = 
+					"jdbc:sqlserver://" + 
+					System.getenv("ADDRESS_SQL") + 
+					";database=sudoku;user= "  + 
+					System.getenv("USER_SQL") + 
+					";password=" + 
+					System.getenv("PASSWORD_SQL") + 
+					";encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
+
+			//Create the connection.
+			Connection connection = DriverManager.getConnection(connectionString);
+
 			//Query to be executed.
-			String query = "SELECT * FROM Student";
+			String query = "SELECT TOP(10) Id FROM Puzzles;";
 
 			//Load the statement.
-			PreparedStatement preparedStatement = DAL.getConnection().prepareStatement(query);
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
 
 			//Execute the query and store Re	sultSet in variable.
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -34,6 +44,7 @@ public class ApplicationWindow {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+
 	}
 
 }
