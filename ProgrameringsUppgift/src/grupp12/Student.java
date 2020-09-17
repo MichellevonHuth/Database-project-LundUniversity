@@ -21,6 +21,17 @@ public class Student {
 		this.name = name;
 	}
 	
+	public Student findStudent(String studentID) {
+		
+		for(Student s : studentList) {
+			if(s.getStudentID().equals(studentID)) {
+				return s; 
+			}
+		}
+		
+	return null;
+}
+	
 	
 	public void addCourseForStudent(WrittenExam writtenExam) {
 		writtenExam.setCourse(this);
