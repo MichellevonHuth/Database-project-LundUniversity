@@ -22,7 +22,10 @@ public class ApplicationWindow {
 	private JTextField studentNameTextField;
 	private JTextField studentIdTextField;
 	private JLabel lblNewLabel;
+	private JButton btnAddstudent;
 	
+	
+
 	DataAccessLayer dal = new DataAccessLayer();
 	Controller controller = new Controller(dal, frame); 
 	ErrorHandler e = new ErrorHandler(); 
@@ -99,30 +102,7 @@ public class ApplicationWindow {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-	JButton btnAddstudent = new JButton("AddStudent");
-		btnAddstudent.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				String[] student = { studentNameTextField.getText(), studentIdTextField.getText() };
-				try {
-					if (studentIdTextField.getText().equals("") || studentNameTextField.getText().equals("")) {
-						lblNewLabel.setText("Skriv i felten");
-					} else {
-					controller.addStudent(student);
-					lblNewLabel.setText( student + " har lagts till");
-					studentIdTextField.setText("");
-					studentNameTextField.setText("");
-					}
-						
-				} 
-				 catch (SQLException e1 ) {
-					 e1.printStackTrace();
-							
-				 }	
-			}
-		});
-		
-		
+		btnAddstudent = new JButton("AddStudent");
 		btnAddstudent.setBounds(16, 38, 117, 29);
 		frame.getContentPane().add(btnAddstudent);
 		
@@ -159,5 +139,27 @@ public class ApplicationWindow {
 		studentIdTextField.setBounds(33, 246, 204, 26);
 		frame.getContentPane().add(studentIdTextField);
 		studentIdTextField.setColumns(10);
+	}
+	
+	public JButton getBtnAddstudent() {
+		return btnAddstudent;
+	}
+
+	public void setBtnAddstudent(JButton btnAddstudent) {
+		this.btnAddstudent = btnAddstudent;
+	}
+	public JTextField getStudentIdTextField() {
+		return studentIdTextField;
+	}
+
+	public void setStudentIdTextField(JTextField studentIdTextField) {
+		this.studentIdTextField = studentIdTextField;
+	}
+	public JTextField getStudentNameTextField() {
+		return studentNameTextField;
+	}
+
+	public void setStudentNameTextField(JTextField studentNameTextField) {
+		this.studentNameTextField = studentNameTextField;
 	}
 }
