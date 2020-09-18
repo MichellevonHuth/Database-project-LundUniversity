@@ -9,94 +9,29 @@ import DAL.DataAccessLayer;
 import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JTextField;
-
 import Controller.Controller;
-
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class ApplicationWindow {
+public class ApplicationWindow extends JFrame {
 
 	private JFrame frame;
 	private JTextField studentNameTextField;
 	private JTextField studentIdTextField;
 	private JLabel lblNewLabel;
 	private JButton btnAddstudent;
+	private JButton btnAddcourse;
+	private JButton btnRemovecourse;
+	private JButton btnRemovestudent;
+	private JButton btnFindstudent;
+	private JButton btnFindcourse;
 	
-	
-
-	DataAccessLayer dal = new DataAccessLayer();
-	Controller controller = new Controller(dal, frame); 
-	ErrorHandler e = new ErrorHandler(); 
-	
-	
-		public static void main(String[] args) {
-			
-		
-			try {
-				DataAccessLayer DAL = new DataAccessLayer();
-				
-				//Query to be executed.
-				String query = "SELECT * FROM Student";
-
-				//Load the statement.
-				PreparedStatement preparedStatement = DAL.getConnection().prepareStatement(query);
-
-				//Execute the query and store Re	sultSet in variable.
-				ResultSet resultSet = preparedStatement.executeQuery();
-
-				//Store metadata of ResultSet in variable
-				ResultSetMetaData md = resultSet.getMetaData();
-
-				//Store the number of columns in ResultSet in variable.
-				int columns = md.getColumnCount();
-
-				while (resultSet.next()) {
-
-					//For i <= number of columns in set.
-					for (int i = 1; i <= columns; ++i) {
-						
-						//Print the cell value at the current row, index i
-						System.out.println(resultSet.getObject(i));
-					}
-				}
-
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
-		
-
+	private Controller controller; 
 	
 
-	
-
-	/**
-	 * Launch the application.
-	 */
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ApplicationWindow window = new ApplicationWindow();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
 	public ApplicationWindow() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
+	
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -106,23 +41,23 @@ public class ApplicationWindow {
 		btnAddstudent.setBounds(16, 38, 117, 29);
 		frame.getContentPane().add(btnAddstudent);
 		
-		JButton btnAddcourse = new JButton("AddCourse");
+		btnAddcourse = new JButton("AddCourse");
 		btnAddcourse.setBounds(16, 79, 117, 29);
 		frame.getContentPane().add(btnAddcourse);
 		
-		JButton btnRemovecourse = new JButton("RemoveCourse");
+		btnRemovecourse = new JButton("RemoveCourse");
 		btnRemovecourse.setBounds(16, 115, 117, 29);
 		frame.getContentPane().add(btnRemovecourse);
 		
-		JButton btnRemovestudent = new JButton("RemoveStudent");
+		btnRemovestudent = new JButton("RemoveStudent");
 		btnRemovestudent.setBounds(16, 156, 154, 29);
 		frame.getContentPane().add(btnRemovestudent);
 		
-		JButton btnFindstudent = new JButton("FindStudent");
+		btnFindstudent = new JButton("FindStudent");
 		btnFindstudent.setBounds(145, 38, 117, 29);
 		frame.getContentPane().add(btnFindstudent);
 		
-		JButton btnFindcourse = new JButton("FindCourse");
+		btnFindcourse = new JButton("FindCourse");
 		btnFindcourse.setBounds(155, 79, 117, 29);
 		frame.getContentPane().add(btnFindcourse);
 		
@@ -139,6 +74,14 @@ public class ApplicationWindow {
 		studentIdTextField.setBounds(33, 246, 204, 26);
 		frame.getContentPane().add(studentIdTextField);
 		studentIdTextField.setColumns(10);
+	}
+	
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
 	}
 	
 	public JButton getBtnAddstudent() {
@@ -162,4 +105,67 @@ public class ApplicationWindow {
 	public void setStudentNameTextField(JTextField studentNameTextField) {
 		this.studentNameTextField = studentNameTextField;
 	}
+	public JLabel getLblNewLabel() {
+		return lblNewLabel;
+	}
+
+	public void setLblNewLabel(JLabel lblNewLabel) {
+		this.lblNewLabel = lblNewLabel;
+	}
+
+	public JButton getBtnAddcourse() {
+		return btnAddcourse;
+	}
+
+	public void setBtnAddcourse(JButton btnAddcourse) {
+		this.btnAddcourse = btnAddcourse;
+	}
+
+	
+	public JButton getBtnRemovecourse() {
+		return btnRemovecourse;
+	}
+
+	public void setBtnRemovecourse(JButton btnRemovecourse) {
+		this.btnRemovecourse = btnRemovecourse;
+	}
+
+	
+	public JButton getBtnRemovestudent() {
+		return btnRemovestudent;
+	}
+
+	public void setBtnRemovestudent(JButton btnRemovestudent) {
+		this.btnRemovestudent = btnRemovestudent;
+	}
+
+	
+	public JButton getBtnFindstudent() {
+		return btnFindstudent;
+	}
+
+	public void setBtnFindstudent(JButton btnFindstudent) {
+		this.btnFindstudent = btnFindstudent;
+	}
+
+	
+
+	public JButton getBtnFindcourse() {
+		return btnFindcourse;
+	}
+
+	public void setBtnFindcourse(JButton btnFindcourse) {
+		this.btnFindcourse = btnFindcourse;
+	}
+	
+	public Controller getController() {
+		return controller;
+	}
+
+	public void setController(Controller controller) {
+		this.controller = controller;
+	}
+
 }
+	
+

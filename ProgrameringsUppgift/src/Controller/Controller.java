@@ -10,49 +10,58 @@ import javax.swing.JFrame;
 
 public class Controller {
 	
-	DataAccessLayer dal = new DataAccessLayer(); 
-	ApplicationWindow applicationWindow;
-	
-	
-	private DataAccessLayer dataAccessLayer; 
-	private JFrame applicationWindow1;
+	private DataAccessLayer dal;
+	private ApplicationWindow applicationWindow;
 
 	
-	
-	public Controller(DataAccessLayer dal, ApplicationWindow applicationWindow) {
-		
-		
-		this.dal =  dataAccessLayer; 
+	public DataAccessLayer getDataAccessLayer( ) {
+		return dal;
+	}
+	public void setDataAccessLayer (DataAccessLayer dal) {
+		this.dal = dal;
+	}
+	public void setApplicationWindow(ApplicationWindow applicationWindow) {
 		this.applicationWindow = applicationWindow;
+	}
+	public ApplicationWindow getApplicationWindow() {
+		return applicationWindow;
 	}
 	
 	
 	
+	public Controller(DataAccessLayer dal, ApplicationWindow applicationWindow) {
+		this.dal = dal; 
+		this.applicationWindow = applicationWindow;
+		declareEvents();
+	}
+	
+
+	public void declareEvents () {
 	applicationWindow.getBtnAddstudent().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			String studentID = applicationWindow.getStudentIdTextField().getText();
 			String studentName = applicationWindow.getStudentNameTextField().getText();
 			
+			
 			try {
-				if (studentID.equals("") || studentName.equals("")) {
-					lblNewLabel.setText("Skriv i fälten");
-				} else {
-				dataAccessLayer.addStudent(studentName, studentID);
 				
-				lblNewLabel.setText( student + " har lagts till");
-				studentIdTextField.setText("");
-				studentNameTextField.setText("");
-				}
-					
-			} 
-			 catch (SQLException e1 ) {
-				 e1.printStackTrace();
-						
-			 }	
+				dal.addStudent(studentName, studentID);
+			}
+			
+			catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+				
 		}
-		}
-	});
+		
+		
+		
+		});
 	
 	
+	}
 
 }
+
+
+

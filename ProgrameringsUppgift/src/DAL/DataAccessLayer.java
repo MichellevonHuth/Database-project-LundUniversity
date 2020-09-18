@@ -8,25 +8,6 @@ public class DataAccessLayer {
 	
 	private Connection connection;
 	String connectionString = "jdbc:sqlserver://" +  "localhost" + ";database=master;user= "  + "sa" + ";password=" + System.getenv("PASSWORD") + ";trustServerCertificate=true;loginTimeout=30;" ;
-
-	
-	
-	public ResultSet getStudents() throws SQLException {
-	DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
-	String query = "SELECT * FROM Student";
-	PreparedStatement ps = connection.prepareStatement(query);
-	ResultSet resultList= ps.executeQuery();
-	return resultList;
-	
-	}
-	
-	public void setConnectionString(DataAccessLayer dataAccessLayer) {
-		this.connection = connection;
-	}
-	
-	public Connection getConnection() {
-		return connection;
-	}
 	
 	public DataAccessLayer() {
 		try {
@@ -36,26 +17,30 @@ public class DataAccessLayer {
 			e.printStackTrace();
 		}	
 	}
-
-	public String addStudent(String studentName, String studentID) throws SQLException {
+	
+	
+	
+	public ResultSet findAllStudents() throws SQLException {
+		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
+	
+		String query = "SELECT * FROM Student";
+	
+		PreparedStatement ps = connection.prepareStatement(query);
+		ResultSet resultList= ps.executeQuery();
+	
+		return resultList;
+	
+	}	
+	
+	public void addStudent(String studentName, String studentID) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		
-
+		String query = "INSERT INTO Student (studentName, studentID) Values('"+ studentName + "','" + studentID + "')";
+		PreparedStatement ps = connection.prepareStatement(query);
+		ps.executeUpdate();
 		
-		/*/
-		connection = getConnection();
-		PreparedStatement pstmt = connection.prepareStatement(addStudent1(student));
-		pstmt.setString(1, student[0]);
-		pstmt.setString(2, student[1]);
-		pstmt.executeUpdate();
-		connection.close();
-		return "Student Tillagd";
-		/*/
 	}
 	
-	public String addStudent1(String [] student) {
-		return "Insert into Student values(?,?)";
-	}
-				
+		
 }
 
