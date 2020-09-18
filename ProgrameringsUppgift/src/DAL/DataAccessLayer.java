@@ -13,19 +13,20 @@ public class DataAccessLayer {
 			";password=" + 
 			System.getenv("PASSWORD") + 
 			";trustServerCertificate=true;loginTimeout=30;" ;
-	private DataAccessLayer dataAccessLayer;
+	
+	private Connection connection;
 	
 	public void setConnectionString(DataAccessLayer dataAccessLayer) {
-		this.dataAccessLayer = dataAccessLayer;
+		this.connection = connection;
 	}
 	
-	public DataAccessLayer getConnection() {
-		return dataAccessLayer;
+	public Connection getConnection() {
+		return connection;
 	}
 	
 	public DataAccessLayer() {
 		try {
-			this.dataAccessLayer = DriverManager.getConnection(connectionString);		
+			this.connection = DriverManager.getConnection(connectionString);		
 		}
 		catch(Exception e) {
 			e.printStackTrace();

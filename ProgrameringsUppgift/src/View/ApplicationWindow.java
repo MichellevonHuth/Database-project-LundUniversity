@@ -2,19 +2,14 @@ package View;
 import java.sql.*;
 
 import DAL.*;
-import DataBase.DataBaseConnection;
+import DAL.DataAccessLayer;
 public class ApplicationWindow {
 	
 	public static void main(String[] args) {
 		
-		Course course = new Course();
-		Student student = new Student();
-		
-		System.out.println("hej");
-
-		
+	
 		try {
-			DataAccessLayer DAL = new DataLayer();
+			DataAccessLayer DAL = new DataAccessLayer();
 			
 			//Query to be executed.
 			String query = "SELECT * FROM Student";
