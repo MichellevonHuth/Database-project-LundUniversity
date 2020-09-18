@@ -13,7 +13,7 @@ public class ApplicationWindow {
 
 		
 		try {
-			DataBaseConnection DAL = new DataBaseConnection();
+			DataAccessLayer DAL = new DataLayer();
 			
 			//Query to be executed.
 			String query = "SELECT * FROM Student";
