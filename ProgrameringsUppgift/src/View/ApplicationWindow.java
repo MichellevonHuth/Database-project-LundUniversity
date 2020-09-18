@@ -19,7 +19,7 @@ public class ApplicationWindow extends JFrame {
 	private JFrame frame;
 	private JTextField studentNameTextField;
 	private JTextField studentIdTextField;
-	private JLabel lblNewLabel;
+	private JLabel messageField;
 	private JButton btnAddstudent;
 	private JButton btnAddcourse;
 	private JButton btnRemovecourse;
@@ -66,9 +66,9 @@ public class ApplicationWindow extends JFrame {
 		frame.getContentPane().add(studentNameTextField);
 		studentNameTextField.setColumns(10);
 		
-		lblNewLabel = new JLabel("");
-		lblNewLabel.setBounds(176, 128, 229, 16);
-		frame.getContentPane().add(lblNewLabel);
+		messageField = new JLabel("");
+		messageField.setBounds(176, 128, 229, 16);
+		frame.getContentPane().add(messageField);
 		
 		studentIdTextField = new JTextField();
 		studentIdTextField.setBounds(33, 246, 204, 26);
@@ -105,12 +105,12 @@ public class ApplicationWindow extends JFrame {
 	public void setStudentNameTextField(JTextField studentNameTextField) {
 		this.studentNameTextField = studentNameTextField;
 	}
-	public JLabel getLblNewLabel() {
-		return lblNewLabel;
+	public JLabel getMessageField() {
+		return messageField;
 	}
 
-	public void setLblNewLabel(JLabel lblNewLabel) {
-		this.lblNewLabel = lblNewLabel;
+	public void setMessageField(JLabel messageField) {
+		this.messageField = messageField;
 	}
 
 	public JButton getBtnAddcourse() {

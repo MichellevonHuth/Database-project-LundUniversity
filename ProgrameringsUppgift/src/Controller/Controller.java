@@ -46,6 +46,9 @@ public class Controller {
 			try {
 				
 				dal.addStudent(studentName, studentID);
+				applicationWindow.getStudentIdTextField().setText("");
+				applicationWindow.getStudentNameTextField().setText("");
+				applicationWindow.getMessageField().setText("Studenten har lagt till");
 			}
 			
 			catch (SQLException e1) {
