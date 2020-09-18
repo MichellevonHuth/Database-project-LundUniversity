@@ -1,6 +1,6 @@
 package DAL;
 
-import java.sql.Connection;
+import java.sql.*;
 import java.sql.DriverManager;
 
 public class DataAccessLayer {
@@ -34,6 +34,19 @@ public class DataAccessLayer {
 	
 		
 	}
-
-
+	
+	public String addStudent(String[] student) throws SQLException {
+		connection = getConnection();
+		PreparedStatement pstmt = connection.prepareStatement(addStudent1(student));
+		pstmt.setString(1, student[0]);
+		pstmt.setString(2, student[1]);
+		pstmt.executeUpdate();
+		connection.close();
+		return "Student Tillagd";
+	}
+	
+	public String addStudent1(String [] student) {
+		return "Insert into Student values(?,?)";
+	}
+				
 }

@@ -5,14 +5,27 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import DAL.*;
 import DAL.DataAccessLayer;
+
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+
+import Controller.Controller;
+
 import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ApplicationWindow {
 
 	private JFrame frame;
-	private JTextField textField;
+	private JTextField studentNameTextField;
+	private JTextField studentIdTextField;
+	private JLabel lblNewLabel;
+	
+	DataAccessLayer dal = new DataAccessLayer();
+	Controller controller = new Controller(dal, frame); 
+	ErrorHandler e = new ErrorHandler(); 
 	
 	
 		public static void main(String[] args) {
@@ -86,7 +99,29 @@ public class ApplicationWindow {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JButton btnAddstudent = new JButton("AddStudent");
+	JButton btnAddstudent = new JButton("AddStudent");
+		btnAddstudent.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				String[] student = { studentNameTextField.getText(), studentIdTextField.getText() };
+				try {
+					if (studentIdTextField.getText().equals("") || studentNameTextField.getText().equals("")) {
+						lblNewLabel.setText("Skriv i felten");
+					} 
+					controller.addStudent(student);
+					lblNewLabel.setText( student + " har lagts till");
+					studentIdTextField.setText("");
+					studentNameTextField.setText("");
+						
+				} 
+				 catch (SQLException e1) {
+					 e1.printStackTrace();
+							
+				 }	
+			}
+		});
+		
+		
 		btnAddstudent.setBounds(16, 38, 117, 29);
 		frame.getContentPane().add(btnAddstudent);
 		
@@ -110,13 +145,18 @@ public class ApplicationWindow {
 		btnFindcourse.setBounds(155, 79, 117, 29);
 		frame.getContentPane().add(btnFindcourse);
 		
-		textField = new JTextField();
-		textField.setBounds(33, 212, 204, 26);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		studentNameTextField = new JTextField();
+		studentNameTextField.setBounds(33, 212, 204, 26);
+		frame.getContentPane().add(studentNameTextField);
+		studentNameTextField.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(176, 128, 61, 16);
 		frame.getContentPane().add(lblNewLabel);
+		
+		studentIdTextField = new JTextField();
+		studentIdTextField.setBounds(33, 246, 204, 26);
+		frame.getContentPane().add(studentIdTextField);
+		studentIdTextField.setColumns(10);
 	}
 }
