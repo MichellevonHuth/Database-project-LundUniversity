@@ -5,10 +5,14 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import DAL.*;
 import DAL.DataAccessLayer;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
 
 public class ApplicationWindow {
 
 	private JFrame frame;
+	private JTextField textField;
 	
 	
 		public static void main(String[] args) {
@@ -80,6 +84,39 @@ public class ApplicationWindow {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		JButton btnAddstudent = new JButton("AddStudent");
+		btnAddstudent.setBounds(16, 38, 117, 29);
+		frame.getContentPane().add(btnAddstudent);
+		
+		JButton btnAddcourse = new JButton("AddCourse");
+		btnAddcourse.setBounds(16, 79, 117, 29);
+		frame.getContentPane().add(btnAddcourse);
+		
+		JButton btnRemovecourse = new JButton("RemoveCourse");
+		btnRemovecourse.setBounds(16, 115, 117, 29);
+		frame.getContentPane().add(btnRemovecourse);
+		
+		JButton btnRemovestudent = new JButton("RemoveStudent");
+		btnRemovestudent.setBounds(16, 156, 154, 29);
+		frame.getContentPane().add(btnRemovestudent);
+		
+		JButton btnFindstudent = new JButton("FindStudent");
+		btnFindstudent.setBounds(145, 38, 117, 29);
+		frame.getContentPane().add(btnFindstudent);
+		
+		JButton btnFindcourse = new JButton("FindCourse");
+		btnFindcourse.setBounds(155, 79, 117, 29);
+		frame.getContentPane().add(btnFindcourse);
+		
+		textField = new JTextField();
+		textField.setBounds(33, 212, 204, 26);
+		frame.getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setBounds(176, 128, 61, 16);
+		frame.getContentPane().add(lblNewLabel);
 	}
-
 }
