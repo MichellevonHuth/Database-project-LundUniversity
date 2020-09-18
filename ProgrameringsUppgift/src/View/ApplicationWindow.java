@@ -107,14 +107,15 @@ public class ApplicationWindow {
 				try {
 					if (studentIdTextField.getText().equals("") || studentNameTextField.getText().equals("")) {
 						lblNewLabel.setText("Skriv i felten");
-					} 
+					} else {
 					controller.addStudent(student);
 					lblNewLabel.setText( student + " har lagts till");
 					studentIdTextField.setText("");
 					studentNameTextField.setText("");
+					}
 						
 				} 
-				 catch (SQLException e1) {
+				 catch (SQLException e1 ) {
 					 e1.printStackTrace();
 							
 				 }	
@@ -151,7 +152,7 @@ public class ApplicationWindow {
 		studentNameTextField.setColumns(10);
 		
 		lblNewLabel = new JLabel("");
-		lblNewLabel.setBounds(176, 128, 61, 16);
+		lblNewLabel.setBounds(176, 128, 229, 16);
 		frame.getContentPane().add(lblNewLabel);
 		
 		studentIdTextField = new JTextField();

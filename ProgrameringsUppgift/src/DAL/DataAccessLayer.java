@@ -1,10 +1,12 @@
 package DAL;
-
+import java.sql.Connection;
 import java.sql.*;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 
 public class DataAccessLayer {
-
+	
+	private Connection connection;
 	private String connectionString =				
 			"jdbc:sqlserver://" + 
 			"localhost" +
@@ -13,9 +15,15 @@ public class DataAccessLayer {
 			";password=" + 
 			System.getenv("PASSWORD") + 
 			";trustServerCertificate=true;loginTimeout=30;" ;
+
+	public ResultSet getStudents(String name) throws SQLExecption {
+	DriverManager.deregisterDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
+	String query = "SELECT * FROM Student";
+	PreparedStatement ps = connection.prepareStatement(query);
+	ResultSet resultList= ps.executeQuery();
+	return resultList;
 	
-	private Connection connection;
-	
+	}
 	public void setConnectionString(DataAccessLayer dataAccessLayer) {
 		this.connection = connection;
 	}
@@ -30,11 +38,9 @@ public class DataAccessLayer {
 		}
 		catch(Exception e) {
 			e.printStackTrace();
-		}
-	
-		
+		}	
 	}
-	
+
 	public String addStudent(String[] student) throws SQLException {
 		connection = getConnection();
 		PreparedStatement pstmt = connection.prepareStatement(addStudent1(student));
@@ -50,3 +56,4 @@ public class DataAccessLayer {
 	}
 				
 }
+
