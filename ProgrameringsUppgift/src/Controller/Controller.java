@@ -43,12 +43,17 @@ public class Controller {
 		public void actionPerformed(ActionEvent e) {
 			String studentID = applicationWindow.getStudentIdTextField().getText();
 			String studentName = applicationWindow.getStudentNameTextField().getText();
-			
+	
 			try {	
-				dal.addStudent(studentName, studentID);
-				applicationWindow.getStudentIdTextField().setText("");
-				applicationWindow.getStudentNameTextField().setText("");
-				applicationWindow.getMessageField().setText("Studenten har lagt till");
+				if (studentID.equals("") && studentName.equals("")) {
+					applicationWindow.getMessageField().setText(errorHandler.errorMessageEmptyFields());
+				}
+				else {
+					dal.addStudent(studentName, studentID);
+					applicationWindow.getStudentIdTextField().setText("");
+					applicationWindow.getStudentNameTextField().setText("");
+					applicationWindow.getMessageField().setText("Studenten har lagt till");	
+				}
 			}
 			
 			catch (Exception e1) {

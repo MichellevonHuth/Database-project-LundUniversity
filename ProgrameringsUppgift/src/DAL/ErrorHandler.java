@@ -45,4 +45,9 @@ public class ErrorHandler {
 		
 		return errorMessage; 
 	}
+	
+	public String errorMessageEmptyFields() {
+		String errorMessage = "Vänligen fyll i båda fälten.";
+		return errorMessage;
+	}
 }
