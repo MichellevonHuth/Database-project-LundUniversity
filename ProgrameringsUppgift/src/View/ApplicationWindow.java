@@ -17,8 +17,8 @@ import java.awt.event.ActionEvent;
 public class ApplicationWindow extends JFrame {
 
 	private JFrame frame;
-	private JTextField studentNameTextField;
-	private JTextField studentIdTextField;
+	private JTextField textFieldStudentName;
+	private JTextField textFieldStudentId;
 	private JLabel messageField;
 	private JButton btnAddstudent;
 	private JButton btnAddcourse;
@@ -27,6 +27,9 @@ public class ApplicationWindow extends JFrame {
 	private JButton btnFindstudent;
 	private JButton btnFindcourse;
 	private Controller controller; 
+	private JTextField textFieldCourseCode;
+	private JTextField textFieldCredits;
+	private JTextField textFieldCourseName;
 	
 
 	public ApplicationWindow() {
@@ -60,19 +63,34 @@ public class ApplicationWindow extends JFrame {
 		btnFindcourse.setBounds(155, 79, 117, 29);
 		frame.getContentPane().add(btnFindcourse);
 		
-		studentNameTextField = new JTextField();
-		studentNameTextField.setBounds(33, 212, 204, 26);
-		frame.getContentPane().add(studentNameTextField);
-		studentNameTextField.setColumns(10);
+		textFieldStudentName = new JTextField();
+		textFieldStudentName.setBounds(16, 199, 204, 26);
+		frame.getContentPane().add(textFieldStudentName);
+		textFieldStudentName.setColumns(10);
 		
 		messageField = new JLabel("");
 		messageField.setBounds(176, 128, 229, 16);
 		frame.getContentPane().add(messageField);
 		
-		studentIdTextField = new JTextField();
-		studentIdTextField.setBounds(33, 246, 204, 26);
-		frame.getContentPane().add(studentIdTextField);
-		studentIdTextField.setColumns(10);
+		textFieldStudentId = new JTextField();
+		textFieldStudentId.setBounds(16, 237, 204, 26);
+		frame.getContentPane().add(textFieldStudentId);
+		textFieldStudentId.setColumns(10);
+		
+		textFieldCourseCode = new JTextField();
+		textFieldCourseCode.setBounds(249, 199, 130, 26);
+		frame.getContentPane().add(textFieldCourseCode);
+		textFieldCourseCode.setColumns(10);
+		
+		textFieldCredits = new JTextField();
+		textFieldCredits.setColumns(10);
+		textFieldCredits.setBounds(249, 237, 130, 26);
+		frame.getContentPane().add(textFieldCredits);
+		
+		textFieldCourseName = new JTextField();
+		textFieldCourseName.setColumns(10);
+		textFieldCourseName.setBounds(249, 156, 130, 26);
+		frame.getContentPane().add(textFieldCourseName);
 	}
 	
 	public JFrame getFrame() {
@@ -90,19 +108,19 @@ public class ApplicationWindow extends JFrame {
 	public void setBtnAddstudent(JButton btnAddstudent) {
 		this.btnAddstudent = btnAddstudent;
 	}
-	public JTextField getStudentIdTextField() {
-		return studentIdTextField;
+	public JTextField getTextFieldStudentId() {
+		return textFieldStudentId;
 	}
 
-	public void setStudentIdTextField(JTextField studentIdTextField) {
-		this.studentIdTextField = studentIdTextField;
+	public void setTextFieldStudentId(JTextField textFieldStudentId) {
+		this.textFieldStudentId = textFieldStudentId;
 	}
-	public JTextField getStudentNameTextField() {
-		return studentNameTextField;
+	public JTextField getTextFieldStudentName() {
+		return textFieldStudentName;
 	}
 
-	public void setStudentNameTextField(JTextField studentNameTextField) {
-		this.studentNameTextField = studentNameTextField;
+	public void setTextFieldStudentName(JTextField textFieldStudentName) {
+		this.textFieldStudentName = textFieldStudentName;
 	}
 	public JLabel getMessageField() {
 		return messageField;
@@ -147,8 +165,6 @@ public class ApplicationWindow extends JFrame {
 		this.btnFindstudent = btnFindstudent;
 	}
 
-	
-
 	public JButton getBtnFindcourse() {
 		return btnFindcourse;
 	}
@@ -164,7 +180,6 @@ public class ApplicationWindow extends JFrame {
 	public void setController(Controller controller) {
 		this.controller = controller;
 	}
-
 }
 	
 

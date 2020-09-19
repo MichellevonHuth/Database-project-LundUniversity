@@ -41,8 +41,8 @@ public class Controller {
 		
 	applicationWindow.getBtnAddstudent().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			String studentID = applicationWindow.getStudentIdTextField().getText();
-			String studentName = applicationWindow.getStudentNameTextField().getText();
+			String studentID = applicationWindow.getTextFieldStudentId().getText();
+			String studentName = applicationWindow.getTextFieldStudentName().getText();
 	
 			try {	
 				if (studentID.equals("") && studentName.equals("")) {
@@ -50,8 +50,8 @@ public class Controller {
 				}
 				else {
 					dal.addStudent(studentName, studentID);
-					applicationWindow.getStudentIdTextField().setText("");
-					applicationWindow.getStudentNameTextField().setText("");
+					applicationWindow.getTextFieldStudentId().setText("");
+					applicationWindow.getTextFieldStudentName().setText("");
 					applicationWindow.getMessageField().setText("Studenten har lagt till");	
 				}
 			}
@@ -64,6 +64,7 @@ public class Controller {
 	
 	applicationWindow.getBtnAddcourse().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
+			
 		}
 	});
 	
