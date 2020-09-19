@@ -37,14 +37,13 @@ public class Controller {
 	
 
 	public void declareEvents () {
+		
 	applicationWindow.getBtnAddstudent().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			String studentID = applicationWindow.getStudentIdTextField().getText();
 			String studentName = applicationWindow.getStudentNameTextField().getText();
 			
-			
-			try {
-				
+			try {	
 				dal.addStudent(studentName, studentID);
 				applicationWindow.getStudentIdTextField().setText("");
 				applicationWindow.getStudentNameTextField().setText("");
@@ -53,13 +52,16 @@ public class Controller {
 			
 			catch (SQLException e1) {
 				e1.printStackTrace();
-			}
-				
+			}			
+		}		
+	});
+	
+	
+	applicationWindow.getBtnRemovestudent().addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+		
 		}
-		
-		
-		
-		});
+	});
 	
 	
 	}
