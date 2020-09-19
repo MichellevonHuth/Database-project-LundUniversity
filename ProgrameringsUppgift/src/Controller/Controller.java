@@ -56,6 +56,11 @@ public class Controller {
 		}		
 	});
 	
+	applicationWindow.getBtnAddcourse().addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+		}
+	});
+	
 	
 	applicationWindow.getBtnRemovestudent().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {

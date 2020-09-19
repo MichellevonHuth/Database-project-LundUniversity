@@ -41,7 +41,31 @@ public class DataAccessLayer {
 		
 	}
 	
-	
+	public void addCourse(String courseCode, String courseName, String credits) throws SQLException {
+		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		
+		String query = "INSERT INTO Course (courseCode, courseName, credits) Values('"+ courseCode + "','" + courseName + "','" + credits + "')";
+		PreparedStatement ps = connection.prepareStatement(query);
+		ps.executeUpdate();
+		
+	}
+	
+	public void addStudentOnCourse(String courseCode, String studentID, String startDate) throws SQLException {
+		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
+		
+		String query = "INSERT INTO Studies (courseCode, studentID, startDate) Values('"+ courseCode + "','" + studentID + "','" + startDate + "')";
+		PreparedStatement ps = connection.prepareStatement(query);
+		ps.executeUpdate();
+		
+	}
+
+	public void insertIntoHasStuided(String courseCode, String studentID, int grade) throws SQLException {
+		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
+		
+		String query = "INSERT INTO hasStuided (courseCode, studentID, grade) Values('"+ courseCode + "','" + studentID + "','" + grade + "')";
+		PreparedStatement ps = connection.prepareStatement(query);
+		ps.executeUpdate();
+		
+	}
 }
 
