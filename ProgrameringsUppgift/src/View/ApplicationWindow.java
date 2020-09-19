@@ -14,12 +14,13 @@ import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
+import javax.swing.JTextPane;
+import javax.swing.SwingConstants;
 
 public class ApplicationWindow extends JFrame {
 
 	private JFrame frame;
 	private JTextField textFieldStudentName;
-	private JTextField textFieldStudentId;
 	private JLabel messageField;
 	private JButton btnAddstudent;
 	private JButton btnAddcourse;
@@ -28,70 +29,182 @@ public class ApplicationWindow extends JFrame {
 	private JButton btnFindstudent;
 	private JButton btnFindcourse;
 	private Controller controller; 
-	private JTextField textFieldCourseCode;
 	private JTextField textFieldCourseCredits;
 	private JTextField textFieldCourseName;
+	private JTextField textFieldGrade;
 	
 
 	public ApplicationWindow() {
 	
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 1500, 1000);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		btnAddstudent = new JButton("AddStudent");
-		btnAddstudent.setBounds(16, 38, 117, 29);
+		btnAddstudent = new JButton("ADD");
+		btnAddstudent.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnAddstudent.setBounds(39, 225, 164, 29);
 		frame.getContentPane().add(btnAddstudent);
 		
-		btnAddcourse = new JButton("AddCourse");
-		btnAddcourse.setBounds(16, 79, 117, 29);
+		btnAddcourse = new JButton("ADD");
+		btnAddcourse.setBounds(39, 621, 164, 29);
 		frame.getContentPane().add(btnAddcourse);
 		
-		btnRemovecourse = new JButton("RemoveCourse");
-		btnRemovecourse.setBounds(16, 115, 117, 29);
+		btnRemovecourse = new JButton("DELETE");
+		btnRemovecourse.setBounds(39, 651, 164, 29);
 		frame.getContentPane().add(btnRemovecourse);
 		
-		btnRemovestudent = new JButton("RemoveStudent");
-		btnRemovestudent.setBounds(16, 156, 154, 29);
+		btnRemovestudent = new JButton("DELETE");
+		btnRemovestudent.setBounds(39, 266, 164, 29);
 		frame.getContentPane().add(btnRemovestudent);
 		
-		btnFindstudent = new JButton("FindStudent");
-		btnFindstudent.setBounds(145, 38, 117, 29);
+		btnFindstudent = new JButton("FIND");
+		btnFindstudent.setBounds(215, 225, 164, 29);
 		frame.getContentPane().add(btnFindstudent);
 		
-		btnFindcourse = new JButton("FindCourse");
-		btnFindcourse.setBounds(155, 79, 117, 29);
+		btnFindcourse = new JButton("FIND");
+		btnFindcourse.setBounds(215, 621, 164, 29);
 		frame.getContentPane().add(btnFindcourse);
 		
 		textFieldStudentName = new JTextField();
-		textFieldStudentName.setBounds(16, 199, 204, 26);
+		textFieldStudentName.setBounds(163, 173, 204, 26);
 		frame.getContentPane().add(textFieldStudentName);
 		textFieldStudentName.setColumns(10);
 		
 		messageField = new JLabel("");
-		messageField.setBounds(176, 128, 229, 16);
+		messageField.setBounds(532, 772, 375, 46);
 		frame.getContentPane().add(messageField);
 		
-		textFieldStudentId = new JTextField();
-		textFieldStudentId.setBounds(16, 237, 204, 26);
-		frame.getContentPane().add(textFieldStudentId);
-		textFieldStudentId.setColumns(10);
-		
-		textFieldCourseCode = new JTextField();
-		textFieldCourseCode.setBounds(249, 199, 130, 26);
-		frame.getContentPane().add(textFieldCourseCode);
-		textFieldCourseCode.setColumns(10);
-		
 		textFieldCourseCredits = new JTextField();
+		textFieldCourseCredits.setBounds(163, 572, 189, 26);
 		textFieldCourseCredits.setColumns(10);
-		textFieldCourseCredits.setBounds(249, 237, 130, 26);
 		frame.getContentPane().add(textFieldCourseCredits);
 		
 		textFieldCourseName = new JTextField();
+		textFieldCourseName.setBounds(163, 544, 189, 26);
 		textFieldCourseName.setColumns(10);
-		textFieldCourseName.setBounds(249, 156, 130, 26);
 		frame.getContentPane().add(textFieldCourseName);
+		
+		JLabel lblStudent = new JLabel("STUDENT");
+		lblStudent.setBounds(163, 88, 61, 16);
+		frame.getContentPane().add(lblStudent);
+		
+		JLabel lblStudentName = new JLabel("Student Name:");
+		lblStudentName.setBounds(59, 178, 92, 16);
+		frame.getContentPane().add(lblStudentName);
+		
+		JLabel lblStudentId = new JLabel("Student ID: ");
+		lblStudentId.setBounds(59, 150, 84, 16);
+		frame.getContentPane().add(lblStudentId);
+		
+		JComboBox comboBoxStudentID = new JComboBox();
+		comboBoxStudentID.setBounds(163, 146, 204, 27);
+		frame.getContentPane().add(comboBoxStudentID);
+		
+		JButton btnShowAllStudents = new JButton("SHOW ALL STUDENTS");
+		btnShowAllStudents.setBounds(215, 266, 164, 29);
+		frame.getContentPane().add(btnShowAllStudents);
+		
+		JLabel lblCourse = new JLabel("COURSE");
+		lblCourse.setBounds(163, 466, 61, 16);
+		frame.getContentPane().add(lblCourse);
+		
+		JLabel lblCourseId = new JLabel("Course ID:");
+		lblCourseId.setBounds(59, 521, 84, 16);
+		frame.getContentPane().add(lblCourseId);
+		
+		JLabel lblCourseName = new JLabel("Course Name:");
+		lblCourseName.setBounds(59, 549, 92, 16);
+		frame.getContentPane().add(lblCourseName);
+		
+		JLabel lblCourse_1 = new JLabel("Credits:");
+		lblCourse_1.setBounds(59, 577, 92, 16);
+		frame.getContentPane().add(lblCourse_1);
+		
+		JComboBox comboBoxCourseID = new JComboBox();
+		comboBoxCourseID.setBounds(163, 517, 189, 27);
+		frame.getContentPane().add(comboBoxCourseID);
+		
+		JButton btnShowAllCourses = new JButton("SHOW ALL COURSES");
+		btnShowAllCourses.setBounds(215, 651, 164, 29);
+		frame.getContentPane().add(btnShowAllCourses);
+		
+		JTextPane textOutputBox = new JTextPane();
+		textOutputBox.setBounds(532, 88, 375, 630);
+		frame.getContentPane().add(textOutputBox);
+		
+		JLabel lblHeader = new JLabel("ALL STUDENTS");
+		lblHeader.setBounds(668, 45, 118, 16);
+		frame.getContentPane().add(lblHeader);
+		
+		JLabel lblNewLabel = new JLabel("REGISTRATE STUDENT ON A NEW COURSE");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(1044, 88, 337, 16);
+		frame.getContentPane().add(lblNewLabel);
+		
+		JLabel lblConnectionStudentID = new JLabel("Student ID:");
+		lblConnectionStudentID.setBounds(1044, 162, 84, 16);
+		frame.getContentPane().add(lblConnectionStudentID);
+		
+		JLabel lblConnectionCourseID = new JLabel("Course ID:");
+		lblConnectionCourseID.setBounds(1044, 188, 84, 16);
+		frame.getContentPane().add(lblConnectionCourseID);
+		
+		JComboBox comboBoxConnectionStudentID = new JComboBox();
+		comboBoxConnectionStudentID.setBounds(1140, 158, 197, 27);
+		frame.getContentPane().add(comboBoxConnectionStudentID);
+		
+		JComboBox comboBoxConnectionCourseID = new JComboBox();
+		comboBoxConnectionCourseID.setBounds(1140, 184, 197, 27);
+		frame.getContentPane().add(comboBoxConnectionCourseID);
+		
+		JButton btnConnectionInsert = new JButton("REGISTRATE");
+		btnConnectionInsert.setBounds(1027, 236, 181, 29);
+		frame.getContentPane().add(btnConnectionInsert);
+		
+		JButton btnConnectionRemove = new JButton("REMOVE");
+		btnConnectionRemove.setBounds(1216, 236, 181, 29);
+		frame.getContentPane().add(btnConnectionRemove);
+		
+		JLabel lblNewLabel_1 = new JLabel("REGISTRATE STUDENT FOR COMPLETED COURSES");
+		lblNewLabel_1.setBounds(1048, 458, 349, 16);
+		frame.getContentPane().add(lblNewLabel_1);
+		
+		JLabel lblRegistrateStudentID = new JLabel("Student ID:");
+		lblRegistrateStudentID.setBounds(1047, 513, 81, 16);
+		frame.getContentPane().add(lblRegistrateStudentID);
+		
+		JLabel lblRegistrationCourseID = new JLabel("Course ID:");
+		lblRegistrationCourseID.setBounds(1047, 540, 81, 16);
+		frame.getContentPane().add(lblRegistrationCourseID);
+		
+		JLabel lblNewLabel_2 = new JLabel("Grade:");
+		lblNewLabel_2.setBounds(1047, 569, 61, 16);
+		frame.getContentPane().add(lblNewLabel_2);
+		
+		JComboBox comboBoxRegistrationStudentID = new JComboBox();
+		comboBoxRegistrationStudentID.setBounds(1140, 509, 197, 27);
+		frame.getContentPane().add(comboBoxRegistrationStudentID);
+		
+		JComboBox comboBoxRegistrateCourseID = new JComboBox();
+		comboBoxRegistrateCourseID.setBounds(1140, 536, 197, 27);
+		frame.getContentPane().add(comboBoxRegistrateCourseID);
+		
+		textFieldGrade = new JTextField();
+		textFieldGrade.setBounds(1140, 564, 197, 26);
+		frame.getContentPane().add(textFieldGrade);
+		textFieldGrade.setColumns(10);
+		
+		JButton btnCompletedCourse = new JButton("REGISTRATE");
+		btnCompletedCourse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnCompletedCourse.setBounds(1027, 621, 181, 29);
+		frame.getContentPane().add(btnCompletedCourse);
 	}
 	
 	public JFrame getFrame() {
