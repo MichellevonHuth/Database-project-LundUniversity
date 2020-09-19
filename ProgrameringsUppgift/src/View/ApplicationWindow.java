@@ -26,7 +26,6 @@ public class ApplicationWindow extends JFrame {
 	private JButton btnRemovestudent;
 	private JButton btnFindstudent;
 	private JButton btnFindcourse;
-	
 	private Controller controller; 
 	
 

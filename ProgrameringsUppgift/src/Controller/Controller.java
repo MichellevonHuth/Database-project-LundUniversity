@@ -1,5 +1,5 @@
 package Controller;
-
+import DAL.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
@@ -12,6 +12,7 @@ public class Controller {
 	
 	private DataAccessLayer dal;
 	private ApplicationWindow applicationWindow;
+	ErrorHandler errorHandler = new ErrorHandler();
 
 	
 	public DataAccessLayer getDataAccessLayer( ) {
@@ -26,7 +27,7 @@ public class Controller {
 	public ApplicationWindow getApplicationWindow() {
 		return applicationWindow;
 	}
-	
+
 	
 	
 	public Controller(DataAccessLayer dal, ApplicationWindow applicationWindow) {
@@ -50,8 +51,8 @@ public class Controller {
 				applicationWindow.getMessageField().setText("Studenten har lagt till");
 			}
 			
-			catch (SQLException e1) {
-				e1.printStackTrace();
+			catch (Exception e1) {
+				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
 			}			
 		}		
 	});
