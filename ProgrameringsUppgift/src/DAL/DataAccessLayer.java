@@ -41,7 +41,7 @@ public class DataAccessLayer {
 		
 	}
 	
-	public void addCourse(String courseCode, String courseName, String credits) throws SQLException {
+	public void addCourse(String courseCode, String courseName, int credits) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		
 		String query = "INSERT INTO Course (courseCode, courseName, credits) Values('"+ courseCode + "','" + courseName + "','" + credits + "')";

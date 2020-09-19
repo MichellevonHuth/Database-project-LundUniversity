@@ -13,6 +13,7 @@ import Controller.Controller;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
 
 public class ApplicationWindow extends JFrame {
 
@@ -28,7 +29,7 @@ public class ApplicationWindow extends JFrame {
 	private JButton btnFindcourse;
 	private Controller controller; 
 	private JTextField textFieldCourseCode;
-	private JTextField textFieldCredits;
+	private JTextField textFieldCourseCredits;
 	private JTextField textFieldCourseName;
 	
 
@@ -82,10 +83,10 @@ public class ApplicationWindow extends JFrame {
 		frame.getContentPane().add(textFieldCourseCode);
 		textFieldCourseCode.setColumns(10);
 		
-		textFieldCredits = new JTextField();
-		textFieldCredits.setColumns(10);
-		textFieldCredits.setBounds(249, 237, 130, 26);
-		frame.getContentPane().add(textFieldCredits);
+		textFieldCourseCredits = new JTextField();
+		textFieldCourseCredits.setColumns(10);
+		textFieldCourseCredits.setBounds(249, 237, 130, 26);
+		frame.getContentPane().add(textFieldCourseCredits);
 		
 		textFieldCourseName = new JTextField();
 		textFieldCourseName.setColumns(10);
@@ -179,6 +180,30 @@ public class ApplicationWindow extends JFrame {
 
 	public void setController(Controller controller) {
 		this.controller = controller;
+	}
+	
+	public JTextField getTextFieldCourseCode() {
+		return textFieldCourseCode;
+	}
+
+	public void setTextFieldCourseCode(JTextField textFieldCourseCode) {
+		this.textFieldCourseCode = textFieldCourseCode;
+	}
+
+	public JTextField getTextFieldCourseCredits() {
+		return textFieldCourseCredits;
+	}
+
+	public void setTextFieldCourseCredits(JTextField textFieldCourseCredits) {
+		this.textFieldCourseCredits = textFieldCourseCredits;
+	}
+
+	public JTextField getTextFieldCourseName() {
+		return textFieldCourseName;
+	}
+
+	public void setTextFieldCourseName(JTextField textFieldCourseName) {
+		this.textFieldCourseName = textFieldCourseName;
 	}
 }
 	

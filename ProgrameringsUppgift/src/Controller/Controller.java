@@ -64,7 +64,26 @@ public class Controller {
 	
 	applicationWindow.getBtnAddcourse().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
+			String courseName = applicationWindow.getTextFieldCourseName().getText();
+			String courseCode = applicationWindow.getTextFieldCourseCode().getText();
+			int courseCredits = Integer.parseInt(applicationWindow.getTextFieldCourseCredits().getText());
+			String strCourseCredits = applicationWindow.getTextFieldCourseCredits().getText();
 			
+			try {
+				if (courseName.equals("") && courseCode.equals("") || strCourseCredits.equals("")) {
+					applicationWindow.getMessageField().setText(errorHandler.errorMessageEmptyFields());
+				}
+				else {
+					dal.addCourse(courseCode, courseName, courseCredits);
+					applicationWindow.getTextFieldCourseName().setText("");
+					applicationWindow.getTextFieldCourseCode().setText("");
+					applicationWindow.getTextFieldCourseCredits().setText("");
+					applicationWindow.getMessageField().setText("Kursen har lagts till");
+				}
+			}
+			catch (Exception e1) {
+				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
+			}
 		}
 	});
 	
