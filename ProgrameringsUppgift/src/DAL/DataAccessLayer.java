@@ -47,6 +47,7 @@ public class DataAccessLayer {
 	public ArrayList<String> findAllStudents() throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 			ArrayList<String> temp = new ArrayList<String>();
+			
 			String query = "SELECT * FROM Student";
 			PreparedStatement ps = connection.prepareStatement(query);
 			ResultSet resultList = ps.executeQuery();
@@ -62,6 +63,27 @@ public class DataAccessLayer {
 			}
 		return temp;
 		}
+	
+	public ArrayList<String> findStudent(String studentID) throws SQLException {
+		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
+		ArrayList<String> temp = new ArrayList<String>();
+		
+		String query = "SELECT * FROM Student WHERE studentID = '" + studentID + "'";
+		
+		PreparedStatement ps = connection.prepareStatement(query);
+		ResultSet resultList = ps.executeQuery();
+		int studentID1 = resultList.findColumn("StudentID");
+		int studentName2 = resultList.findColumn("StudentName");
+
+		while(resultList.next()) {
+			String getStudentID = resultList.getString(studentID1);
+			String getStudentName = resultList.getString(studentName2);
+			temp.add(getStudentID);
+			temp.add(getStudentName);
+		}
+			
+		return temp;
+	}
 
 	public ArrayList<String> getAllStudentID() throws SQLException {
 		
@@ -97,6 +119,8 @@ public class DataAccessLayer {
 		return temp;
 		
 	}
+	
+	
 	
 	
 	public void addCourse(String courseCode, String courseName, int credits) throws SQLException {

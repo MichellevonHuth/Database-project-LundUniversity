@@ -96,6 +96,26 @@ public class Controller {
 		}
 	});
 	
+
+	applicationWindow.getBtnFindstudent().addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			
+			String studentID = (String)applicationWindow.getComboBoxStudentID().getSelectedItem();
+			String temp = "";
+			try {
+				for(String s : dal.findStudent((String) studentID)) {
+					temp += s + "\n" + "\n";
+					applicationWindow.getTextOutputBox().setText(temp);
+					applicationWindow.getTextOutputBox().setText(temp);
+					System.out.println(temp);
+				}
+			}
+			catch (Exception e1) {
+				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
+			}
+		}
+	});
+	
 	applicationWindow.getBtnShowAllStudents().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 		String temp = "";
