@@ -13,6 +13,7 @@ public class Application {
 		applicationWindow.setController(controller);	
 		applicationWindow.getFrame().setVisible(true);
 		applicationWindow.getController().setComboBoxes();
+		System.out.print("hej");
 
 		
 		
