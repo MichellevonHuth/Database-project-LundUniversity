@@ -34,14 +34,14 @@ public class Controller {
 		this.dal = dal; 
 		this.applicationWindow = applicationWindow;
 		declareEvents();
-	}
+	} 
 	
 
 	public void declareEvents () {
 		
 	applicationWindow.getBtnAddstudent().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			String studentID = applicationWindow.getTextFieldStudentId().getText();
+			String studentID = applicationWindow.getComboBoxStudentID().Text.ToString();
 			String studentName = applicationWindow.getTextFieldStudentName().getText();
 	
 			try {	
@@ -50,7 +50,7 @@ public class Controller {
 				}
 				else {
 					dal.addStudent(studentName, studentID);
-					applicationWindow.getTextFieldStudentId().setText("");
+					applicationWindow.getComboBoxStudentID().setText("");
 					applicationWindow.getTextFieldStudentName().setText("");
 					applicationWindow.getMessageField().setText("Studenten har lagt till");	
 				}
@@ -65,7 +65,7 @@ public class Controller {
 	applicationWindow.getBtnAddcourse().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			String courseName = applicationWindow.getTextFieldCourseName().getText();
-			String courseCode = applicationWindow.getTextFieldCourseCode().getText();
+			String courseCode = applicationWindow.getComboBoxCourseID().getToolkit();
 			int courseCredits = Integer.parseInt(applicationWindow.getTextFieldCourseCredits().getText());
 			String strCourseCredits = applicationWindow.getTextFieldCourseCredits().getText();
 			
@@ -76,7 +76,7 @@ public class Controller {
 				else {
 					dal.addCourse(courseCode, courseName, courseCredits);
 					applicationWindow.getTextFieldCourseName().setText("");
-					applicationWindow.getTextFieldCourseCode().setText("");
+					applicationWindow.getComboBoxCourseID().setText("");
 					applicationWindow.getTextFieldCourseCredits().setText("");
 					applicationWindow.getMessageField().setText("Kursen har lagts till");
 				}
