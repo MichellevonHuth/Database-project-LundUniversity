@@ -12,8 +12,8 @@ public class Application {
 		Controller controller = new Controller (dal, applicationWindow);
 		applicationWindow.setController(controller);	
 		applicationWindow.getFrame().setVisible(true);
-		applicationWindow.getController().getAllStudents();
-		applicationWindow.getController().getAllCourses();
+		applicationWindow.getController().setComboBoxes();
+
 		
 		
 	}

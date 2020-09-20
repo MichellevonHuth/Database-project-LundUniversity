@@ -29,21 +29,21 @@ public class Controller {
 	public ApplicationWindow getApplicationWindow() {
 		return applicationWindow;
 	}
-	public void getAllStudents() throws Exception {
+	public void setComboBoxes() throws Exception {
 		for (String s : dal.getAllStudentID()) {
 			applicationWindow.getComboBoxStudentID().addItem(s);
+			applicationWindow.getComboBoxRegistrationStudentID().addItem(s);
+			applicationWindow.getComboBoxConnectionStudentID().addItem(s);
 		}
 		
-	}
-	public void getAllCourses() throws Exception {
 		for (String s : dal.getAllCourseCode()) {
 			applicationWindow.getComboBoxCourseID().addItem(s);
+			applicationWindow.getComboBoxRegistrateCourseID().addItem(s);
+			applicationWindow.getComboBoxConnectionCourseID().addItem(s);
 		}
 		
 	}
-
-	
-	
+		
 	public Controller(DataAccessLayer dal, ApplicationWindow applicationWindow) {
 		this.dal = dal; 
 		this.applicationWindow = applicationWindow;

@@ -54,9 +54,7 @@ public class DataAccessLayer {
 			temp.add(studentID);
 		}
 	
-		return temp;
-	
-		
+		return temp;	
 	}
 	
 public ArrayList<String> getAllCourseCode() throws SQLException {
@@ -64,7 +62,7 @@ public ArrayList<String> getAllCourseCode() throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		
 		ArrayList<String> temp = new ArrayList<String>();
-		String query = "SELECT courseCode FROM Student";
+		String query = "SELECT courseCode FROM Course";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ResultSet resultList= ps.executeQuery();
 		
@@ -74,7 +72,6 @@ public ArrayList<String> getAllCourseCode() throws SQLException {
 		}
 	
 		return temp;
-	
 		
 	}
 	
