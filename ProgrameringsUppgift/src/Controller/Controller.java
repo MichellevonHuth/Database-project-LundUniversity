@@ -78,6 +78,42 @@ public class Controller {
 			
 	});
 	
+	applicationWindow.getBtnRemovestudent().addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			
+			String studentID = (String)applicationWindow.getComboBoxStudentID().getSelectedItem();
+			
+			try {
+					dal.removeStudent(studentID);
+					applicationWindow.getMessageField().setText("Studenten har tagits bort");
+					setComboBoxes();
+					System.out.println(studentID);
+				}
+			
+			catch (Exception e1) {
+				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
+			}
+		}
+	});
+	
+	applicationWindow.getBtnShowAllStudents().addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+		String temp = "";
+		
+		try {
+			for(String s: dal.findAllStudents()) {
+			 temp += s + "\n" + "\n";
+				applicationWindow.getTextOutputBox().setText(temp);
+				applicationWindow.getTextOutputBox().setText(temp);
+				System.out.println(temp);
+			}
+		} 
+		catch (Exception e1) {
+			applicationWindow.getMessageField().setText(errorHandler.handleException(e1));			
+		}
+	}
+});
+	
 	applicationWindow.getBtnAddcourse().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			String courseName = applicationWindow.getTextFieldCourseName().getText();
@@ -104,6 +140,7 @@ public class Controller {
 			}
 		}
 	});
+	
 	
 	applicationWindow.getBtnConnectionInsert().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -152,12 +189,7 @@ public class Controller {
 		}
 	});
 	
-	
-	applicationWindow.getBtnRemovestudent().addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-		
-		}
-	});
+
 	
 	applicationWindow.getBtnCompletedCourse().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {

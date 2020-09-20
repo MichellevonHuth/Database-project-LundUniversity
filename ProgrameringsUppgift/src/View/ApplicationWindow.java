@@ -556,10 +556,6 @@ public class ApplicationWindow extends JFrame {
 		this.comboBoxCourseID = comboBoxCourseID;
 	}
 
-
-
-
-
 }
 	
 

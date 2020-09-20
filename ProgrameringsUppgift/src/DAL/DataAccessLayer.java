@@ -20,18 +20,6 @@ public class DataAccessLayer {
 	}
 	
 	
-	public ResultSet findAllStudents() throws SQLException {
-		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
-	
-		String query = "SELECT * FROM Student";
-	
-		PreparedStatement ps = connection.prepareStatement(query);
-		ResultSet resultList= ps.executeQuery();
-	
-		return resultList;
-	
-	}	
-	
 	public void addStudent(String studentName, String studentID) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		
@@ -40,6 +28,41 @@ public class DataAccessLayer {
 		ps.executeUpdate();
 		
 	}
+	
+	public void removeStudent(String studentID) throws SQLException {
+		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
+	
+		String query1 = "DELETE FROM HasStudied WHERE studentID = '"+ studentID + "')";
+				// "DELETE FROM Studies WHERE studentID = '"+ studentID + "') DELETE FROM Student WHERE studentID = '"+ studentID + "')";
+	
+		PreparedStatement ps1 = connection.prepareStatement(query1);
+		//PreparedStatement ps2 = connection.prepareStatement(query2);
+		//PreparedStatement ps3 = connection.prepareStatement(query3);
+		ps1.executeUpdate();
+		//ps2.executeUpdate(query2);
+		//ps3.executeUpdate(query3);
+		
+	}
+	
+	public ArrayList<String> findAllStudents() throws SQLException {
+		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
+			ArrayList<String> temp = new ArrayList<String>();
+			String query = "SELECT * FROM Student";
+			PreparedStatement ps = connection.prepareStatement(query);
+			ResultSet resultList = ps.executeQuery();
+			int studentID1 = resultList.findColumn("StudentID");
+			int studentName2 = resultList.findColumn("StudentName");
+
+			
+			while(resultList.next()) {
+				String studentID = resultList.getString(studentID1);
+				String studentName = resultList.getString(studentName2);
+				temp.add(studentID);
+				temp.add(studentName);
+			}
+		return temp;
+		}
+
 	public ArrayList<String> getAllStudentID() throws SQLException {
 		
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
@@ -57,7 +80,7 @@ public class DataAccessLayer {
 		return temp;	
 	}
 	
-public ArrayList<String> getAllCourseCode() throws SQLException {
+	public ArrayList<String> getAllCourseCode() throws SQLException {
 		
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		
@@ -74,7 +97,6 @@ public ArrayList<String> getAllCourseCode() throws SQLException {
 		return temp;
 		
 	}
-	
 	
 	
 	public void addCourse(String courseCode, String courseName, int credits) throws SQLException {
