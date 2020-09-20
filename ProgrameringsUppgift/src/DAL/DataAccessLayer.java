@@ -59,6 +59,25 @@ public class DataAccessLayer {
 		
 	}
 	
+public ArrayList<String> getAllCourseCode() throws SQLException {
+		
+		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
+		
+		ArrayList<String> temp = new ArrayList<String>();
+		String query = "SELECT corseCode FROM Student";
+		PreparedStatement ps = connection.prepareStatement(query);
+		ResultSet resultList= ps.executeQuery();
+		
+		while(resultList.next()) {
+			String courseCode = resultList.getString(1);
+			temp.add(courseCode);
+		}
+	
+		return temp;
+	
+		
+	}
+	
 	
 	
 	public void addCourse(String courseCode, String courseName, int credits) throws SQLException {

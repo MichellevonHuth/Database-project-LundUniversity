@@ -32,7 +32,12 @@ public class Controller {
 	public void getAllStudents() throws Exception {
 		for (String s : dal.getAllStudentID()) {
 			applicationWindow.getComboBoxStudentID().addItem(s);
-
+		}
+		
+	}
+	public void getAllCourses() throws Exception {
+		for (String s : dal.getAllCourseCode()) {
+			applicationWindow.getComboBoxCourseID().addItem(s);
 		}
 		
 	}
@@ -74,7 +79,7 @@ public class Controller {
 	applicationWindow.getBtnAddcourse().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			String courseName = applicationWindow.getTextFieldCourseName().getText();
-			String courseCode = applicationWindow.getComboBoxCourseID().getToolkit();
+			String courseCode = (String)applicationWindow.getComboBoxCourseID().getSelectedItem();
 			int courseCredits = Integer.parseInt(applicationWindow.getTextFieldCourseCredits().getText());
 			String strCourseCredits = applicationWindow.getTextFieldCourseCredits().getText();
 			
@@ -85,7 +90,7 @@ public class Controller {
 				else {
 					dal.addCourse(courseCode, courseName, courseCredits);
 					applicationWindow.getTextFieldCourseName().setText("");
-					applicationWindow.getComboBoxCourseID().setText("");
+					applicationWindow.getComboBoxCourseID().setSelectedItem("");
 					applicationWindow.getTextFieldCourseCredits().setText("");
 					applicationWindow.getMessageField().setText("Kursen har lagts till");
 				}
