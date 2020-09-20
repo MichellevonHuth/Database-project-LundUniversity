@@ -89,7 +89,7 @@ public ArrayList<String> getAllCourseCode() throws SQLException {
 	public void addStudentOnCourse(String courseCode, String studentID) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		
-		String query = "INSERT INTO Studies (courseCode, studentID) Values('"+ courseCode + "','" + studentID + "',')";
+		String query = "INSERT INTO Studies (courseCode, studentID) Values('"+ courseCode + "','" + studentID + "')";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.executeUpdate();
 		
@@ -98,7 +98,7 @@ public ArrayList<String> getAllCourseCode() throws SQLException {
 	public void insertIntoHasStuided(String courseCode, String studentID, int grade) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		
-		String query = "INSERT INTO hasStuided (courseCode, studentID, grade) Values('"+ courseCode + "','" + studentID + "','" + grade + "')";
+		String query = "INSERT INTO hasStudied (courseCode, studentID, grade) Values('"+ courseCode + "','" + studentID + "','" + grade + "')";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.executeUpdate();
 		

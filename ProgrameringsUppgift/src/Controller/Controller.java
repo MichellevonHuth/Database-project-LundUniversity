@@ -104,20 +104,51 @@ public class Controller {
 			}
 		}
 	});
+	
 	applicationWindow.getBtnConnectionInsert().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			String courseCode = (String)applicationWindow.getComboBoxConnectionCourseID().getSelectedItem();
 			String studentID = (String)applicationWindow.getComboBoxConnectionStudentID().getSelectedItem();
 			
 			try {
+			
 				dal.addStudentOnCourse(courseCode, studentID);
 				applicationWindow.getMessageField().setText("Studenten har lagts till på kursen");
+				
 			}
 			catch(Exception e1) {
-				//applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
+				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
 				
 			}
 		
+		}
+	});
+	
+	applicationWindow.getBtnCompletedCourse().addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			String courseCode = (String)applicationWindow.getComboBoxRegistrateCourseID().getSelectedItem();
+			String studentID = (String)applicationWindow.getComboBoxRegistrationStudentID().getSelectedItem();
+			int grade = Integer.parseInt(applicationWindow.getTextFieldGrade().getText());
+			String stringGrade = applicationWindow.getTextFieldGrade().getText();
+			
+			try {
+				if (stringGrade.equals("")) {
+					applicationWindow.getMessageField().setText(errorHandler.errorMessageEmptyFields());
+				} 
+				else {
+					dal.insertIntoHasStuided(courseCode, studentID, grade);
+					
+					if(grade < 50) {
+						applicationWindow.getMessageField().setText("Studenten har genomfört kursen med icke godkänt betyg, och behöver forstätta läsa kursen!");
+					} else {
+						applicationWindow.getMessageField().setText("Studenten har genomfört kursen med godkänt betyg!");	
+					}			
+				}
+			}
+			catch (Exception e1) {
+				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
+				
+			}
 		}
 	});
 	
