@@ -3,6 +3,7 @@ import java.sql.Connection;
 import java.sql.*;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class DataAccessLayer {
 	
@@ -17,7 +18,6 @@ public class DataAccessLayer {
 			e.printStackTrace();
 		}	
 	}
-	
 	
 	
 	public ResultSet findAllStudents() throws SQLException {
@@ -40,6 +40,26 @@ public class DataAccessLayer {
 		ps.executeUpdate();
 		
 	}
+	public ArrayList<String> getAllStudentID() throws SQLException {
+		
+		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
+		
+		ArrayList<String> temp = new ArrayList<String>();
+		String query = "SELECT StudentID FROM Student";
+		PreparedStatement ps = connection.prepareStatement(query);
+		ResultSet resultList= ps.executeQuery();
+		
+		while(resultList.next()) {
+			String studentID = resultList.getString(1);
+			temp.add(studentID);
+		}
+	
+		return temp;
+	
+		
+	}
+	
+	
 	
 	public void addCourse(String courseCode, String courseName, int credits) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());

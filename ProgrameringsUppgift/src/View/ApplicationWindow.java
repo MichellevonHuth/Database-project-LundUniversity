@@ -131,8 +131,10 @@ public class ApplicationWindow extends JFrame {
 		frame.getContentPane().add(lblStudentId);
 		
 		comboBoxStudentID = new JComboBox();
+		comboBoxStudentID.setEditable(true);
 		comboBoxStudentID.setBounds(163, 146, 204, 27);
 		frame.getContentPane().add(comboBoxStudentID);
+		
 		
 		btnShowAllStudents = new JButton("SHOW ALL STUDENTS");
 		btnShowAllStudents.setBounds(215, 266, 164, 29);
@@ -155,6 +157,7 @@ public class ApplicationWindow extends JFrame {
 		frame.getContentPane().add(lblCourse_1);
 		
 		comboBoxCourseID = new JComboBox();
+		comboBoxCourseID.setEditable(true);
 		comboBoxCourseID.setBounds(163, 517, 189, 27);
 		frame.getContentPane().add(comboBoxCourseID);
 		
@@ -184,10 +187,12 @@ public class ApplicationWindow extends JFrame {
 		frame.getContentPane().add(lblConnectionCourseID);
 		
 		comboBoxConnectionStudentID = new JComboBox();
+		comboBoxConnectionStudentID.setEditable(true);
 		comboBoxConnectionStudentID.setBounds(1140, 173, 197, 27);
 		frame.getContentPane().add(comboBoxConnectionStudentID);
 		
 		comboBoxConnectionCourseID = new JComboBox();
+		comboBoxConnectionCourseID.setEditable(true);
 		comboBoxConnectionCourseID.setBounds(1140, 199, 197, 27);
 		frame.getContentPane().add(comboBoxConnectionCourseID);
 		
@@ -216,10 +221,12 @@ public class ApplicationWindow extends JFrame {
 		frame.getContentPane().add(lblGrade);
 		
 		comboBoxRegistrationStudentID = new JComboBox();
+		comboBoxRegistrationStudentID.setEditable(true);
 		comboBoxRegistrationStudentID.setBounds(1140, 529, 197, 27);
 		frame.getContentPane().add(comboBoxRegistrationStudentID);
 		
 		comboBoxRegistrateCourseID = new JComboBox();
+		comboBoxRegistrateCourseID.setEditable(true);
 		comboBoxRegistrateCourseID.setBounds(1140, 556, 197, 27);
 		frame.getContentPane().add(comboBoxRegistrateCourseID);
 		
@@ -229,10 +236,6 @@ public class ApplicationWindow extends JFrame {
 		textFieldGrade.setColumns(10);
 		
 		btnCompletedCourse = new JButton("REGISTRATE");
-		btnCompletedCourse.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnCompletedCourse.setBounds(1027, 641, 181, 29);
 		frame.getContentPane().add(btnCompletedCourse);
 	}

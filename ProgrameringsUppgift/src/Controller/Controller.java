@@ -3,6 +3,8 @@ import DAL.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import java.util.ArrayList;
+
 import DAL.DataAccessLayer;
 import View.ApplicationWindow;
 import javax.swing.JFrame;
@@ -27,6 +29,13 @@ public class Controller {
 	public ApplicationWindow getApplicationWindow() {
 		return applicationWindow;
 	}
+	public void getAllStudents() throws Exception {
+		for (String s : dal.getAllStudentID()) {
+			applicationWindow.getComboBoxStudentID().addItem(s);
+
+		}
+		
+	}
 
 	
 	
@@ -41,7 +50,7 @@ public class Controller {
 		
 	applicationWindow.getBtnAddstudent().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			String studentID = applicationWindow.getComboBoxStudentID().Text.ToString();
+			String studentID = (String)applicationWindow.getComboBoxStudentID().getSelectedItem();
 			String studentName = applicationWindow.getTextFieldStudentName().getText();
 	
 			try {	
@@ -50,7 +59,7 @@ public class Controller {
 				}
 				else {
 					dal.addStudent(studentName, studentID);
-					applicationWindow.getComboBoxStudentID().setText("");
+					applicationWindow.getComboBoxStudentID().setSelectedItem("");
 					applicationWindow.getTextFieldStudentName().setText("");
 					applicationWindow.getMessageField().setText("Studenten har lagt till");	
 				}
@@ -91,6 +100,11 @@ public class Controller {
 	applicationWindow.getBtnRemovestudent().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 		
+		}
+	});
+	
+	applicationWindow.getBtnCompletedCourse().addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
 		}
 	});
 	
