@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
+import java.awt.Font;
 
 public class ApplicationWindow extends JFrame {
 
@@ -89,7 +90,8 @@ public class ApplicationWindow extends JFrame {
 		frame.getContentPane().add(textFieldCourseName);
 		
 		JLabel lblStudent = new JLabel("STUDENT");
-		lblStudent.setBounds(163, 88, 61, 16);
+		lblStudent.setFont(new Font("Lucida Grande", Font.BOLD, 20));
+		lblStudent.setBounds(163, 88, 127, 16);
 		frame.getContentPane().add(lblStudent);
 		
 		JLabel lblStudentName = new JLabel("Student Name:");
@@ -142,59 +144,59 @@ public class ApplicationWindow extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("REGISTRATE STUDENT ON A NEW COURSE");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(1044, 88, 337, 16);
+		lblNewLabel.setBounds(1044, 103, 337, 16);
 		frame.getContentPane().add(lblNewLabel);
 		
 		JLabel lblConnectionStudentID = new JLabel("Student ID:");
-		lblConnectionStudentID.setBounds(1044, 162, 84, 16);
+		lblConnectionStudentID.setBounds(1044, 177, 84, 16);
 		frame.getContentPane().add(lblConnectionStudentID);
 		
 		JLabel lblConnectionCourseID = new JLabel("Course ID:");
-		lblConnectionCourseID.setBounds(1044, 188, 84, 16);
+		lblConnectionCourseID.setBounds(1044, 203, 84, 16);
 		frame.getContentPane().add(lblConnectionCourseID);
 		
 		JComboBox comboBoxConnectionStudentID = new JComboBox();
-		comboBoxConnectionStudentID.setBounds(1140, 158, 197, 27);
+		comboBoxConnectionStudentID.setBounds(1140, 173, 197, 27);
 		frame.getContentPane().add(comboBoxConnectionStudentID);
 		
 		JComboBox comboBoxConnectionCourseID = new JComboBox();
-		comboBoxConnectionCourseID.setBounds(1140, 184, 197, 27);
+		comboBoxConnectionCourseID.setBounds(1140, 199, 197, 27);
 		frame.getContentPane().add(comboBoxConnectionCourseID);
 		
 		JButton btnConnectionInsert = new JButton("REGISTRATE");
-		btnConnectionInsert.setBounds(1027, 236, 181, 29);
+		btnConnectionInsert.setBounds(1027, 251, 181, 29);
 		frame.getContentPane().add(btnConnectionInsert);
 		
 		JButton btnConnectionRemove = new JButton("REMOVE");
-		btnConnectionRemove.setBounds(1216, 236, 181, 29);
+		btnConnectionRemove.setBounds(1216, 251, 181, 29);
 		frame.getContentPane().add(btnConnectionRemove);
 		
 		JLabel lblNewLabel_1 = new JLabel("REGISTRATE STUDENT FOR COMPLETED COURSES");
-		lblNewLabel_1.setBounds(1048, 458, 349, 16);
+		lblNewLabel_1.setBounds(1048, 478, 349, 16);
 		frame.getContentPane().add(lblNewLabel_1);
 		
 		JLabel lblRegistrateStudentID = new JLabel("Student ID:");
-		lblRegistrateStudentID.setBounds(1047, 513, 81, 16);
+		lblRegistrateStudentID.setBounds(1047, 533, 81, 16);
 		frame.getContentPane().add(lblRegistrateStudentID);
 		
 		JLabel lblRegistrationCourseID = new JLabel("Course ID:");
-		lblRegistrationCourseID.setBounds(1047, 540, 81, 16);
+		lblRegistrationCourseID.setBounds(1047, 560, 81, 16);
 		frame.getContentPane().add(lblRegistrationCourseID);
 		
 		JLabel lblNewLabel_2 = new JLabel("Grade:");
-		lblNewLabel_2.setBounds(1047, 569, 61, 16);
+		lblNewLabel_2.setBounds(1047, 589, 61, 16);
 		frame.getContentPane().add(lblNewLabel_2);
 		
 		JComboBox comboBoxRegistrationStudentID = new JComboBox();
-		comboBoxRegistrationStudentID.setBounds(1140, 509, 197, 27);
+		comboBoxRegistrationStudentID.setBounds(1140, 529, 197, 27);
 		frame.getContentPane().add(comboBoxRegistrationStudentID);
 		
 		JComboBox comboBoxRegistrateCourseID = new JComboBox();
-		comboBoxRegistrateCourseID.setBounds(1140, 536, 197, 27);
+		comboBoxRegistrateCourseID.setBounds(1140, 556, 197, 27);
 		frame.getContentPane().add(comboBoxRegistrateCourseID);
 		
 		textFieldGrade = new JTextField();
-		textFieldGrade.setBounds(1140, 564, 197, 26);
+		textFieldGrade.setBounds(1140, 584, 197, 26);
 		frame.getContentPane().add(textFieldGrade);
 		textFieldGrade.setColumns(10);
 		
@@ -203,7 +205,7 @@ public class ApplicationWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnCompletedCourse.setBounds(1027, 621, 181, 29);
+		btnCompletedCourse.setBounds(1027, 641, 181, 29);
 		frame.getContentPane().add(btnCompletedCourse);
 	}
 	
