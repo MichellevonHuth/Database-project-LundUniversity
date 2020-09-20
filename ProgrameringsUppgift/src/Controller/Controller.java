@@ -55,25 +55,26 @@ public class Controller {
 		
 	applicationWindow.getBtnAddstudent().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			String studentID = (String)applicationWindow.getComboBoxStudentID().getSelectedItem();
 			String studentName = applicationWindow.getTextFieldStudentName().getText();
-	
-			try {	
-				if (studentID.equals("") && studentName.equals("")) {
+			String studentID = (String)applicationWindow.getComboBoxStudentID().getSelectedItem();
+			
+			
+			try {
+				if (studentName.equals("") && studentID.equals("")) {
 					applicationWindow.getMessageField().setText(errorHandler.errorMessageEmptyFields());
 				}
 				else {
-					dal.addStudent(studentName, studentID);
-					applicationWindow.getComboBoxStudentID().setSelectedItem("");
+					dal.addStudent(studentName,studentID);
 					applicationWindow.getTextFieldStudentName().setText("");
-					applicationWindow.getMessageField().setText("Studenten har lagt till");	
+					applicationWindow.getComboBoxStudentID().setSelectedItem("");
+					applicationWindow.getMessageField().setText("Studenten har lagts till");
 				}
 			}
-			
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
-			}			
-		}		
+			}
+		}
+			
 	});
 	
 	applicationWindow.getBtnAddcourse().addActionListener(new ActionListener() {

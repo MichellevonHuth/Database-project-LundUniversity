@@ -45,7 +45,7 @@ public class DataAccessLayer {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		
 		ArrayList<String> temp = new ArrayList<String>();
-		String query = "SELECT StudentID FROM Student";
+		String query = "SELECT studentID FROM Student";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ResultSet resultList= ps.executeQuery();
 		
