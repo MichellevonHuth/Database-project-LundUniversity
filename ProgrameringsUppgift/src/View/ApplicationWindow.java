@@ -5,7 +5,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import DAL.*;
 import DAL.DataAccessLayer;
-
 import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -21,19 +20,48 @@ import java.awt.Font;
 public class ApplicationWindow extends JFrame {
 
 	private JFrame frame;
-	private JTextField textFieldStudentName;
+	private JTextPane textOutputBox;
+	private Controller controller;
 	private JLabel messageField;
+	private JLabel lblGrade;
+	private JLabel lblRegistrationCourseID ;
+	private JLabel lblRegistrateStudentID ;
+	private JLabel lblRegStudForComCor;
+	private JLabel lblStudentId;
+	private JLabel lblConnectionCourseID;
+	private JLabel lblConnectionStudentID;
+	private JLabel lblHeader;
+	private JLabel lblRegStuOnCor;
+	private JLabel lblCourse_1;
+	private JLabel lblCourseId;
+	private JLabel lblCourseName;
+	private JLabel lblCourse;
+	private JLabel lblStudent;
+	private JLabel lblStudentName;
+	private JButton btnConnectionInsert;
 	private JButton btnAddstudent;
 	private JButton btnAddcourse;
 	private JButton btnRemovecourse;
 	private JButton btnRemovestudent;
 	private JButton btnFindstudent;
 	private JButton btnFindcourse;
-	private Controller controller; 
+	private JButton btnCompletedCourse;
+	private JButton btnConnectionRemove;
+	private JButton btnShowAllCourses;
+	private JButton btnShowAllStudents; 
 	private JTextField textFieldCourseCredits;
 	private JTextField textFieldCourseName;
 	private JTextField textFieldGrade;
+	private JTextField textFieldStudentName;
+	private JComboBox comboBoxRegistrateCourseID;
+	private JComboBox comboBoxRegistrationStudentID;
+	private JComboBox comboBoxConnectionCourseID;
+	private JComboBox comboBoxConnectionStudentID;
+	private JComboBox comboBoxStudentID;
+	private JComboBox comboBoxCourseID;
+
 	
+
 
 	public ApplicationWindow() {
 	
@@ -89,109 +117,109 @@ public class ApplicationWindow extends JFrame {
 		textFieldCourseName.setColumns(10);
 		frame.getContentPane().add(textFieldCourseName);
 		
-		JLabel lblStudent = new JLabel("STUDENT");
+		lblStudent = new JLabel("STUDENT");
 		lblStudent.setFont(new Font("Lucida Grande", Font.BOLD, 20));
 		lblStudent.setBounds(163, 88, 127, 16);
 		frame.getContentPane().add(lblStudent);
 		
-		JLabel lblStudentName = new JLabel("Student Name:");
+		lblStudentName = new JLabel("Student Name:");
 		lblStudentName.setBounds(59, 178, 92, 16);
 		frame.getContentPane().add(lblStudentName);
 		
-		JLabel lblStudentId = new JLabel("Student ID: ");
+		lblStudentId = new JLabel("Student ID: ");
 		lblStudentId.setBounds(59, 150, 84, 16);
 		frame.getContentPane().add(lblStudentId);
 		
-		JComboBox comboBoxStudentID = new JComboBox();
+		comboBoxStudentID = new JComboBox();
 		comboBoxStudentID.setBounds(163, 146, 204, 27);
 		frame.getContentPane().add(comboBoxStudentID);
 		
-		JButton btnShowAllStudents = new JButton("SHOW ALL STUDENTS");
+		btnShowAllStudents = new JButton("SHOW ALL STUDENTS");
 		btnShowAllStudents.setBounds(215, 266, 164, 29);
 		frame.getContentPane().add(btnShowAllStudents);
 		
-		JLabel lblCourse = new JLabel("COURSE");
+		lblCourse = new JLabel("COURSE");
 		lblCourse.setBounds(163, 466, 61, 16);
 		frame.getContentPane().add(lblCourse);
 		
-		JLabel lblCourseId = new JLabel("Course ID:");
+		lblCourseId = new JLabel("Course ID:");
 		lblCourseId.setBounds(59, 521, 84, 16);
 		frame.getContentPane().add(lblCourseId);
 		
-		JLabel lblCourseName = new JLabel("Course Name:");
+		lblCourseName = new JLabel("Course Name:");
 		lblCourseName.setBounds(59, 549, 92, 16);
 		frame.getContentPane().add(lblCourseName);
 		
-		JLabel lblCourse_1 = new JLabel("Credits:");
+		lblCourse_1 = new JLabel("Credits:");
 		lblCourse_1.setBounds(59, 577, 92, 16);
 		frame.getContentPane().add(lblCourse_1);
 		
-		JComboBox comboBoxCourseID = new JComboBox();
+		comboBoxCourseID = new JComboBox();
 		comboBoxCourseID.setBounds(163, 517, 189, 27);
 		frame.getContentPane().add(comboBoxCourseID);
 		
-		JButton btnShowAllCourses = new JButton("SHOW ALL COURSES");
+		btnShowAllCourses = new JButton("SHOW ALL COURSES");
 		btnShowAllCourses.setBounds(215, 651, 164, 29);
 		frame.getContentPane().add(btnShowAllCourses);
 		
-		JTextPane textOutputBox = new JTextPane();
+		textOutputBox = new JTextPane();
 		textOutputBox.setBounds(532, 88, 375, 630);
 		frame.getContentPane().add(textOutputBox);
 		
-		JLabel lblHeader = new JLabel("ALL STUDENTS");
+		lblHeader = new JLabel("ALL STUDENTS");
 		lblHeader.setBounds(668, 45, 118, 16);
 		frame.getContentPane().add(lblHeader);
 		
-		JLabel lblNewLabel = new JLabel("REGISTRATE STUDENT ON A NEW COURSE");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(1044, 103, 337, 16);
-		frame.getContentPane().add(lblNewLabel);
+		lblRegStuOnCor = new JLabel("REGISTRATE STUDENT ON A NEW COURSE");
+		lblRegStuOnCor.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRegStuOnCor.setBounds(1044, 103, 337, 16);
+		frame.getContentPane().add(lblRegStuOnCor);
 		
-		JLabel lblConnectionStudentID = new JLabel("Student ID:");
+		lblConnectionStudentID = new JLabel("Student ID:");
 		lblConnectionStudentID.setBounds(1044, 177, 84, 16);
 		frame.getContentPane().add(lblConnectionStudentID);
 		
-		JLabel lblConnectionCourseID = new JLabel("Course ID:");
+		lblConnectionCourseID = new JLabel("Course ID:");
 		lblConnectionCourseID.setBounds(1044, 203, 84, 16);
 		frame.getContentPane().add(lblConnectionCourseID);
 		
-		JComboBox comboBoxConnectionStudentID = new JComboBox();
+		comboBoxConnectionStudentID = new JComboBox();
 		comboBoxConnectionStudentID.setBounds(1140, 173, 197, 27);
 		frame.getContentPane().add(comboBoxConnectionStudentID);
 		
-		JComboBox comboBoxConnectionCourseID = new JComboBox();
+		comboBoxConnectionCourseID = new JComboBox();
 		comboBoxConnectionCourseID.setBounds(1140, 199, 197, 27);
 		frame.getContentPane().add(comboBoxConnectionCourseID);
 		
-		JButton btnConnectionInsert = new JButton("REGISTRATE");
+		btnConnectionInsert = new JButton("REGISTRATE");
 		btnConnectionInsert.setBounds(1027, 251, 181, 29);
 		frame.getContentPane().add(btnConnectionInsert);
 		
-		JButton btnConnectionRemove = new JButton("REMOVE");
+		btnConnectionRemove = new JButton("REMOVE");
 		btnConnectionRemove.setBounds(1216, 251, 181, 29);
 		frame.getContentPane().add(btnConnectionRemove);
 		
-		JLabel lblNewLabel_1 = new JLabel("REGISTRATE STUDENT FOR COMPLETED COURSES");
-		lblNewLabel_1.setBounds(1048, 478, 349, 16);
-		frame.getContentPane().add(lblNewLabel_1);
+		lblRegStudForComCor = new JLabel("REGISTRATE STUDENT FOR COMPLETED COURSES");
+		lblRegStudForComCor.setBounds(1048, 478, 349, 16);
+		frame.getContentPane().add(lblRegStudForComCor);
 		
-		JLabel lblRegistrateStudentID = new JLabel("Student ID:");
+		lblRegistrateStudentID = new JLabel("Student ID:");
 		lblRegistrateStudentID.setBounds(1047, 533, 81, 16);
 		frame.getContentPane().add(lblRegistrateStudentID);
 		
-		JLabel lblRegistrationCourseID = new JLabel("Course ID:");
+		lblRegistrationCourseID = new JLabel("Course ID:");
 		lblRegistrationCourseID.setBounds(1047, 560, 81, 16);
 		frame.getContentPane().add(lblRegistrationCourseID);
 		
-		JLabel lblNewLabel_2 = new JLabel("Grade:");
-		lblNewLabel_2.setBounds(1047, 589, 61, 16);
-		frame.getContentPane().add(lblNewLabel_2);
+		lblGrade = new JLabel("Grade:");
+		lblGrade.setBounds(1047, 589, 61, 16);
+		frame.getContentPane().add(lblGrade);
 		
-		JComboBox comboBoxRegistrationStudentID = new JComboBox();
+		comboBoxRegistrationStudentID = new JComboBox();
 		comboBoxRegistrationStudentID.setBounds(1140, 529, 197, 27);
 		frame.getContentPane().add(comboBoxRegistrationStudentID);
 		
-		JComboBox comboBoxRegistrateCourseID = new JComboBox();
+		comboBoxRegistrateCourseID = new JComboBox();
 		comboBoxRegistrateCourseID.setBounds(1140, 556, 197, 27);
 		frame.getContentPane().add(comboBoxRegistrateCourseID);
 		
@@ -200,7 +228,7 @@ public class ApplicationWindow extends JFrame {
 		frame.getContentPane().add(textFieldGrade);
 		textFieldGrade.setColumns(10);
 		
-		JButton btnCompletedCourse = new JButton("REGISTRATE");
+		btnCompletedCourse = new JButton("REGISTRATE");
 		btnCompletedCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -223,13 +251,6 @@ public class ApplicationWindow extends JFrame {
 
 	public void setBtnAddstudent(JButton btnAddstudent) {
 		this.btnAddstudent = btnAddstudent;
-	}
-	public JTextField getTextFieldStudentId() {
-		return textFieldStudentId;
-	}
-
-	public void setTextFieldStudentId(JTextField textFieldStudentId) {
-		this.textFieldStudentId = textFieldStudentId;
 	}
 	public JTextField getTextFieldStudentName() {
 		return textFieldStudentName;
@@ -297,14 +318,6 @@ public class ApplicationWindow extends JFrame {
 		this.controller = controller;
 	}
 	
-	public JTextField getTextFieldCourseCode() {
-		return textFieldCourseCode;
-	}
-
-	public void setTextFieldCourseCode(JTextField textFieldCourseCode) {
-		this.textFieldCourseCode = textFieldCourseCode;
-	}
-
 	public JTextField getTextFieldCourseCredits() {
 		return textFieldCourseCredits;
 	}
@@ -320,6 +333,230 @@ public class ApplicationWindow extends JFrame {
 	public void setTextFieldCourseName(JTextField textFieldCourseName) {
 		this.textFieldCourseName = textFieldCourseName;
 	}
+	public JButton getBtnCompletedCourse() {
+		return btnCompletedCourse;
+	}
+
+	public void setBtnCompletedCourse(JButton btnCompletedCourse) {
+		this.btnCompletedCourse = btnCompletedCourse;
+	}
+	public JTextField getTextFieldGrade() {
+		return textFieldGrade;
+	}
+
+	public void setTextFieldGrade(JTextField textFieldGrade) {
+		this.textFieldGrade = textFieldGrade;
+	}
+	
+
+	public JComboBox getComboBoxRegistrateCourseID() {
+		return comboBoxRegistrateCourseID;
+	}
+
+	public void setComboBoxRegistrateCourseID(JComboBox comboBoxRegistrateCourseID) {
+		this.comboBoxRegistrateCourseID = comboBoxRegistrateCourseID;
+	}
+	public JComboBox getComboBoxRegistrationStudentID() {
+		return comboBoxRegistrationStudentID;
+	}
+
+	public void setComboBoxRegistrationStudentID(JComboBox comboBoxRegistrationStudentID) {
+		this.comboBoxRegistrationStudentID = comboBoxRegistrationStudentID;
+	}
+
+
+	public JLabel getLblRegistrationCourseID() {
+		return lblRegistrationCourseID;
+	}
+
+	public void setLblRegistrationCourseID(JLabel lblRegistrationCourseID) {
+		this.lblRegistrationCourseID = lblRegistrationCourseID;
+	}
+
+	public JLabel getLblRegistrateStudentID() {
+		return lblRegistrateStudentID;
+	}
+
+	public void setLblRegistrateStudentID(JLabel lblRegistrateStudentID) {
+		this.lblRegistrateStudentID = lblRegistrateStudentID;
+	}
+
+	public JButton getBtnConnectionRemove() {
+		return btnConnectionRemove;
+	}
+
+	public void setBtnConnectionRemove(JButton btnConnectionRemove) {
+		this.btnConnectionRemove = btnConnectionRemove;
+	}
+	public JButton getBtnConnectionInsert() {
+		return btnConnectionInsert;
+	}
+
+	public void setBtnConnectionInsert(JButton btnConnectionInsert) {
+		this.btnConnectionInsert = btnConnectionInsert;
+	}
+
+	public JComboBox getComboBoxConnectionCourseID() {
+		return comboBoxConnectionCourseID;
+	}
+
+	public void setComboBoxConnectionCourseID(JComboBox comboBoxConnectionCourseID) {
+		this.comboBoxConnectionCourseID = comboBoxConnectionCourseID;
+	}
+	
+	public JComboBox getComboBoxConnectionStudentID() {
+		return comboBoxConnectionStudentID;
+	}
+
+	public void setComboBoxConnectionStudentID(JComboBox comboBoxConnectionStudentID) {
+		this.comboBoxConnectionStudentID = comboBoxConnectionStudentID;
+	}
+	
+	public JLabel getLblConnectionCourseID() {
+		return lblConnectionCourseID;
+	}
+
+	public void setLblConnectionCourseID(JLabel lblConnectionCourseID) {
+		this.lblConnectionCourseID = lblConnectionCourseID;
+	}
+	public JLabel getLblConnectionStudentID() {
+		return lblConnectionStudentID;
+	}
+
+	public void setLblConnectionStudentID(JLabel lblConnectionStudentID) {
+		this.lblConnectionStudentID = lblConnectionStudentID;
+	}
+	
+	public JLabel getLblGrade() {
+		return lblGrade;
+	}
+
+	public void setLblGrade(JLabel lblGrade) {
+		this.lblGrade = lblGrade;
+	}
+
+	public JLabel getLblRegStudForComCor() {
+		return lblRegStudForComCor;
+	}
+
+	public void setLblRegStudForComCor(JLabel lblRegStudForComCor) {
+		this.lblRegStudForComCor = lblRegStudForComCor;
+	}
+
+	public JLabel getLblRegStuOnCor() {
+		return lblRegStuOnCor;
+	}
+
+	public void setLblRegStuOnCor(JLabel lblRegStuOnCor) {
+		this.lblRegStuOnCor = lblRegStuOnCor;
+	}
+
+	public JLabel getLblHeader() {
+		return lblHeader;
+	}
+
+	public void setLblHeader(JLabel lblHeader) {
+		this.lblHeader = lblHeader;
+	}
+	public JTextPane getTextOutputBox() {
+		return textOutputBox;
+	}
+
+	public void setTextOutputBox(JTextPane textOutputBox) {
+		this.textOutputBox = textOutputBox;
+	}
+	public JLabel getLblStudentId() {
+		return lblStudentId;
+	}
+
+	public void setLblStudentId(JLabel lblStudentId) {
+		this.lblStudentId = lblStudentId;
+	}
+
+	public JLabel getLblCourse_1() {
+		return lblCourse_1;
+	}
+
+	public void setLblCourse_1(JLabel lblCourse_1) {
+		this.lblCourse_1 = lblCourse_1;
+	}
+
+	public JLabel getLblCourseId() {
+		return lblCourseId;
+	}
+
+	public void setLblCourseId(JLabel lblCourseId) {
+		this.lblCourseId = lblCourseId;
+	}
+
+	public JLabel getLblCourseName() {
+		return lblCourseName;
+	}
+
+	public void setLblCourseName(JLabel lblCourseName) {
+		this.lblCourseName = lblCourseName;
+	}
+
+	public JLabel getLblCourse() {
+		return lblCourse;
+	}
+
+	public void setLblCourse(JLabel lblCourse) {
+		this.lblCourse = lblCourse;
+	}
+
+	public JLabel getLblStudent() {
+		return lblStudent;
+	}
+
+	public void setLblStudent(JLabel lblStudent) {
+		this.lblStudent = lblStudent;
+	}
+
+	public JLabel getLblStudentName() {
+		return lblStudentName;
+	}
+
+	public void setLblStudentName(JLabel lblStudentName) {
+		this.lblStudentName = lblStudentName;
+	}
+
+	public JButton getBtnShowAllCourses() {
+		return btnShowAllCourses;
+	}
+
+	public void setBtnShowAllCourses(JButton btnShowAllCourses) {
+		this.btnShowAllCourses = btnShowAllCourses;
+	}
+
+	public JButton getBtnShowAllStudents() {
+		return btnShowAllStudents;
+	}
+
+	public void setBtnShowAllStudents(JButton btnShowAllStudents) {
+		this.btnShowAllStudents = btnShowAllStudents;
+	}
+
+	public JComboBox getComboBoxStudentID() {
+		return comboBoxStudentID;
+	}
+
+	public void setComboBoxStudentID(JComboBox comboBoxStudentID) {
+		this.comboBoxStudentID = comboBoxStudentID;
+	}
+
+	public JComboBox getComboBoxCourseID() {
+		return comboBoxCourseID;
+	}
+
+	public void setComboBoxCourseID(JComboBox comboBoxCourseID) {
+		this.comboBoxCourseID = comboBoxCourseID;
+	}
+
+
+
+
+
 }
 	
 
