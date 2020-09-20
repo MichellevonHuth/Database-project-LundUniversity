@@ -51,13 +51,10 @@ public class DataAccessLayer {
 			String query = "SELECT * FROM Student";
 			PreparedStatement ps = connection.prepareStatement(query);
 			ResultSet resultList = ps.executeQuery();
-			int studentID1 = resultList.findColumn("StudentID");
-			int studentName2 = resultList.findColumn("StudentName");
-
 			
 			while(resultList.next()) {
-				String studentID = resultList.getString(studentID1);
-				String studentName = resultList.getString(studentName2);
+				String studentID = resultList.getString(1);
+				String studentName = resultList.getString(2);
 				temp.add(studentID);
 				temp.add(studentName);
 			}
@@ -72,12 +69,10 @@ public class DataAccessLayer {
 		
 		PreparedStatement ps = connection.prepareStatement(query);
 		ResultSet resultList = ps.executeQuery();
-		int studentID1 = resultList.findColumn("StudentID");
-		int studentName2 = resultList.findColumn("StudentName");
 
 		while(resultList.next()) {
-			String getStudentID = resultList.getString(studentID1);
-			String getStudentName = resultList.getString(studentName2);
+			String getStudentID = resultList.getString(1);
+			String getStudentName = resultList.getString(2);
 			temp.add(getStudentID);
 			temp.add(getStudentName);
 		}
