@@ -66,7 +66,7 @@ public class ApplicationWindow extends JFrame {
 	public ApplicationWindow() {
 	
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1500, 1000);
+		frame.setBounds(100, 100, 1500, 800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -104,7 +104,7 @@ public class ApplicationWindow extends JFrame {
 		textFieldStudentName.setColumns(10);
 		
 		messageField = new JLabel("");
-		messageField.setBounds(532, 772, 375, 46);
+		messageField.setBounds(532, 720, 375, 46);
 		frame.getContentPane().add(messageField);
 		
 		textFieldCourseCredits = new JTextField();

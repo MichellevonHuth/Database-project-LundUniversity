@@ -100,6 +100,21 @@ public class Controller {
 			}
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
+				
+			}
+		}
+	});
+	applicationWindow.getBtnConnectionInsert().addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			String courseCode = (String)applicationWindow.getComboBoxCourseID().getSelectedItem();
+			String studentID = (String)applicationWindow.getComboBoxStudentID().getSelectedItem();
+			
+			try {
+				dal.addStudentOnCourse(courseCode, studentID);
+			}
+			catch(Exception e1) {
+				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
+				applicationWindow.getMessageField().setText("Studenten har lagts till på kursen");
 			}
 		}
 	});

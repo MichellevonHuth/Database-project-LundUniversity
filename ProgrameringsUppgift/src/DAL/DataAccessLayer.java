@@ -86,10 +86,10 @@ public ArrayList<String> getAllCourseCode() throws SQLException {
 		
 	}
 	
-	public void addStudentOnCourse(String courseCode, String studentID, String startDate) throws SQLException {
+	public void addStudentOnCourse(String courseCode, String studentID) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		
-		String query = "INSERT INTO Studies (courseCode, studentID, startDate) Values('"+ courseCode + "','" + studentID + "','" + startDate + "')";
+		String query = "INSERT INTO Studies (courseCode, studentID) Values('"+ courseCode + "','" + studentID + "',')";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.executeUpdate();
 		
@@ -103,5 +103,6 @@ public ArrayList<String> getAllCourseCode() throws SQLException {
 		ps.executeUpdate();
 		
 	}
+	
 }
 
