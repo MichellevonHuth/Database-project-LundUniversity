@@ -106,16 +106,18 @@ public class Controller {
 	});
 	applicationWindow.getBtnConnectionInsert().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			String courseCode = (String)applicationWindow.getComboBoxCourseID().getSelectedItem();
-			String studentID = (String)applicationWindow.getComboBoxStudentID().getSelectedItem();
+			String courseCode = (String)applicationWindow.getComboBoxConnectionCourseID().getSelectedItem();
+			String studentID = (String)applicationWindow.getComboBoxConnectionStudentID().getSelectedItem();
 			
 			try {
 				dal.addStudentOnCourse(courseCode, studentID);
-			}
-			catch(Exception e1) {
-				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
 				applicationWindow.getMessageField().setText("Studenten har lagts till på kursen");
 			}
+			catch(Exception e1) {
+				//applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
+				
+			}
+		
 		}
 	});
 	
