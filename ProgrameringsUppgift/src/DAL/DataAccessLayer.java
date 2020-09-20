@@ -64,7 +64,7 @@ public ArrayList<String> getAllCourseCode() throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		
 		ArrayList<String> temp = new ArrayList<String>();
-		String query = "SELECT corseCode FROM Student";
+		String query = "SELECT courseCode FROM Student";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ResultSet resultList= ps.executeQuery();
 		
