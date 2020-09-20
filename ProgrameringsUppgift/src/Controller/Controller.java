@@ -68,6 +68,7 @@ public class Controller {
 					applicationWindow.getTextFieldStudentName().setText("");
 					applicationWindow.getComboBoxStudentID().setSelectedItem("");
 					applicationWindow.getMessageField().setText("Studenten har lagts till");
+					setComboBoxes();
 				}
 			}
 			catch (Exception e1) {
@@ -94,6 +95,7 @@ public class Controller {
 					applicationWindow.getComboBoxCourseID().setSelectedItem("");
 					applicationWindow.getTextFieldCourseCredits().setText("");
 					applicationWindow.getMessageField().setText("Kursen har lagts till");
+					setComboBoxes();
 				}
 			}
 			catch (Exception e1) {
