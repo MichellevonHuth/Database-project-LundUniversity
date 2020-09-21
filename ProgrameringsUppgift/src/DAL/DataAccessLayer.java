@@ -80,7 +80,6 @@ public class DataAccessLayer {
 	
 	public String getLetterGrade(int grade) {
 	
-		
 		if(grade>=85) 
 			return "A";
 		if(grade>=75)
@@ -99,29 +98,41 @@ public class DataAccessLayer {
 	public ArrayList<String> findCourse(String courseID) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		ArrayList<String> temp = new ArrayList<String>();
-		
+
 		String query1 = "SELECT * FROM Course WHERE courseCode = '" + courseID + "'";
 		String query2 = "SELECT s.studentID FROM Course c, Studies s WHERE c.courseCode = s.courseCode AND c.courseCode = '" + courseID + "'";
 		String query3 = "SELECT s.studentID, s.grade FROM Course c, HasStudied s WHERE c.courseCode = s.courseCode AND c.courseCode = '" + courseID + "'";
-		
-				
+		String query4 = "SELECT count(grade) FROM HasStudied WHERE courseCode = '" + courseID + "'";
+		String query5 = "SELECT count(grade) FROM HasStudied WHERE grade >= 85";
+
 		PreparedStatement ps1 = connection.prepareStatement(query1);
 		PreparedStatement ps2 = connection.prepareStatement(query2);
 		PreparedStatement ps3 = connection.prepareStatement(query3);
+		PreparedStatement ps4 = connection.prepareStatement(query4);
+		PreparedStatement ps5 = connection.prepareStatement(query5);
 		
 		ResultSet resultList1 = ps1.executeQuery();
 		ResultSet resultList2 = ps2.executeQuery();
 		ResultSet resultList3 = ps3.executeQuery();
+		ResultSet resultList4 = ps4.executeQuery();
+		ResultSet resultList5 = ps5.executeQuery();
 		
 		
-		while(resultList1.next()) {
+		while(resultList1.next() && resultList4.next() && resultList5.next()) {
 			String getCourseCode = resultList1.getString(1);
 			String getCourseName = resultList1.getString(2);
 			String getCredits = resultList1.getString(3);
+			double getAllGrades = Double.parseDouble(resultList4.getString(1));
+			double getAllAs = Double.parseDouble(resultList5.getString(1));
+			
+			double percentage = getAllAs/getAllGrades *100;
+			String result = String.format("%.2f", percentage);
+			
 			temp.add("COURSE CODE: " + getCourseCode + "\n");
 			temp.add("COURSE NAME: " + getCourseName + "\n");
 			temp.add("CREDITS: " + getCredits + "\n");
-		}
+			temp.add("PERCENTAGE OF STUDENTS WITH AN A : " + result + " %" + "\n");
+		} 
 		
 		temp.add("\n" + "STUDENTS STUDYING: " + "\n");
 		
@@ -141,6 +152,7 @@ public class DataAccessLayer {
 
 		return temp;
 	}
+	
 	
 	public ArrayList<String> getAllStudentID() throws SQLException {
 		
@@ -216,28 +228,57 @@ public class DataAccessLayer {
 	
 	}
 	
-	public ArrayList<String> showAllCourses() throws SQLException {
+	public ArrayList<String> showAllCourses(String courseCode) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 			ArrayList<String> temp = new ArrayList<String>();
 			
-			String query = "SELECT * FROM Course";
-			PreparedStatement ps = connection.prepareStatement(query);
-			ResultSet resultList = ps.executeQuery();
-			int credits = resultList.findColumn("credits");
+			String query1 = "SELECT * FROM Course";
+			String query2 = "SELECT TOP 5 UPPER (courseCode) AS 'Course Code', (SUM(CASE WHEN grade >= 50 THEN 1 ELSE 0 END)* 100)/ COUNT(courseCode) AS 'Percent Passed'" + "FROM HasStudied " + "GROUP BY courseCode " + "ORDER BY 'Percent Passed'DESC";	
+
 			
-			while(resultList.next()) {
-				String courseID = resultList.getString(1);
-				String courseName = resultList.getString(2);
-				String credits1 = resultList.getString(credits);
+			PreparedStatement ps1 = connection.prepareStatement(query1);
+			PreparedStatement ps2 = connection.prepareStatement(query2);
+			
+			ResultSet resultList1 = ps1.executeQuery();
+			ResultSet resultList2 = ps2.executeQuery();
+		
+			while(resultList1.next()) {
+				String courseID = resultList1.getString(1);
+				String courseName = resultList1.getString(2);
+				String credits1 = resultList1.getString(3);
+				
 				temp.add("COURSE ID: " + courseID + "\n");
 				temp.add("COURSE NAME: " + courseName + "\n");
 				temp.add("CREDITS: " + credits1);
 				temp.add("\n" + "\n"); 
 			}
+			
+			while(resultList2.next()) {
+				String getThroughput = resultList2.getString(1);
+				
+				temp.add("COURSES WITH HIGHEST THROUGHPUT: " + getThroughput);
+			}
+			
 		return temp;
 		}
 
-
+	public ArrayList<String> getThroughput() throws SQLException {
+		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
+		
+		ArrayList<String> temp = new ArrayList<String>(); 
+				
+		String query = "SELECT TOP 5 UPPER (courseCode) AS 'Course Code', (SUM(CASE WHEN grade >= 50 THEN 1 ELSE 0 END)* 100)/ COUNT(courseCode) AS 'Percent Passed'" + "FROM HasStudied " + "GROUP BY courseCode " + "ORDER BY 'Percent Passed'DESC";	
+		PreparedStatement ps = connection.prepareStatement(query);
+		ResultSet resultList = ps.executeQuery();	
+		
+		while(resultList.next()) {
+			String getCourseCode= resultList.getString(1);
+			String getPercent = resultList.getString(2);
+			temp.add(getCourseCode + "\n");
+			temp.add(getPercent);
+		}
+			return temp;
+	}
 	public void insertIntoHasStuided(String courseCode, String studentID, int grade) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		

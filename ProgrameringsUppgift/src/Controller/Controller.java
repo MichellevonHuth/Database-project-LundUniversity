@@ -223,17 +223,19 @@ public class Controller {
 	
 	applicationWindow.getBtnShowAllCourses().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			String temp = "";
+			String temp1 = "";
+			String courseCode = (String)applicationWindow.getComboBoxCourseID().getSelectedItem();
 		
 			try {
-				for(String s: dal.showAllCourses()) {
-					temp += s;
-					applicationWindow.getTextOutputBox().setText(temp);
-			}
-		} 
+				for(String s: dal.showAllCourses(courseCode)) {
+					temp1 += s;
+					applicationWindow.getTextOutputBox().setText(temp1);
+				}
+			} 
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));			
 			}
+			
 		}
 	});	
 	
