@@ -123,7 +123,7 @@ public class Controller {
 			String temp = "";
 			try {
 				for(String s : dal.findStudent((String) studentID)) {
-					temp += s + "\n" + "\n";
+					temp += s;
 					applicationWindow.getTextOutputBox().setText(temp);
 					applicationWindow.getTextOutputBox().setText(temp);
 					
@@ -141,7 +141,7 @@ public class Controller {
 		
 		try {
 			for(String s: dal.findAllStudents()) {
-			 temp += s + "\n" + "\n";
+			 temp += s;
 				applicationWindow.getTextOutputBox().setText(temp);
 				applicationWindow.getTextOutputBox().setText(temp);
 				
@@ -198,6 +198,24 @@ public class Controller {
 			}
 		}
 	});
+	
+	applicationWindow.getBtnFindcourse().addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			
+			String courseCode = (String)applicationWindow.getComboBoxCourseID().getSelectedItem();
+			String temp = "";
+			try {
+				for(String s : dal.findCourse((String) courseCode)) {
+					temp += s;
+					applicationWindow.getTextOutputBox().setText(temp);	
+				}
+			}
+			catch (Exception e1) {
+				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
+			}
+		}
+	
+	});
 
 
 	
@@ -207,7 +225,7 @@ public class Controller {
 		
 			try {
 				for(String s: dal.showAllCourses()) {
-					temp += s + "\n" + "\n";
+					temp += s;
 					applicationWindow.getTextOutputBox().setText(temp);
 			}
 		} 

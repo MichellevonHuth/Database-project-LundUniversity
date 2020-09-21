@@ -173,9 +173,10 @@ public class DataAccessLayer {
 				String courseID = resultList.getString(1);
 				String courseName = resultList.getString(2);
 				String credits1 = resultList.getString(credits);
-				temp.add(courseID);
-				temp.add(courseName);
-				temp.add(credits1);
+				temp.add("COURSE ID: " + courseID + "\n");
+				temp.add("COURSE NAME: " + courseName + "\n");
+				temp.add("CREDITS: " + credits1);
+				temp.add("\n" + "\n"); 
 			}
 		return temp;
 		}
