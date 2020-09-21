@@ -211,6 +211,7 @@ public class Controller {
 					temp += s;
 					applicationWindow.getTextOutputBox().setText(temp);	
 				}
+				//applicationWindow.getTextOutputBox().setText(dal.getPercentageA(courseCode));
 			}
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));

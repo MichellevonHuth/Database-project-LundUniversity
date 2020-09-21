@@ -118,30 +118,33 @@ public class DataAccessLayer {
 		ResultSet resultList5 = ps5.executeQuery();
 		
 		
-		while(resultList1.next() && resultList4.next() && resultList5.next()) {
+		while(resultList1.next()) {
 			String getCourseCode = resultList1.getString(1);
 			String getCourseName = resultList1.getString(2);
 			String getCredits = resultList1.getString(3);
-			double getAllGrades = Double.parseDouble(resultList4.getString(1));
-			double getAllAs = Double.parseDouble(resultList5.getString(1));
-			
-			double percentage = getAllAs/getAllGrades *100;
-			String result = String.format("%.2f", percentage);
 			
 			temp.add("COURSE CODE: " + getCourseCode + "\n");
 			temp.add("COURSE NAME: " + getCourseName + "\n");
 			temp.add("CREDITS: " + getCredits + "\n");
-			temp.add("PERCENTAGE OF STUDENTS WITH AN A : " + result + " %" + "\n");
 		} 
 		
-		temp.add("\n" + "STUDENTS STUDYING: " + "\n");
+		while(resultList4.next() && resultList5.next()) {
+			double getAllGrades = Double.parseDouble(resultList4.getString(1));
+			double getAllAs = Double.parseDouble(resultList5.getString(1));
+			double percentage = getAllAs/getAllGrades *100;
+			String result = String.format("%.2f", percentage);
+			
+			temp.add("PERCENTAGE OF STUDENTS WITH AN A : " + result + " %" + "\n");	
+		}
+		
+			temp.add("\n" + "STUDENTS STUDYING: " + "\n");
 		
 		while(resultList2.next()) {
 			String getAllStudentOnCourse = resultList2.getString(1);
 			temp.add(getAllStudentOnCourse + "\n");
 		}
 		
-		temp.add("\n" + "STUDENTS WHO HAS STUDIED: " + "\n");
+			temp.add("\n" + "STUDENTS WHO HAS STUDIED: " + "\n");
 		
 		while(resultList3.next()) {
 			String getAllStudentHasStudied = resultList3.getString(1); 
@@ -152,6 +155,31 @@ public class DataAccessLayer {
 
 		return temp;
 	}
+	
+	/*/ HÄR TESTAR JAG ATT HITTA ALLA A I EN EGEN METOD, FUNKAR INTE
+	public String getPercentageA(String courseCode) throws SQLException {
+		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
+		
+		String query1 = "SELECT count(grade) FROM HasStudied WHERE courseCode = '" + courseCode + "'";
+		String query2 = "SELECT count(grade) FROM HasStudied WHERE grade >= 85";
+		
+		PreparedStatement ps1 = connection.prepareStatement(query1);
+		PreparedStatement ps2 = connection.prepareStatement(query2);
+		
+		ResultSet resultList1 = ps1.executeQuery();
+		ResultSet resultList2 = ps2.executeQuery();
+		
+		String returnValue;
+		
+			double getAllGrades = Double.parseDouble(resultList1.getString(1));
+			double getAllAs = Double.parseDouble(resultList2.getString(2));
+			double percentage = getAllAs/getAllGrades *100;
+			String result = String.format("%.2f", percentage);	
+			returnValue = ("PERCENTAGE OF STUDENTS WITH AN A : " + result + " %" + "\n");
+			
+		return returnValue; 
+				
+	} /*/
 	
 	
 	public ArrayList<String> getAllStudentID() throws SQLException {
@@ -253,32 +281,17 @@ public class DataAccessLayer {
 				temp.add("\n" + "\n"); 
 			}
 			
+			temp.add("TOP 5 COURSES WITH HIGHEST THROUGHPUT: " + "\n");
+			
 			while(resultList2.next()) {
 				String getThroughput = resultList2.getString(1);
 				
-				temp.add("COURSES WITH HIGHEST THROUGHPUT: " + getThroughput);
+				temp.add(getThroughput + "\n");
 			}
 			
 		return temp;
 		}
 
-	public ArrayList<String> getThroughput() throws SQLException {
-		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
-		
-		ArrayList<String> temp = new ArrayList<String>(); 
-				
-		String query = "SELECT TOP 5 UPPER (courseCode) AS 'Course Code', (SUM(CASE WHEN grade >= 50 THEN 1 ELSE 0 END)* 100)/ COUNT(courseCode) AS 'Percent Passed'" + "FROM HasStudied " + "GROUP BY courseCode " + "ORDER BY 'Percent Passed'DESC";	
-		PreparedStatement ps = connection.prepareStatement(query);
-		ResultSet resultList = ps.executeQuery();	
-		
-		while(resultList.next()) {
-			String getCourseCode= resultList.getString(1);
-			String getPercent = resultList.getString(2);
-			temp.add(getCourseCode + "\n");
-			temp.add(getPercent);
-		}
-			return temp;
-	}
 	public void insertIntoHasStuided(String courseCode, String studentID, int grade) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		
