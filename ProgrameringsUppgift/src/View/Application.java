@@ -15,7 +15,6 @@ public class Application {
 		applicationWindow.getController().setComboBoxesCourse();
 		applicationWindow.getController().setComboBoxesStudent();
 
-		
 	}
 }
 

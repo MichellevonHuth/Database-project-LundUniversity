@@ -59,9 +59,9 @@ public class ApplicationWindow extends JFrame {
 	private JComboBox comboBoxConnectionStudentID;
 	private JComboBox comboBoxStudentID;
 	private JComboBox comboBoxCourseID;
+	private JButton btnShowResult;
 
 	
-
 
 	public ApplicationWindow() {
 	
@@ -118,11 +118,11 @@ public class ApplicationWindow extends JFrame {
 		lblStudent.setBounds(163, 88, 127, 16);
 		frame.getContentPane().add(lblStudent);
 		
-		lblStudentName = new JLabel("Student Name:");
-		lblStudentName.setBounds(59, 178, 92, 16);
+		lblStudentName = new JLabel("Student Name: *");
+		lblStudentName.setBounds(59, 178, 102, 16);
 		frame.getContentPane().add(lblStudentName);
 		
-		lblStudentId = new JLabel("Student ID: ");
+		lblStudentId = new JLabel("Student ID: * ");
 		lblStudentId.setBounds(59, 150, 84, 16);
 		frame.getContentPane().add(lblStudentId);
 		
@@ -140,15 +140,15 @@ public class ApplicationWindow extends JFrame {
 		lblCourse.setBounds(163, 466, 61, 16);
 		frame.getContentPane().add(lblCourse);
 		
-		lblCourseId = new JLabel("Course Code");
-		lblCourseId.setBounds(59, 521, 84, 16);
+		lblCourseId = new JLabel("Course Code: *");
+		lblCourseId.setBounds(59, 521, 102, 16);
 		frame.getContentPane().add(lblCourseId);
 		
-		lblCourseName = new JLabel("Course Name:");
-		lblCourseName.setBounds(59, 549, 92, 16);
+		lblCourseName = new JLabel("Course Name: *");
+		lblCourseName.setBounds(59, 549, 102, 16);
 		frame.getContentPane().add(lblCourseName);
 		
-		lblCourse_1 = new JLabel("Credits:");
+		lblCourse_1 = new JLabel("Credits: *");
 		lblCourse_1.setBounds(59, 577, 92, 16);
 		frame.getContentPane().add(lblCourse_1);
 		
@@ -174,12 +174,12 @@ public class ApplicationWindow extends JFrame {
 		lblRegStuOnCor.setBounds(1044, 103, 337, 16);
 		frame.getContentPane().add(lblRegStuOnCor);
 		
-		lblConnectionStudentID = new JLabel("Student ID:");
+		lblConnectionStudentID = new JLabel("Student ID: *");
 		lblConnectionStudentID.setBounds(1044, 177, 84, 16);
 		frame.getContentPane().add(lblConnectionStudentID);
 		
-		lblConnectionCourseID = new JLabel("Course Code:");
-		lblConnectionCourseID.setBounds(1044, 203, 84, 16);
+		lblConnectionCourseID = new JLabel("Course Code: *");
+		lblConnectionCourseID.setBounds(1044, 203, 95, 16);
 		frame.getContentPane().add(lblConnectionCourseID);
 		
 		comboBoxConnectionStudentID = new JComboBox();
@@ -204,16 +204,16 @@ public class ApplicationWindow extends JFrame {
 		lblRegStudForComCor.setBounds(1048, 478, 349, 16);
 		frame.getContentPane().add(lblRegStudForComCor);
 		
-		lblRegistrateStudentID = new JLabel("Student ID:");
-		lblRegistrateStudentID.setBounds(1047, 533, 81, 16);
+		lblRegistrateStudentID = new JLabel("Student ID: *");
+		lblRegistrateStudentID.setBounds(1027, 534, 81, 16);
 		frame.getContentPane().add(lblRegistrateStudentID);
 		
-		lblRegistrationCourseID = new JLabel("Course  Code:");
-		lblRegistrationCourseID.setBounds(1047, 560, 92, 16);
+		lblRegistrationCourseID = new JLabel("Course  Code: *");
+		lblRegistrationCourseID.setBounds(1027, 561, 107, 16);
 		frame.getContentPane().add(lblRegistrationCourseID);
 		
 		lblGrade = new JLabel("Grade:");
-		lblGrade.setBounds(1047, 589, 61, 16);
+		lblGrade.setBounds(1027, 593, 61, 16);
 		frame.getContentPane().add(lblGrade);
 		
 		comboBoxRegistrationStudentID = new JComboBox();
@@ -227,13 +227,17 @@ public class ApplicationWindow extends JFrame {
 		frame.getContentPane().add(comboBoxRegistrateCourseID);
 		
 		textFieldGrade = new JTextField();
-		textFieldGrade.setBounds(1140, 584, 197, 26);
+		textFieldGrade.setBounds(1140, 588, 197, 26);
 		frame.getContentPane().add(textFieldGrade);
 		textFieldGrade.setColumns(10);
 		
-		btnCompletedCourse = new JButton("REGISTRATE");
-		btnCompletedCourse.setBounds(1027, 641, 181, 29);
+		btnCompletedCourse = new JButton("REGISTRATE GRADE");
+		btnCompletedCourse.setBounds(1027, 633, 181, 29);
 		frame.getContentPane().add(btnCompletedCourse);
+		
+		btnShowResult = new JButton("SHOW RESULT");
+		btnShowResult.setBounds(1216, 633, 181, 29);
+		frame.getContentPane().add(btnShowResult);
 	}
 	
 	public JFrame getFrame() {
@@ -550,7 +554,14 @@ public class ApplicationWindow extends JFrame {
 	public void setComboBoxCourseID(JComboBox comboBoxCourseID) {
 		this.comboBoxCourseID = comboBoxCourseID;
 	}
+	
+	public JButton getBtnShowResult() {
+		return btnShowResult;
+	}
 
+	public void setBtnShowResult(JButton btnShowResult) {
+		this.btnShowResult = btnShowResult;
+	}
 }
 	
 

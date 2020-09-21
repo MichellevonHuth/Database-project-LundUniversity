@@ -256,16 +256,20 @@ public class Controller {
 		
 		}
 	});
-	
+		
 	applicationWindow.getBtnConnectionRemove().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 
-			
 			String courseCode = (String)applicationWindow.getComboBoxConnectionCourseID().getSelectedItem();
 			String studentID = (String)applicationWindow.getComboBoxConnectionStudentID().getSelectedItem();
 			try {
-					dal.removeRegistratedStudent(studentID, courseCode);
+					boolean result = dal.removeRegistratedStudent(studentID, courseCode);
+					if (result) {
 					applicationWindow.getMessageField().setText("Studenten har tagits bort från kursen");
+					}
+					else {
+					applicationWindow.getMessageField().setText("Studenten har inte läst den kursen");
+					}
 				}
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
@@ -291,6 +295,7 @@ public class Controller {
 					if(grade < 50) {
 						applicationWindow.getMessageField().setText("Studenten har genomfört kursen med icke godkänt betyg, och behöver forstätta läsa kursen!");
 					} else {
+						dal.removeRegistratedStudent(studentID, courseCode);
 						applicationWindow.getMessageField().setText("Studenten har genomfört kursen med godkänt betyg!");	
 					}			
 				}
@@ -302,16 +307,26 @@ public class Controller {
 		}
 	});
 	
-
 	
-	applicationWindow.getBtnCompletedCourse().addActionListener(new ActionListener() {
+	applicationWindow.getBtnShowResult().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
+			String courseCode = (String)applicationWindow.getComboBoxRegistrateCourseID().getSelectedItem();
+			String studentID = (String)applicationWindow.getComboBoxRegistrationStudentID().getSelectedItem();
+			String temp = ""; 
+			
+			try {
+				for(String s : dal. getResult(courseCode, studentID)) {
+					temp += s;
+					applicationWindow.getTextOutputBox().setText(temp);	
+				}
+			}
+			catch (Exception e1) {
+				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
+			}
 		}
 	});
 	
-	
 	}
-
 }
 
 

@@ -78,39 +78,70 @@ public class DataAccessLayer {
 	}
 	
 	
+	public String getLetterGrade(int grade) {
+	
+		
+		if(grade>=85) 
+			return "A";
+		if(grade>=75)
+			return "B";
+		if(grade>=65)
+			return "C";
+		if(grade>=55) 
+			return "D";
+		if(grade>=50) {
+			return "E";
+		}
+		return "Fail!";
+	}
+	
+	
 	public ArrayList<String> findCourse(String courseID) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		ArrayList<String> temp = new ArrayList<String>();
 		
 		String query1 = "SELECT * FROM Course WHERE courseCode = '" + courseID + "'";
 		String query2 = "SELECT s.studentID FROM Course c, Studies s WHERE c.courseCode = s.courseCode AND c.courseCode = '" + courseID + "'";
-
+		String query3 = "SELECT s.studentID, s.grade FROM Course c, HasStudied s WHERE c.courseCode = s.courseCode AND c.courseCode = '" + courseID + "'";
+		
 				
 		PreparedStatement ps1 = connection.prepareStatement(query1);
 		PreparedStatement ps2 = connection.prepareStatement(query2);
+		PreparedStatement ps3 = connection.prepareStatement(query3);
+		
 		ResultSet resultList1 = ps1.executeQuery();
 		ResultSet resultList2 = ps2.executeQuery();
-		int credits = resultList1.findColumn("credits");
-
+		ResultSet resultList3 = ps3.executeQuery();
+		
+		
 		while(resultList1.next()) {
 			String getCourseCode = resultList1.getString(1);
 			String getCourseName = resultList1.getString(2);
-			String getCredits = resultList1.getString(credits);
+			String getCredits = resultList1.getString(3);
 			temp.add("COURSE CODE: " + getCourseCode + "\n");
 			temp.add("COURSE NAME: " + getCourseName + "\n");
 			temp.add("CREDITS: " + getCredits + "\n");
 		}
 		
-		temp.add("\n" + "STUDENTS: " + "\n");
+		temp.add("\n" + "STUDENTS STUDYING: " + "\n");
 		
 		while(resultList2.next()) {
 			String getAllStudentOnCourse = resultList2.getString(1);
 			temp.add(getAllStudentOnCourse + "\n");
 		}
-			
+		
+		temp.add("\n" + "STUDENTS WHO HAS STUDIED: " + "\n");
+		
+		while(resultList3.next()) {
+			String getAllStudentHasStudied = resultList3.getString(1); 
+			int getAllGrades = Integer.parseInt(resultList3.getString(2));
+			String getLetterGrade = getLetterGrade(getAllGrades);
+			temp.add(getAllStudentHasStudied + " " + " - GRADE: " + getLetterGrade + "\n");		
+		}
+
 		return temp;
 	}
-
+	
 	public ArrayList<String> getAllStudentID() throws SQLException {
 		
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
@@ -164,11 +195,15 @@ public class DataAccessLayer {
 	}
 	
 	
-	public void removeRegistratedStudent (String studentID, String courseCode) throws SQLException {
+	public boolean removeRegistratedStudent (String studentID, String courseCode) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		String query = "DELETE FROM Studies WHERE studentID = '" + studentID +"' AND courseCode= '" + courseCode + "'";
 		PreparedStatement ps = connection.prepareStatement(query);
-		ps.executeUpdate();
+		int numberOfRowsAffected = ps.executeUpdate();
+		if (numberOfRowsAffected != 0) {
+			return true;
+		}
+		return false;	
 	}
 	
 	public void removeCourse(String courseCode) throws SQLException {
@@ -210,6 +245,28 @@ public class DataAccessLayer {
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.executeUpdate();
 		
+	}
+	
+	public ArrayList<String>  getResult(String courseCode, String studentID) throws SQLException {
+		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
+		ArrayList<String> temp = new ArrayList<String>();
+		String query = "SELECT courseCode, studentID, grade FROM HasStudied WHERE courseCode = '" + courseCode + "' AND studentID = '" + studentID +"'";
+		PreparedStatement ps = connection.prepareStatement(query);
+		ResultSet resultList= ps.executeQuery();
+		
+			while(resultList.next()) {
+			String getCourseCode = resultList.getString(1);
+			String getStudentID = resultList.getString(2);
+			int getGrade = Integer.parseInt(resultList.getString(3));
+			String getLetterGrade = getLetterGrade(getGrade);
+			
+			temp.add("COURSE CODE: " + getCourseCode + "\n");
+			temp.add("STUDENT ID: " + getStudentID + "\n");
+			temp.add("RESULT: " + getLetterGrade +  "\n");
+			}
+		
+		return temp; 
+	
 	}
 	
 }
