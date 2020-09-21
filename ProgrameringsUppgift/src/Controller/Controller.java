@@ -29,15 +29,11 @@ public class Controller {
 	public ApplicationWindow getApplicationWindow() {
 		return applicationWindow;
 	}
-	public void setComboBoxes() throws Exception {
+	public void setComboBoxesStudent() throws Exception {
 	
 		applicationWindow.getComboBoxStudentID().removeAllItems();
 		applicationWindow.getComboBoxRegistrationStudentID().removeAllItems();
 		applicationWindow.getComboBoxConnectionStudentID().removeAllItems();
-		
-		applicationWindow.getComboBoxCourseID().removeAllItems();
-		applicationWindow.getComboBoxRegistrateCourseID().removeAllItems();
-		applicationWindow.getComboBoxConnectionCourseID().removeAllItems();
 		
 		for (String s : dal.getAllStudentID()) {
 			applicationWindow.getComboBoxStudentID().addItem(s);
@@ -45,13 +41,23 @@ public class Controller {
 			applicationWindow.getComboBoxConnectionStudentID().addItem(s);
 		}
 		
+	}
+	
+	public void setComboBoxesCourse() throws Exception {
+		
+		applicationWindow.getComboBoxCourseID().removeAllItems();
+		applicationWindow.getComboBoxRegistrateCourseID().removeAllItems();
+		applicationWindow.getComboBoxConnectionCourseID().removeAllItems();
+		
+		
 		for (String s : dal.getAllCourseCode()) {
 			applicationWindow.getComboBoxCourseID().addItem(s);
 			applicationWindow.getComboBoxRegistrateCourseID().addItem(s);
 			applicationWindow.getComboBoxConnectionCourseID().addItem(s);
 		}
-		
 	}
+	
+	
 		
 	public Controller(DataAccessLayer dal, ApplicationWindow applicationWindow) {
 		this.dal = dal; 
@@ -77,7 +83,7 @@ public class Controller {
 					applicationWindow.getTextFieldStudentName().setText("");
 					applicationWindow.getComboBoxStudentID().setSelectedItem("");
 					applicationWindow.getMessageField().setText("Studenten har lagts till");
-					setComboBoxes();
+					setComboBoxesStudent();
 				}
 			}
 			catch (Exception e1) {
@@ -93,10 +99,10 @@ public class Controller {
 			String studentID = (String)applicationWindow.getComboBoxStudentID().getSelectedItem();
 			
 			try {
-					System.out.println(studentID);
+
 					dal.removeStudent(studentID);
 					applicationWindow.getMessageField().setText("Studenten har tagits bort");
-					setComboBoxes();
+					setComboBoxesStudent();
 					
 				}
 			
@@ -117,7 +123,7 @@ public class Controller {
 					temp += s + "\n" + "\n";
 					applicationWindow.getTextOutputBox().setText(temp);
 					applicationWindow.getTextOutputBox().setText(temp);
-					System.out.println(temp);
+					
 				}
 			}
 			catch (Exception e1) {
@@ -135,7 +141,7 @@ public class Controller {
 			 temp += s + "\n" + "\n";
 				applicationWindow.getTextOutputBox().setText(temp);
 				applicationWindow.getTextOutputBox().setText(temp);
-				System.out.println(temp);
+				
 			}
 		} 
 		catch (Exception e1) {
@@ -161,7 +167,7 @@ public class Controller {
 					applicationWindow.getComboBoxCourseID().setSelectedItem("");
 					applicationWindow.getTextFieldCourseCredits().setText("");
 					applicationWindow.getMessageField().setText("Kursen har lagts till");
-					setComboBoxes();
+					setComboBoxesCourse();
 				}
 			}
 			catch (Exception e1) {

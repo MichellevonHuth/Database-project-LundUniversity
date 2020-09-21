@@ -71,10 +71,6 @@ public class ApplicationWindow extends JFrame {
 		frame.getContentPane().setLayout(null);
 		
 		btnAddstudent = new JButton("ADD");
-		btnAddstudent.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnAddstudent.setBounds(39, 225, 164, 29);
 		frame.getContentPane().add(btnAddstudent);
 		
@@ -351,7 +347,6 @@ public class ApplicationWindow extends JFrame {
 		this.textFieldGrade = textFieldGrade;
 	}
 	
-
 	public JComboBox getComboBoxRegistrateCourseID() {
 		return comboBoxRegistrateCourseID;
 	}

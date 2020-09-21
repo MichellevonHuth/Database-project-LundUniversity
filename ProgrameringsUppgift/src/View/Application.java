@@ -12,10 +12,9 @@ public class Application {
 		Controller controller = new Controller (dal, applicationWindow);
 		applicationWindow.setController(controller);	
 		applicationWindow.getFrame().setVisible(true);
-		applicationWindow.getController().setComboBoxes();
-		System.out.print("hej");
+		applicationWindow.getController().setComboBoxesCourse();
+		applicationWindow.getController().setComboBoxesStudent();
 
-		
 		
 	}
 }
