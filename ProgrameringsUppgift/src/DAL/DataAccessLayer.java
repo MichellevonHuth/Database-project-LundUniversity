@@ -102,8 +102,8 @@ public class DataAccessLayer {
 		String query1 = "SELECT * FROM Course WHERE courseCode = '" + courseID + "'";
 		String query2 = "SELECT s.studentID FROM Course c, Studies s WHERE c.courseCode = s.courseCode AND c.courseCode = '" + courseID + "'";
 		String query3 = "SELECT s.studentID, s.grade FROM Course c, HasStudied s WHERE c.courseCode = s.courseCode AND c.courseCode = '" + courseID + "'";
-		String query4 = "SELECT count(grade) FROM HasStudied WHERE courseCode = '" + courseID + "'";
-		String query5 = "SELECT count(grade) FROM HasStudied WHERE grade >= 85";
+		String query4 = "SELECT count(grade) FROM HasStudied WHERE courseCode = '" + courseID + "' AND grade >=85";
+		String query5 = "SELECT count(grade) FROM HasStudied WHERE courseCode = '" + courseID + "'";
 
 		PreparedStatement ps1 = connection.prepareStatement(query1);
 		PreparedStatement ps2 = connection.prepareStatement(query2);
@@ -129,8 +129,8 @@ public class DataAccessLayer {
 		} 
 		
 		while(resultList4.next() && resultList5.next()) {
-			double getAllGrades = Double.parseDouble(resultList4.getString(1));
-			double getAllAs = Double.parseDouble(resultList5.getString(1));
+			double getAllAs = Double.parseDouble(resultList4.getString(1));
+			double getAllGrades= Double.parseDouble(resultList5.getString(1));
 			double percentage = getAllAs/getAllGrades *100;
 			String result = String.format("%.2f", percentage);
 			
