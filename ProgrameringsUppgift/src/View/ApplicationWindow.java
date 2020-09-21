@@ -37,6 +37,7 @@ public class ApplicationWindow extends JFrame {
 	private JLabel lblCourseName;
 	private JLabel lblCourse;
 	private JLabel lblStudent;
+	private JLabel lblSemester;
 	private JLabel lblStudentName;
 	private JButton btnConnectionInsert;
 	private JButton btnAddstudent;
@@ -49,6 +50,7 @@ public class ApplicationWindow extends JFrame {
 	private JButton btnConnectionRemove;
 	private JButton btnShowAllCourses;
 	private JButton btnShowAllStudents; 
+	private JButton btnShowResult;
 	private JTextField textFieldCourseCredits;
 	private JTextField textFieldCourseName;
 	private JTextField textFieldGrade;
@@ -59,10 +61,11 @@ public class ApplicationWindow extends JFrame {
 	private JComboBox comboBoxConnectionStudentID;
 	private JComboBox comboBoxStudentID;
 	private JComboBox comboBoxCourseID;
-	private JButton btnShowResult;
+	private JComboBox comboBoxSemester;
+
+
 
 	
-
 	public ApplicationWindow() {
 	
 		frame = new JFrame();
@@ -179,7 +182,7 @@ public class ApplicationWindow extends JFrame {
 		frame.getContentPane().add(lblConnectionStudentID);
 		
 		lblConnectionCourseID = new JLabel("Course Code: *");
-		lblConnectionCourseID.setBounds(1044, 203, 95, 16);
+		lblConnectionCourseID.setBounds(1044, 205, 95, 16);
 		frame.getContentPane().add(lblConnectionCourseID);
 		
 		comboBoxConnectionStudentID = new JComboBox();
@@ -193,11 +196,11 @@ public class ApplicationWindow extends JFrame {
 		frame.getContentPane().add(comboBoxConnectionCourseID);
 		
 		btnConnectionInsert = new JButton("REGISTRATE");
-		btnConnectionInsert.setBounds(1027, 251, 181, 29);
+		btnConnectionInsert.setBounds(1023, 266, 181, 29);
 		frame.getContentPane().add(btnConnectionInsert);
 		
 		btnConnectionRemove = new JButton("REMOVE");
-		btnConnectionRemove.setBounds(1216, 251, 181, 29);
+		btnConnectionRemove.setBounds(1216, 266, 181, 29);
 		frame.getContentPane().add(btnConnectionRemove);
 		
 		lblRegStudForComCor = new JLabel("REGISTRATE STUDENT FOR COMPLETED COURSES");
@@ -238,6 +241,17 @@ public class ApplicationWindow extends JFrame {
 		btnShowResult = new JButton("SHOW RESULT");
 		btnShowResult.setBounds(1216, 633, 181, 29);
 		frame.getContentPane().add(btnShowResult);
+		
+		comboBoxSemester = new JComboBox();
+		comboBoxSemester.setBounds(1140, 227, 204, 27);
+		frame.getContentPane().add(comboBoxSemester);
+		
+		comboBoxSemester.addItem("Semester 1");
+		comboBoxSemester.addItem("Semester 2");
+		
+		lblSemester = new JLabel("Semester: *");
+		lblSemester.setBounds(1044, 230, 84, 16);
+		frame.getContentPane().add(lblSemester);
 	}
 	
 	public JFrame getFrame() {
@@ -562,6 +576,23 @@ public class ApplicationWindow extends JFrame {
 	public void setBtnShowResult(JButton btnShowResult) {
 		this.btnShowResult = btnShowResult;
 	}
+	
+	public JComboBox getComboBoxSemester() {
+		return comboBoxSemester;
+	}
+
+	public void setComboBoxSemester(JComboBox comboBoxSemester) {
+		this.comboBoxSemester = comboBoxSemester;
+	}
+
+	public JLabel getLblSemester() {
+		return lblSemester;
+	}
+
+	public void setLblSemester(JLabel lblSemester) {
+		this.lblSemester = lblSemester;
+	}
+
 }
 	
 

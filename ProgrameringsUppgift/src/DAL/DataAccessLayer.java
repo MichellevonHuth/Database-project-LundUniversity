@@ -225,10 +225,12 @@ public class DataAccessLayer {
 		
 	}
 	
-	public void addStudentOnCourse(String courseCode, String studentID) throws SQLException {
+	public void addStudentOnCourse(String courseCode, String studentID, String semester) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		
-		String query = "INSERT INTO Studies (courseCode, studentID) Values('"+ courseCode + "','" + studentID + "')";
+		
+		
+		String query = "INSERT INTO Studies (courseCode, studentID, semester) Values('"+ courseCode + "','" + studentID + "','" + semester + "')";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.executeUpdate();
 		

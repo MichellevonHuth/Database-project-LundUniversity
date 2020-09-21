@@ -245,10 +245,11 @@ public class Controller {
 		public void actionPerformed(ActionEvent e) {
 			String courseCode = (String)applicationWindow.getComboBoxConnectionCourseID().getSelectedItem();
 			String studentID = (String)applicationWindow.getComboBoxConnectionStudentID().getSelectedItem();
+			String semester = (String)applicationWindow.getComboBoxSemester().getSelectedItem();
 			
 			try {
 			
-				dal.addStudentOnCourse(courseCode, studentID);
+				dal.addStudentOnCourse(courseCode, studentID, semester);
 				applicationWindow.getMessageField().setText("Studenten har lagts till på kursen");
 				
 			}
