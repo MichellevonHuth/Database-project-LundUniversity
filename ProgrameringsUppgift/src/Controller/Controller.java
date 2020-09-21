@@ -75,11 +75,14 @@ public class Controller {
 			
 			
 			try {
-				if (studentName.equals("") && studentID.equals("")) {
+				if (studentName.equals("") && studentID.equals("") || (studentID.equals("") || studentName.equals("") ) ) {
 					applicationWindow.getMessageField().setText(errorHandler.errorMessageEmptyFields());
+					applicationWindow.getTextFieldStudentName().setText("");
+					applicationWindow.getComboBoxStudentID().setSelectedItem("");
 				}
+			
 				else {
-					dal.addStudent(studentName,studentID);
+					dal.addStudent(studentID, studentName);
 					applicationWindow.getTextFieldStudentName().setText("");
 					applicationWindow.getComboBoxStudentID().setSelectedItem("");
 					applicationWindow.getMessageField().setText("Studenten har lagts till");
@@ -176,6 +179,43 @@ public class Controller {
 			}
 		}
 	});
+	
+
+	applicationWindow.getBtnRemovecourse().addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			
+			String courseCode = (String)applicationWindow.getComboBoxCourseID().getSelectedItem();
+			
+			try {
+					dal.removeCourse(courseCode);
+					applicationWindow.getMessageField().setText("Kursen har tagits bort");
+					applicationWindow.getComboBoxCourseID().removeItem(courseCode);
+					setComboBoxesCourse();
+				}
+			
+			catch (Exception e1) {
+				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
+			}
+		}
+	});
+
+
+	
+	applicationWindow.getBtnShowAllCourses().addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			String temp = "";
+		
+			try {
+				for(String s: dal.showAllCourses()) {
+					temp += s + "\n" + "\n";
+					applicationWindow.getTextOutputBox().setText(temp);
+			}
+		} 
+			catch (Exception e1) {
+				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));			
+			}
+		}
+	});	
 	
 	
 	applicationWindow.getBtnConnectionInsert().addActionListener(new ActionListener() {

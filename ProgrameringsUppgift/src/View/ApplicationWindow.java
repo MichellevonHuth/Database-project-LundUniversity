@@ -140,7 +140,7 @@ public class ApplicationWindow extends JFrame {
 		lblCourse.setBounds(163, 466, 61, 16);
 		frame.getContentPane().add(lblCourse);
 		
-		lblCourseId = new JLabel("Course ID:");
+		lblCourseId = new JLabel("Course Code");
 		lblCourseId.setBounds(59, 521, 84, 16);
 		frame.getContentPane().add(lblCourseId);
 		
@@ -178,7 +178,7 @@ public class ApplicationWindow extends JFrame {
 		lblConnectionStudentID.setBounds(1044, 177, 84, 16);
 		frame.getContentPane().add(lblConnectionStudentID);
 		
-		lblConnectionCourseID = new JLabel("Course ID:");
+		lblConnectionCourseID = new JLabel("Course Code:");
 		lblConnectionCourseID.setBounds(1044, 203, 84, 16);
 		frame.getContentPane().add(lblConnectionCourseID);
 		
@@ -208,8 +208,8 @@ public class ApplicationWindow extends JFrame {
 		lblRegistrateStudentID.setBounds(1047, 533, 81, 16);
 		frame.getContentPane().add(lblRegistrateStudentID);
 		
-		lblRegistrationCourseID = new JLabel("Course ID:");
-		lblRegistrationCourseID.setBounds(1047, 560, 81, 16);
+		lblRegistrationCourseID = new JLabel("Course  Code:");
+		lblRegistrationCourseID.setBounds(1047, 560, 92, 16);
 		frame.getContentPane().add(lblRegistrationCourseID);
 		
 		lblGrade = new JLabel("Grade:");
