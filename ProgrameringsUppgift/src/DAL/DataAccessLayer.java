@@ -229,11 +229,32 @@ public class DataAccessLayer {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		
 		
-		
 		String query = "INSERT INTO Studies (courseCode, studentID, semester) Values('"+ courseCode + "','" + studentID + "','" + semester + "')";
-		PreparedStatement ps = connection.prepareStatement(query);
-		ps.executeUpdate();
 		
+		PreparedStatement ps = connection.prepareStatement(query);	
+		ps.executeUpdate();	
+		
+	}
+	
+	public boolean checkCreditsForSemester (String courseCode, String studentID, String semester) throws SQLException  {
+		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
+		ArrayList <String> temp = new ArrayList <String>();
+		String query = "SELECT s.studentID, s.semester, SUM(credits) AS Credits FROM Studies s, Course c WHERE s.courseCode = c.courseCode AND s.courseCode = '" + courseCode + "' AND s.studentID = '" + studentID + "' AND s.semester = '" + semester + "' AND Credits <= 45 GROUP BY s.studentID, s.semester";
+		PreparedStatement ps = connection.prepareStatement(query);	
+		ResultSet rs = ps.executeQuery();
+	
+		System.out.println("hej");
+		while (rs.next()) {
+			String getStatement = rs.getString(1);
+			temp.add(getStatement);
+		}
+		
+		if (temp.isEmpty()) {
+			return false;
+		}
+		return true;	
+		
+	
 	}
 	
 	

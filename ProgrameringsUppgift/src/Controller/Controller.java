@@ -248,9 +248,17 @@ public class Controller {
 			String semester = (String)applicationWindow.getComboBoxSemester().getSelectedItem();
 			
 			try {
+				boolean checkCreditsForSemester  = dal.checkCreditsForSemester(courseCode, studentID, semester);
+				if(checkCreditsForSemester) {		
+					dal.addStudentOnCourse(courseCode, studentID, semester);
+					applicationWindow.getMessageField().setText("Studenten har lagts till på kursen");
+					
+				}
+				else {
+					
+					applicationWindow.getMessageField().setText("Studenten får inte läsa mer än 45 hp per termin");
 			
-				dal.addStudentOnCourse(courseCode, studentID, semester);
-				applicationWindow.getMessageField().setText("Studenten har lagts till på kursen");
+				}
 				
 			}
 			catch(Exception e1) {
