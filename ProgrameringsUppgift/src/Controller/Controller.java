@@ -106,6 +106,7 @@ public class Controller {
 					dal.removeStudent(studentID);
 					applicationWindow.getMessageField().setText("Studenten har tagits bort");
 					setComboBoxesStudent();
+					System.out.println("hej");
 					
 				}
 			
