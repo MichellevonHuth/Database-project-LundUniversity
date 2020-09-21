@@ -6,6 +6,7 @@ public class ErrorHandler {
 	
 	public String handleException(Exception ex) {
 		String errorMessage;
+		ex.printStackTrace();
 		
 		if (ex instanceof NullPointerException) {
 			errorMessage = "En instans du försöker komma åt, existerar inte";

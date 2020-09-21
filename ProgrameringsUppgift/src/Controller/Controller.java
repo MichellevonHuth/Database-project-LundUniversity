@@ -30,6 +30,15 @@ public class Controller {
 		return applicationWindow;
 	}
 	public void setComboBoxes() throws Exception {
+	
+		applicationWindow.getComboBoxStudentID().removeAllItems();
+		applicationWindow.getComboBoxRegistrationStudentID().removeAllItems();
+		applicationWindow.getComboBoxConnectionStudentID().removeAllItems();
+		
+		applicationWindow.getComboBoxCourseID().removeAllItems();
+		applicationWindow.getComboBoxRegistrateCourseID().removeAllItems();
+		applicationWindow.getComboBoxConnectionCourseID().removeAllItems();
+		
 		for (String s : dal.getAllStudentID()) {
 			applicationWindow.getComboBoxStudentID().addItem(s);
 			applicationWindow.getComboBoxRegistrationStudentID().addItem(s);
@@ -84,10 +93,11 @@ public class Controller {
 			String studentID = (String)applicationWindow.getComboBoxStudentID().getSelectedItem();
 			
 			try {
+					System.out.println(studentID);
 					dal.removeStudent(studentID);
 					applicationWindow.getMessageField().setText("Studenten har tagits bort");
 					setComboBoxes();
-					System.out.println(studentID);
+					
 				}
 			
 			catch (Exception e1) {

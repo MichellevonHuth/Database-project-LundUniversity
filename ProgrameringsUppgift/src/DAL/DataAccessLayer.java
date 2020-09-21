@@ -32,15 +32,11 @@ public class DataAccessLayer {
 	public void removeStudent(String studentID) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 	
-		String query1 = "DELETE FROM HasStudied WHERE studentID = '"+ studentID + "')";
-				// "DELETE FROM Studies WHERE studentID = '"+ studentID + "') DELETE FROM Student WHERE studentID = '"+ studentID + "')";
+		String query1 = "DELETE FROM HasStudied WHERE studentID = '"+ studentID + "'DELETE FROM Studies WHERE studentID = '" + studentID + "' DELETE FROM Student WHERE studentID = '" + studentID + "'";
 	
 		PreparedStatement ps1 = connection.prepareStatement(query1);
-		//PreparedStatement ps2 = connection.prepareStatement(query2);
-		//PreparedStatement ps3 = connection.prepareStatement(query3);
 		ps1.executeUpdate();
-		//ps2.executeUpdate(query2);
-		//ps3.executeUpdate(query3);
+
 		
 	}
 	
@@ -114,13 +110,9 @@ public class DataAccessLayer {
 		return temp;
 		
 	}
-	
-	
-	
-	
+
 	public void addCourse(String courseCode, String courseName, int credits) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
-		
 		String query = "INSERT INTO Course (courseCode, courseName, credits) Values('"+ courseCode + "','" + courseName + "','" + credits + "')";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.executeUpdate();
