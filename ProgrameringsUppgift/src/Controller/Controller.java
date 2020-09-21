@@ -266,7 +266,6 @@ public class Controller {
 			try {
 					dal.removeRegistratedStudent(studentID, courseCode);
 					applicationWindow.getMessageField().setText("Studenten har tagits bort från kursen");
-					applicationWindow.getComboBoxCourseID().removeItem(courseCode);
 				}
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));

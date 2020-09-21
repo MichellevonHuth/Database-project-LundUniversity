@@ -77,22 +77,35 @@ public class DataAccessLayer {
 		return temp;
 	}
 	
+	
 	public ArrayList<String> findCourse(String courseID) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		ArrayList<String> temp = new ArrayList<String>();
 		
-		String query = "SELECT * FROM Course WHERE courseCode = '" + courseID + "'";
-		PreparedStatement ps = connection.prepareStatement(query);
-		ResultSet resultList = ps.executeQuery();
-		int credits = resultList.findColumn("credits");
+		String query1 = "SELECT * FROM Course WHERE courseCode = '" + courseID + "'";
+		String query2 = "SELECT s.studentID FROM Course c, Studies s WHERE c.courseCode = s.courseCode AND c.courseCode = '" + courseID + "'";
 
-		while(resultList.next()) {
-			String getCourseCode = resultList.getString(1);
-			String getCourseName = resultList.getString(2);
-			String getCredits = resultList.getString(credits);
+				
+		PreparedStatement ps1 = connection.prepareStatement(query1);
+		PreparedStatement ps2 = connection.prepareStatement(query2);
+		ResultSet resultList1 = ps1.executeQuery();
+		ResultSet resultList2 = ps2.executeQuery();
+		int credits = resultList1.findColumn("credits");
+
+		while(resultList1.next()) {
+			String getCourseCode = resultList1.getString(1);
+			String getCourseName = resultList1.getString(2);
+			String getCredits = resultList1.getString(credits);
 			temp.add("COURSE CODE: " + getCourseCode + "\n");
 			temp.add("COURSE NAME: " + getCourseName + "\n");
-			temp.add("CREDITS: " + getCredits);
+			temp.add("CREDITS: " + getCredits + "\n");
+		}
+		
+		temp.add("\n" + "STUDENTS: " + "\n");
+		
+		while(resultList2.next()) {
+			String getAllStudentOnCourse = resultList2.getString(1);
+			temp.add(getAllStudentOnCourse + "\n");
 		}
 			
 		return temp;

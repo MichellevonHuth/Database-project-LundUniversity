@@ -100,7 +100,7 @@ public class ApplicationWindow extends JFrame {
 		textFieldStudentName.setColumns(10);
 		
 		messageField = new JLabel("");
-		messageField.setBounds(532, 720, 375, 46);
+		messageField.setBounds(471, 720, 536, 46);
 		frame.getContentPane().add(messageField);
 		
 		textFieldCourseCredits = new JTextField();
