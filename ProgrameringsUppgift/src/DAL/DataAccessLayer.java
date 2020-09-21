@@ -150,6 +150,14 @@ public class DataAccessLayer {
 		
 	}
 	
+	
+	public void removeRegistratedStudent (String studentID, String courseCode) throws SQLException {
+		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
+		String query = "DELETE FROM Studies WHERE studentID = '" + studentID +"' AND courseCode= '" + courseCode + "'";
+		PreparedStatement ps = connection.prepareStatement(query);
+		ps.executeUpdate();
+	}
+	
 	public void removeCourse(String courseCode) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 	
@@ -180,13 +188,7 @@ public class DataAccessLayer {
 			}
 		return temp;
 		}
-	
-	public void removeRegistratedStudent (String studentID, String courseCode) throws SQLException {
-		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
-		String query = "DELETE FROM Studies WHERE studentID = '" + studentID +"' AND courseCode= '" + courseCode + "'";
-		PreparedStatement ps = connection.prepareStatement(query);
-		ps.executeUpdate();
-	}
+
 
 	public void insertIntoHasStuided(String courseCode, String studentID, int grade) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
