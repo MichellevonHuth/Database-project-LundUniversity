@@ -156,31 +156,6 @@ public class DataAccessLayer {
 		return temp;
 	}
 	
-	/*/ HÄR TESTAR JAG ATT HITTA ALLA A I EN EGEN METOD, FUNKAR INTE
-	public String getPercentageA(String courseCode) throws SQLException {
-		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
-		
-		String query1 = "SELECT count(grade) FROM HasStudied WHERE courseCode = '" + courseCode + "'";
-		String query2 = "SELECT count(grade) FROM HasStudied WHERE grade >= 85";
-		
-		PreparedStatement ps1 = connection.prepareStatement(query1);
-		PreparedStatement ps2 = connection.prepareStatement(query2);
-		
-		ResultSet resultList1 = ps1.executeQuery();
-		ResultSet resultList2 = ps2.executeQuery();
-		
-		String returnValue;
-		
-			double getAllGrades = Double.parseDouble(resultList1.getString(1));
-			double getAllAs = Double.parseDouble(resultList2.getString(2));
-			double percentage = getAllAs/getAllGrades *100;
-			String result = String.format("%.2f", percentage);	
-			returnValue = ("PERCENTAGE OF STUDENTS WITH AN A : " + result + " %" + "\n");
-			
-		return returnValue; 
-				
-	} /*/
-	
 	
 	public ArrayList<String> getAllStudentID() throws SQLException {
 		
@@ -227,14 +202,36 @@ public class DataAccessLayer {
 	
 	public void addStudentOnCourse(String courseCode, String studentID, String semester) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
+		ArrayList <String> temp = new ArrayList <String>();
+		String query1 = "SELECT s.studentID, s.semester, SUM(credits) AS Credits FROM Studies s, Course c WHERE s.courseCode = c.courseCode AND s.courseCode = '" + courseCode + "' AND s.studentID = '" + studentID + "' AND s.semester = '" + semester + "' AND Credits <= 45 GROUP BY s.studentID, s.semester";
+		String query2 = "INSERT INTO Studies (courseCode, studentID, semester) Values('"+ courseCode + "','" + studentID + "','" + semester + "')";
+	
+		
+		PreparedStatement ps1 = connection.prepareStatement(query1);	
+		PreparedStatement ps2 = connection.prepareStatement(query2);
+		ResultSet rs1 = ps1.executeQuery();
+		ResultSet rs2 = ps2.executeQuery();
+		
+		while (rs1.next() && rs2.next()) {
+			String addStudentOnCourse  = rs1.getString(1);
+			temp.add(addStudentOnCourse);
+			
+			String checkCredits = rs1.getString(1);
+			
+			if(temp.isEmpty()) {
+				temp.add(addStudentOnCourse);	
+			}
+			
+			
+		}
 		
 		
-		String query = "INSERT INTO Studies (courseCode, studentID, semester) Values('"+ courseCode + "','" + studentID + "','" + semester + "')";
 		
-		PreparedStatement ps = connection.prepareStatement(query);	
-		ps.executeUpdate();	
+		//ps1.executeUpdate();	
 		
 	}
+
+	/*/
 	
 	public boolean checkCreditsForSemester (String courseCode, String studentID, String semester) throws SQLException  {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
@@ -242,20 +239,18 @@ public class DataAccessLayer {
 		String query = "SELECT s.studentID, s.semester, SUM(credits) AS Credits FROM Studies s, Course c WHERE s.courseCode = c.courseCode AND s.courseCode = '" + courseCode + "' AND s.studentID = '" + studentID + "' AND s.semester = '" + semester + "' AND Credits <= 45 GROUP BY s.studentID, s.semester";
 		PreparedStatement ps = connection.prepareStatement(query);	
 		ResultSet rs = ps.executeQuery();
-	
-		System.out.println("hej");
+
 		while (rs.next()) {
 			String getStatement = rs.getString(1);
 			temp.add(getStatement);
 		}
 		
 		if (temp.isEmpty()) {
-			return false;
+			return true;
 		}
-		return true;	
+		return false;	
 		
-	
-	}
+	} /*/
 	
 	
 	public boolean removeRegistratedStudent (String studentID, String courseCode) throws SQLException {
