@@ -169,15 +169,18 @@ public class Controller {
 		public void actionPerformed(ActionEvent e) {
 			String courseName = applicationWindow.getTextFieldCourseName().getText();
 			String courseCode = (String)applicationWindow.getComboBoxCourseID().getSelectedItem();
-			int courseCredits = Integer.parseInt(applicationWindow.getTextFieldCourseCredits().getText());
 			String strCourseCredits = applicationWindow.getTextFieldCourseCredits().getText();
 			
 			try {
-				if (courseName.equals("") || courseCode.equals("") || strCourseCredits.equals("")) {
+				if (courseName.isEmpty() && courseCode.isEmpty() && strCourseCredits.isEmpty() || courseName.isEmpty() || courseCode.isEmpty() || strCourseCredits.isEmpty()) {
 					applicationWindow.getMessageField().setText(errorHandler.errorMessageEmptyFields());
 					applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
+					applicationWindow.getTextFieldCourseName().setText("");
+					applicationWindow.getTextFieldCourseCredits().setText("");
+					applicationWindow.getComboBoxCourseID().setSelectedItem("");
 				}
 				else {
+					int courseCredits = Integer.parseInt(applicationWindow.getTextFieldCourseCredits().getText());
 					dal.addCourse(courseCode, courseName, courseCredits);
 					applicationWindow.getTextFieldCourseName().setText("");
 					applicationWindow.getComboBoxCourseID().setSelectedItem("");

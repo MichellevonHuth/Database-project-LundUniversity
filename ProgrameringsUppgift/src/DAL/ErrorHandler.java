@@ -48,7 +48,7 @@ public class ErrorHandler {
 	}
 	
 	public String errorMessageEmptyFields() {
-		String errorMessage = "Vänligen fyll i båda fälten.";
+		String errorMessage = "Vänligen fyll i alla fälten.";
 		return errorMessage;
 	}
 	
