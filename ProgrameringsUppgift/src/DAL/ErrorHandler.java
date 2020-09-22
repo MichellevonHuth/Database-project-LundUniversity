@@ -51,4 +51,9 @@ public class ErrorHandler {
 		String errorMessage = "Vänligen fyll i båda fälten.";
 		return errorMessage;
 	}
+	
+	public String creditsError () {
+		String errorMessage = "Student can't read more than 45 credits per semester";
+		return errorMessage; 
+	}
 }

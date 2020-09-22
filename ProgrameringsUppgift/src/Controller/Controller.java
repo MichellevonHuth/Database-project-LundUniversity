@@ -1,13 +1,17 @@
 package Controller;
+import java.awt.Color;
 import DAL.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.ColorModel;
 import java.sql.*;
 import java.util.ArrayList;
 
 import DAL.DataAccessLayer;
 import View.ApplicationWindow;
 import javax.swing.JFrame;
+
+
 
 
 public class Controller {
@@ -77,6 +81,7 @@ public class Controller {
 			try {
 				if (studentName.equals("") && studentID.equals("") || (studentID.equals("") || studentName.equals("") ) ) {
 					applicationWindow.getMessageField().setText(errorHandler.errorMessageEmptyFields());
+					applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
 					applicationWindow.getTextFieldStudentName().setText("");
 					applicationWindow.getComboBoxStudentID().setSelectedItem("");
 				}
@@ -86,11 +91,13 @@ public class Controller {
 					applicationWindow.getTextFieldStudentName().setText("");
 					applicationWindow.getComboBoxStudentID().setSelectedItem("");
 					applicationWindow.getMessageField().setText("Studenten har lagts till");
+					applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
 					setComboBoxesStudent();
 				}
 			}
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
+				applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
 			}
 		}
 			
@@ -105,13 +112,14 @@ public class Controller {
 
 					dal.removeStudent(studentID);
 					applicationWindow.getMessageField().setText("Studenten har tagits bort");
+					applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
 					setComboBoxesStudent();
-					System.out.println("hej");
 					
 				}
 			
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
+				applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
 			}
 		}
 	});
@@ -126,12 +134,13 @@ public class Controller {
 				for(String s : dal.findStudent((String) studentID)) {
 					temp += s;
 					applicationWindow.getTextOutputBox().setText(temp);
-					applicationWindow.getTextOutputBox().setText(temp);
+					applicationWindow.getLblHeader().setText("STUDENT");
 					
 				}
 			}
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
+				applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
 			}
 		}
 	});
@@ -145,12 +154,13 @@ public class Controller {
 			for(String s: dal.findAllStudents()) {
 			 temp += s;
 				applicationWindow.getTextOutputBox().setText(temp);
-				applicationWindow.getTextOutputBox().setText(temp);
+				applicationWindow.getLblHeader().setText("ALL STUDENTS");
 				
 			}
 		} 
 		catch (Exception e1) {
-			applicationWindow.getMessageField().setText(errorHandler.handleException(e1));			
+			applicationWindow.getMessageField().setText(errorHandler.handleException(e1));	
+			applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
 		}
 	}
 });
@@ -163,8 +173,9 @@ public class Controller {
 			String strCourseCredits = applicationWindow.getTextFieldCourseCredits().getText();
 			
 			try {
-				if (courseName.equals("") && courseCode.equals("") || strCourseCredits.equals("")) {
+				if (courseName.equals("") || courseCode.equals("") || strCourseCredits.equals("")) {
 					applicationWindow.getMessageField().setText(errorHandler.errorMessageEmptyFields());
+					applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
 				}
 				else {
 					dal.addCourse(courseCode, courseName, courseCredits);
@@ -172,11 +183,13 @@ public class Controller {
 					applicationWindow.getComboBoxCourseID().setSelectedItem("");
 					applicationWindow.getTextFieldCourseCredits().setText("");
 					applicationWindow.getMessageField().setText("Kursen har lagts till");
+					applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
 					setComboBoxesCourse();
 				}
 			}
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
+				applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
 				
 			}
 		}
@@ -191,12 +204,14 @@ public class Controller {
 			try {
 					dal.removeCourse(courseCode);
 					applicationWindow.getMessageField().setText("Kursen har tagits bort");
+					applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
 					applicationWindow.getComboBoxCourseID().removeItem(courseCode);
 					setComboBoxesCourse();
 				}
 			
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
+				applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
 			}
 		}
 	});
@@ -210,11 +225,12 @@ public class Controller {
 				for(String s : dal.findCourse((String) courseCode)) {
 					temp += s;
 					applicationWindow.getTextOutputBox().setText(temp);	
+					applicationWindow.getLblHeader().setText("COURSE");
 				}
-				//applicationWindow.getTextOutputBox().setText(dal.getPercentageA(courseCode));
 			}
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
+				applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
 			}
 		}
 	
@@ -231,10 +247,12 @@ public class Controller {
 				for(String s: dal.showAllCourses(courseCode)) {
 					temp1 += s;
 					applicationWindow.getTextOutputBox().setText(temp1);
+					applicationWindow.getLblHeader().setText("ALL COURSES");
 				}
 			} 
 			catch (Exception e1) {
-				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));			
+				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));	
+				applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
 			}
 			
 		}
@@ -247,25 +265,23 @@ public class Controller {
 			String studentID = (String)applicationWindow.getComboBoxConnectionStudentID().getSelectedItem();
 			String semester = (String)applicationWindow.getComboBoxSemester().getSelectedItem();
 			
-			try {
-				boolean checkCreditsForSemester  = dal.checkCreditsForSemester(courseCode, studentID, semester);
-				if(checkCreditsForSemester) {		
-					dal.addStudentOnCourse(courseCode, studentID, semester);
+			try {	
+				int [] feedback = dal.checkCreditSemester(courseCode, studentID, semester);
+				
+				if(feedback[0] < 45) {
+					dal.addStudentOnCourse(courseCode, studentID, semester); 
 					applicationWindow.getMessageField().setText("Studenten har lagts till på kursen");
-					
+					applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
 				}
-				else {
+					else {
+						applicationWindow.getMessageField().setText(errorHandler.creditsError());
+						applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
+					}
 					
-					applicationWindow.getMessageField().setText("Studenten får inte läsa mer än 45 hp per termin");
-			
-				}
-				
-			}
-			catch(Exception e1) {
+				} catch(Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
-				
+				applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
 			}
-		
 		}
 	});
 		
@@ -278,13 +294,16 @@ public class Controller {
 					boolean result = dal.removeRegistratedStudent(studentID, courseCode);
 					if (result) {
 					applicationWindow.getMessageField().setText("Studenten har tagits bort från kursen");
+					applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
 					}
 					else {
 					applicationWindow.getMessageField().setText("Studenten har inte läst den kursen");
+					applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
 					}
 				}
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
+				applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
 			}
 		}	
 	});
@@ -300,20 +319,24 @@ public class Controller {
 			try {
 				if (stringGrade.equals("")) {
 					applicationWindow.getMessageField().setText(errorHandler.errorMessageEmptyFields());
+					applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
 				} 
 				else {
 					dal.insertIntoHasStuided(courseCode, studentID, grade);
 					
 					if(grade < 50) {
-						applicationWindow.getMessageField().setText("Studenten har genomfört kursen med icke godkänt betyg, och behöver forstätta läsa kursen!");
+						applicationWindow.getMessageField().setText("Studenten har genomfört kursen med icke godkänt betyg");
+						applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
 					} else {
 						dal.removeRegistratedStudent(studentID, courseCode);
-						applicationWindow.getMessageField().setText("Studenten har genomfört kursen med godkänt betyg!");	
+						applicationWindow.getMessageField().setText("Studenten har genomfört kursen med godkänt betyg");
+						applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
 					}			
 				}
 			}
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
+				applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
 				
 			}
 		}
@@ -330,10 +353,12 @@ public class Controller {
 				for(String s : dal. getResult(courseCode, studentID)) {
 					temp += s;
 					applicationWindow.getTextOutputBox().setText(temp);	
+					applicationWindow.getLblHeader().setText("RESULT");
 				}
 			}
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
+				applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
 			}
 		}
 	});

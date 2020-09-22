@@ -16,6 +16,8 @@ import javax.swing.JComboBox;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import javax.swing.JSeparator;
+import java.awt.Color;
 
 public class ApplicationWindow extends JFrame {
 
@@ -69,6 +71,7 @@ public class ApplicationWindow extends JFrame {
 	public ApplicationWindow() {
 	
 		frame = new JFrame();
+		frame.getContentPane().setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		frame.setBounds(100, 100, 1500, 800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -103,7 +106,7 @@ public class ApplicationWindow extends JFrame {
 		textFieldStudentName.setColumns(10);
 		
 		messageField = new JLabel("");
-		messageField.setBounds(471, 720, 536, 46);
+		messageField.setBounds(532, 720, 375, 46);
 		frame.getContentPane().add(messageField);
 		
 		textFieldCourseCredits = new JTextField();
@@ -118,7 +121,7 @@ public class ApplicationWindow extends JFrame {
 		
 		lblStudent = new JLabel("STUDENT");
 		lblStudent.setFont(new Font("Lucida Grande", Font.BOLD, 20));
-		lblStudent.setBounds(163, 88, 127, 16);
+		lblStudent.setBounds(194, 88, 127, 16);
 		frame.getContentPane().add(lblStudent);
 		
 		lblStudentName = new JLabel("Student Name: *");
@@ -140,7 +143,8 @@ public class ApplicationWindow extends JFrame {
 		frame.getContentPane().add(btnShowAllStudents);
 		
 		lblCourse = new JLabel("COURSE");
-		lblCourse.setBounds(163, 466, 61, 16);
+		lblCourse.setFont(new Font("Lucida Grande", Font.BOLD, 20));
+		lblCourse.setBounds(194, 461, 127, 16);
 		frame.getContentPane().add(lblCourse);
 		
 		lblCourseId = new JLabel("Course Code: *");
@@ -168,13 +172,15 @@ public class ApplicationWindow extends JFrame {
 		textOutputBox.setBounds(532, 88, 375, 630);
 		frame.getContentPane().add(textOutputBox);
 		
-		lblHeader = new JLabel("ALL STUDENTS");
-		lblHeader.setBounds(668, 45, 118, 16);
+		lblHeader = new JLabel("LUND UNIVERSITY");
+		lblHeader.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		lblHeader.setBounds(660, 46, 127, 16);
 		frame.getContentPane().add(lblHeader);
 		
-		lblRegStuOnCor = new JLabel("REGISTRATE STUDENT ON A NEW COURSE");
+		lblRegStuOnCor = new JLabel("REGISTER STUDENT ON A NEW COURSE");
+		lblRegStuOnCor.setFont(new Font("Lucida Grande", Font.BOLD, 20));
 		lblRegStuOnCor.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRegStuOnCor.setBounds(1044, 103, 337, 16);
+		lblRegStuOnCor.setBounds(1000, 105, 421, 16);
 		frame.getContentPane().add(lblRegStuOnCor);
 		
 		lblConnectionStudentID = new JLabel("Student ID: *");
@@ -203,8 +209,9 @@ public class ApplicationWindow extends JFrame {
 		btnConnectionRemove.setBounds(1216, 266, 181, 29);
 		frame.getContentPane().add(btnConnectionRemove);
 		
-		lblRegStudForComCor = new JLabel("REGISTRATE STUDENT FOR COMPLETED COURSES");
-		lblRegStudForComCor.setBounds(1048, 478, 349, 16);
+		lblRegStudForComCor = new JLabel("REGISTER A RESULT TO A STUDENT");
+		lblRegStudForComCor.setFont(new Font("Lucida Grande", Font.BOLD, 20));
+		lblRegStudForComCor.setBounds(1023, 439, 375, 61);
 		frame.getContentPane().add(lblRegStudForComCor);
 		
 		lblRegistrateStudentID = new JLabel("Student ID: *");
@@ -247,11 +254,20 @@ public class ApplicationWindow extends JFrame {
 		frame.getContentPane().add(comboBoxSemester);
 		
 		comboBoxSemester.addItem("Semester 1");
-		comboBoxSemester.addItem("Semester 2");
 		
 		lblSemester = new JLabel("Semester: *");
 		lblSemester.setBounds(1044, 230, 84, 16);
 		frame.getContentPane().add(lblSemester);
+		
+		JSeparator separator = new JSeparator();
+		separator.setForeground(Color.DARK_GRAY);
+		separator.setBounds(16, 373, 486, 53);
+		frame.getContentPane().add(separator);
+		
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setForeground(Color.DARK_GRAY);
+		separator_1.setBounds(940, 373, 486, 53);
+		frame.getContentPane().add(separator_1);
 	}
 	
 	public JFrame getFrame() {
@@ -592,7 +608,6 @@ public class ApplicationWindow extends JFrame {
 	public void setLblSemester(JLabel lblSemester) {
 		this.lblSemester = lblSemester;
 	}
-
 }
 	
 

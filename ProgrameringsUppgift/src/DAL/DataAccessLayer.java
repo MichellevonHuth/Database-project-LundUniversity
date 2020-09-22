@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class DataAccessLayer {
 	
 	private Connection connection;
+	private ErrorHandler errorhandler; 
 	String connectionString = "jdbc:sqlserver://" +  "localhost" + ";database=master;user= "  + "sa" + ";password=" + System.getenv("PASSWORD") + ";trustServerCertificate=true;loginTimeout=30;" ;
 	
 	public DataAccessLayer() {
@@ -160,9 +161,10 @@ public class DataAccessLayer {
 	public ArrayList<String> getAllStudentID() throws SQLException {
 		
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
-		
 		ArrayList<String> temp = new ArrayList<String>();
+		
 		String query = "SELECT studentID FROM Student";
+		
 		PreparedStatement ps = connection.prepareStatement(query);
 		ResultSet resultList= ps.executeQuery();
 		
@@ -200,59 +202,39 @@ public class DataAccessLayer {
 		
 	}
 	
-	public void addStudentOnCourse(String courseCode, String studentID, String semester) throws SQLException {
-		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
-		ArrayList <String> temp = new ArrayList <String>();
-		String query1 = "SELECT s.studentID, s.semester, SUM(credits) AS Credits FROM Studies s, Course c WHERE s.courseCode = c.courseCode AND s.courseCode = '" + courseCode + "' AND s.studentID = '" + studentID + "' AND s.semester = '" + semester + "' AND Credits <= 45 GROUP BY s.studentID, s.semester";
-		String query2 = "INSERT INTO Studies (courseCode, studentID, semester) Values('"+ courseCode + "','" + studentID + "','" + semester + "')";
-	
+	public int[] checkCreditSemester(String courseCode, String studentID, String semester) throws SQLException {
+		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());		
 		
-		PreparedStatement ps1 = connection.prepareStatement(query1);	
-		PreparedStatement ps2 = connection.prepareStatement(query2);
-		ResultSet rs1 = ps1.executeQuery();
+		int [ ] temp = new int[10];
+		
+		String queryGetCreditsPerSemester = "SELECT SUM(credits) AS Credits FROM Studies s, Course c WHERE s.courseCode = c.courseCode AND s.studentID = '" + studentID + "'  AND s.semester = '" + semester + "'  GROUP BY s.studentID, s.semester";
+		String queryGetCreditsForCourse = "SELECT credits FROM Course WHERE courseCode = '" + courseCode + "'";
+
+		PreparedStatement ps2 = connection.prepareStatement(queryGetCreditsPerSemester);
+		PreparedStatement ps3 = connection.prepareStatement(queryGetCreditsForCourse);
+		
 		ResultSet rs2 = ps2.executeQuery();
+		ResultSet rs3 = ps3.executeQuery();
+
 		
-		while (rs1.next() && rs2.next()) {
-			String addStudentOnCourse  = rs1.getString(1);
-			temp.add(addStudentOnCourse);
-			
-			String checkCredits = rs1.getString(1);
-			
-			if(temp.isEmpty()) {
-				temp.add(addStudentOnCourse);	
-			}
-			
-			
+		while(rs2.next() && rs3.next()) {
+			int getCreditsPerSemester = Integer.parseInt(rs2.getString(1));
+			int getCreditsForCourse = Integer.parseInt(rs3.getString(1));
+			int sum = getCreditsPerSemester + getCreditsForCourse;
+			temp[0] = sum;
 		}
 		
-		
-		
-		//ps1.executeUpdate();	
-		
+		return temp;
 	}
+	
+	public void addStudentOnCourse (String courseCode, String studentID, String semester) throws SQLException {
+		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());	
+		String queryAddStudent = "INSERT INTO Studies (courseCode, studentID, semester) Values('"+ courseCode + "','" + studentID + "','" + semester + "')";
+		PreparedStatement ps1 = connection.prepareStatement(queryAddStudent);
+		ps1.executeUpdate();
 
-	/*/
-	
-	public boolean checkCreditsForSemester (String courseCode, String studentID, String semester) throws SQLException  {
-		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
-		ArrayList <String> temp = new ArrayList <String>();
-		String query = "SELECT s.studentID, s.semester, SUM(credits) AS Credits FROM Studies s, Course c WHERE s.courseCode = c.courseCode AND s.courseCode = '" + courseCode + "' AND s.studentID = '" + studentID + "' AND s.semester = '" + semester + "' AND Credits <= 45 GROUP BY s.studentID, s.semester";
-		PreparedStatement ps = connection.prepareStatement(query);	
-		ResultSet rs = ps.executeQuery();
-
-		while (rs.next()) {
-			String getStatement = rs.getString(1);
-			temp.add(getStatement);
-		}
+	}
 		
-		if (temp.isEmpty()) {
-			return true;
-		}
-		return false;	
-		
-	} /*/
-	
-	
 	public boolean removeRegistratedStudent (String studentID, String courseCode) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		String query = "DELETE FROM Studies WHERE studentID = '" + studentID +"' AND courseCode= '" + courseCode + "'";
