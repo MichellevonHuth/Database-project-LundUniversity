@@ -9,15 +9,15 @@ public class ErrorHandler {
 		ex.printStackTrace();
 		
 		if (ex instanceof NullPointerException) {
-			errorMessage = "En instans du försöker komma åt, existerar inte";
+			errorMessage = "This object doesn't exist";
 		}
 
 		else if (ex instanceof IndexOutOfBoundsException) {
-			errorMessage = "Kunde inte hitta det du letar efter";
+			errorMessage = "Coudn't find want you are looking for";
 		}
 
 		else if (ex instanceof NumberFormatException) {
-			errorMessage = "Fel format på inmatat värde";
+			errorMessage = "Wrong format on input value";
 		}
 		
 
@@ -26,29 +26,29 @@ public class ErrorHandler {
 			switch (errorCode) {
 
 			case 2627:
-				errorMessage = "Objektet du försöker lägga till existerar redan";
+				errorMessage = "The object you are trying to add doesn't exist";
 				break;
 
 			case 17:
-				errorMessage = "Databasen kan ej nås";
+				errorMessage = "Problem with the connection to the database";
 				break;
 
 			case 0:
 				errorMessage = "Anslutningen misslyckades, tidsgräns uppnåd";
 				break;
 			default:
-				errorMessage = "Ett oväntat fel uppstod";
+				errorMessage = "An unexpected error has occured";
 				break;
 			}
 		} else {
-			errorMessage = "Ett oväntat fel uppstod";
+			errorMessage = "An unexpected error has occured";
 		}
 		
 		return errorMessage; 
 	}
 	
 	public String errorMessageEmptyFields() {
-		String errorMessage = "Vänligen fyll i alla fälten.";
+		String errorMessage = "Fill in all the fields";
 		return errorMessage;
 	}
 	

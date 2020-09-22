@@ -90,7 +90,7 @@ public class Controller {
 					dal.addStudent(studentID, studentName);
 					applicationWindow.getTextFieldStudentName().setText("");
 					applicationWindow.getComboBoxStudentID().setSelectedItem("");
-					applicationWindow.getMessageField().setText("Studenten har lagts till");
+					applicationWindow.getMessageField().setText("Student added");
 					applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
 					setComboBoxesStudent();
 				}
@@ -111,7 +111,7 @@ public class Controller {
 			try {
 
 					dal.removeStudent(studentID);
-					applicationWindow.getMessageField().setText("Studenten har tagits bort");
+					applicationWindow.getMessageField().setText("Student had been delete");
 					applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
 					setComboBoxesStudent();
 					
@@ -185,7 +185,7 @@ public class Controller {
 					applicationWindow.getTextFieldCourseName().setText("");
 					applicationWindow.getComboBoxCourseID().setSelectedItem("");
 					applicationWindow.getTextFieldCourseCredits().setText("");
-					applicationWindow.getMessageField().setText("Kursen har lagts till");
+					applicationWindow.getMessageField().setText("The course has been added");
 					applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
 					setComboBoxesCourse();
 				}
@@ -206,7 +206,7 @@ public class Controller {
 			
 			try {
 					dal.removeCourse(courseCode);
-					applicationWindow.getMessageField().setText("Kursen har tagits bort");
+					applicationWindow.getMessageField().setText("The course have been deleted");
 					applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
 					applicationWindow.getComboBoxCourseID().removeItem(courseCode);
 					setComboBoxesCourse();
@@ -273,7 +273,7 @@ public class Controller {
 				
 				if(feedback[0] < 45) {
 					dal.addStudentOnCourse(courseCode, studentID, semester); 
-					applicationWindow.getMessageField().setText("Studenten har lagts till på kursen");
+					applicationWindow.getMessageField().setText("The student has been added on the course");
 					applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
 				}
 					else {
@@ -296,11 +296,11 @@ public class Controller {
 			try {
 					boolean result = dal.removeRegistratedStudent(studentID, courseCode);
 					if (result) {
-					applicationWindow.getMessageField().setText("Studenten har tagits bort från kursen");
+					applicationWindow.getMessageField().setText("The student has been deleted from the course ");
 					applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
 					}
 					else {
-					applicationWindow.getMessageField().setText("Studenten har inte läst den kursen");
+					applicationWindow.getMessageField().setText("The student isn't registered on this course");
 					applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
 					}
 				}
@@ -328,11 +328,11 @@ public class Controller {
 					dal.insertIntoHasStuided(courseCode, studentID, grade);
 					
 					if(grade < 50) {
-						applicationWindow.getMessageField().setText("Studenten har genomfört kursen med icke godkänt betyg");
+						applicationWindow.getMessageField().setText("The student have failed this course");
 						applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
 					} else {
 						dal.removeRegistratedStudent(studentID, courseCode);
-						applicationWindow.getMessageField().setText("Studenten har genomfört kursen med godkänt betyg");
+						applicationWindow.getMessageField().setText("The student have completed the course");
 						applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
 					}			
 				}
