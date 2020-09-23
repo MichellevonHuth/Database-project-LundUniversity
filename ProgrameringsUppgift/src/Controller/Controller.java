@@ -286,7 +286,6 @@ public class Controller {
 			try {	
 				
 				if (courseCode.equals("") && studentID.equals("") || (studentID.equals("") || courseCode.equals("") ) ) {
-					applicationWindow.getMessageField().setText(errorHandler.errorMessageEmptyFields());
 					applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
 					applicationWindow.getComboBoxConnectionCourseID().setSelectedItem("");
 					applicationWindow.getComboBoxConnectionStudentID().setSelectedItem("");
@@ -307,6 +306,7 @@ public class Controller {
 				} 
 			catch(Exception e1) {
 				
+				applicationWindow.getMessageField().setText(errorHandler.errorMessageEmptyFields());
 				// applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
 				// applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
 			}
