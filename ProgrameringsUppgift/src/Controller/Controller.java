@@ -284,6 +284,14 @@ public class Controller {
 			String semester = (String)applicationWindow.getComboBoxSemester().getSelectedItem();
 			
 			try {	
+				
+				if (courseCode.equals("") && studentID.equals("") || (studentID.equals("") || courseCode.equals("") ) ) {
+					applicationWindow.getMessageField().setText(errorHandler.errorMessageEmptyFields());
+					applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
+					applicationWindow.getComboBoxConnectionCourseID().setSelectedItem("");
+					applicationWindow.getComboBoxConnectionStudentID().setSelectedItem("");
+				}	
+				
 				int [] feedback = dal.checkCreditSemester(courseCode, studentID, semester);
 				
 				if(feedback[0] < 45) {
@@ -291,14 +299,16 @@ public class Controller {
 					applicationWindow.getMessageField().setText("The student has been added on the course");
 					applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
 				}
-					else {
+				else {
 						applicationWindow.getMessageField().setText(errorHandler.creditsError());
 						applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
-					}
+				}
 					
-				} catch(Exception e1) {
-				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
-				applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
+				} 
+			catch(Exception e1) {
+				
+				// applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
+				// applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
 			}
 		}
 	});
@@ -311,6 +321,8 @@ public class Controller {
 
 			String courseCode = (String)applicationWindow.getComboBoxConnectionCourseID().getSelectedItem();
 			String studentID = (String)applicationWindow.getComboBoxConnectionStudentID().getSelectedItem();
+			
+			
 			try {
 					boolean result = dal.removeRegistratedStudent(studentID, courseCode);
 					if (result) {
