@@ -6,7 +6,7 @@ public class ErrorHandler {
 	
 	public String handleException(Exception ex) {
 		String errorMessage;
-		ex.printStackTrace();
+		//ex.printStackTrace();
 		
 		if (ex instanceof NullPointerException) {
 			errorMessage = "This object doesn't exist";

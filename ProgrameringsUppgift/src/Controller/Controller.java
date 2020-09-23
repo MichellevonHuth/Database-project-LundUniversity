@@ -115,9 +115,7 @@ public class Controller {
 			
 	});
 	
-	
-	
-	
+
 	applicationWindow.getBtnRemovestudent().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			
