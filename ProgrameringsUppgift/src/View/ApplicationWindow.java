@@ -194,12 +194,10 @@ public class ApplicationWindow extends JFrame {
 		frame.getContentPane().add(lblConnectionCourseID);
 		
 		comboBoxConnectionStudentID = new JComboBox();
-		comboBoxConnectionStudentID.setEditable(true);
 		comboBoxConnectionStudentID.setBounds(1140, 173, 197, 27);
 		frame.getContentPane().add(comboBoxConnectionStudentID);
 		
 		comboBoxConnectionCourseID = new JComboBox();
-		comboBoxConnectionCourseID.setEditable(true);
 		comboBoxConnectionCourseID.setBounds(1140, 199, 197, 27);
 		frame.getContentPane().add(comboBoxConnectionCourseID);
 		
@@ -229,12 +227,10 @@ public class ApplicationWindow extends JFrame {
 		frame.getContentPane().add(lblGrade);
 		
 		comboBoxRegistrationStudentID = new JComboBox();
-		comboBoxRegistrationStudentID.setEditable(true);
 		comboBoxRegistrationStudentID.setBounds(1139, 538, 197, 27);
 		frame.getContentPane().add(comboBoxRegistrationStudentID);
 		
 		comboBoxRegistrateCourseID = new JComboBox();
-		comboBoxRegistrateCourseID.setEditable(true);
 		comboBoxRegistrateCourseID.setBounds(1139, 565, 197, 27);
 		frame.getContentPane().add(comboBoxRegistrateCourseID);
 		

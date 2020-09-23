@@ -285,12 +285,6 @@ public class Controller {
 			
 			try {	
 				
-				if (courseCode.equals("") && studentID.equals("") || (studentID.equals("") || courseCode.equals("") ) ) {
-					applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
-					applicationWindow.getComboBoxConnectionCourseID().setSelectedItem("");
-					applicationWindow.getComboBoxConnectionStudentID().setSelectedItem("");
-				}	
-				
 				int [] feedback = dal.checkCreditSemester(courseCode, studentID, semester);
 				
 				if(feedback[0] < 45) {
@@ -306,9 +300,9 @@ public class Controller {
 				} 
 			catch(Exception e1) {
 				
-				applicationWindow.getMessageField().setText(errorHandler.errorMessageEmptyFields());
-				// applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
-				// applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
+				
+				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
+				applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
 			}
 		}
 	});
