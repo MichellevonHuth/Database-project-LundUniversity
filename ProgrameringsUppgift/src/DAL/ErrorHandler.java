@@ -13,13 +13,11 @@ public class ErrorHandler {
 		}
 
 		else if (ex instanceof IndexOutOfBoundsException) {
-			errorMessage = "Coudn't find want you are looking for";
+			errorMessage = "Coudn't find what you are looking for";
 		}
-
 		else if (ex instanceof NumberFormatException) {
 			errorMessage = "Wrong format on input value";
 		}
-		
 
 		else if (ex instanceof SQLException) {
 			int errorCode = ((SQLException) ex).getErrorCode();
@@ -56,4 +54,10 @@ public class ErrorHandler {
 		String errorMessage = "Student can't read more than 45 credits per semester";
 		return errorMessage; 
 	}
+	
+	public String wrongInputName () {
+		String errorMessage = "Wrong format on input value";
+		return errorMessage;
+	}
+
 }

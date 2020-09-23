@@ -86,11 +86,15 @@ public class Controller {
 			
 			
 			try {
-				if (studentName.equals("") && studentID.equals("") || (studentID.equals("") || studentName.equals("") ) ) {
+				if (studentName.equals("") && studentID.equals("") || (studentID.equals("") || studentName.equals(""))) {
 					applicationWindow.getMessageField().setText(errorHandler.errorMessageEmptyFields());
 					applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
 					applicationWindow.getTextFieldStudentName().setText("");
 					applicationWindow.getComboBoxStudentID().setSelectedItem("");
+				
+				} else if(!studentName.matches("[a-öA-Ö ]+")){
+					applicationWindow.getMessageField().setText(errorHandler.wrongInputName());
+					applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
 				}
 			
 				else {
@@ -342,7 +346,6 @@ public class Controller {
 		public void actionPerformed(ActionEvent e) {
 			String courseCode = (String)applicationWindow.getComboBoxRegistrateCourseID().getSelectedItem();
 			String studentID = (String)applicationWindow.getComboBoxRegistrationStudentID().getSelectedItem();
-			int grade = Integer.parseInt(applicationWindow.getTextFieldGrade().getText());
 			String stringGrade = applicationWindow.getTextFieldGrade().getText();
 			
 			try {
@@ -351,8 +354,9 @@ public class Controller {
 					applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
 				} 
 				else {
+					int grade = Integer.parseInt(applicationWindow.getTextFieldGrade().getText());
 					dal.insertIntoHasStuided(courseCode, studentID, grade);
-					
+
 					if(grade < 50) {
 						applicationWindow.getMessageField().setText("The student have failed this course");
 						applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
