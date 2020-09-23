@@ -11,6 +11,7 @@ public class DataAccessLayer {
 	private ErrorHandler errorhandler; 
 	String connectionString = "jdbc:sqlserver://" +  "localhost" + ";database=master;user= "  + "sa" + ";password=" + System.getenv("PASSWORD") + ";trustServerCertificate=true;loginTimeout=30;" ;
 	
+	
 	public DataAccessLayer() {
 		try {
 			this.connection = DriverManager.getConnection(connectionString);		
@@ -19,6 +20,7 @@ public class DataAccessLayer {
 			e.printStackTrace();
 		}	
 	}
+	
 	
 	
 	public void addStudent(String studentID, String studentName) throws SQLException {
@@ -30,6 +32,9 @@ public class DataAccessLayer {
 		
 	}
 	
+	
+	
+	
 	public void removeStudent(String studentID) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 	
@@ -37,9 +42,11 @@ public class DataAccessLayer {
 	
 		PreparedStatement ps1 = connection.prepareStatement(query1);
 		ps1.executeUpdate();
-
 		
 	}
+	
+	
+	
 	
 	public ArrayList<String> findAllStudents() throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
@@ -52,12 +59,15 @@ public class DataAccessLayer {
 			while(resultList.next()) {
 				String studentName = resultList.getString(1);
 				String studentID = resultList.getString(2);
-				temp.add("STUDENT NAME: " + studentName + "\n");
-				temp.add("STUDENT ID: " + studentID);
+				temp.add("STUDENT ID: " + studentName + "\n");
+				temp.add("STUDENT NAME: " + studentID);
 				temp.add("\n" + "\n");
 			}
 		return temp;
-		}
+	}
+	
+	
+	
 	
 	public ArrayList<String> findStudent(String studentID) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
@@ -79,6 +89,8 @@ public class DataAccessLayer {
 	}
 	
 	
+	
+	
 	public String getLetterGrade(int grade) {
 	
 		if(grade>=85) 
@@ -94,6 +106,8 @@ public class DataAccessLayer {
 		}
 		return "Fail!";
 	}
+	
+	
 	
 	
 	public ArrayList<String> findCourse(String courseID) throws SQLException {
@@ -158,6 +172,9 @@ public class DataAccessLayer {
 	}
 	
 	
+	
+	
+	
 	public ArrayList<String> getAllStudentID() throws SQLException {
 		
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
@@ -176,6 +193,10 @@ public class DataAccessLayer {
 		return temp;	
 	}
 	
+	
+	
+	
+	
 	public ArrayList<String> getAllCourseCode() throws SQLException {
 		
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
@@ -193,6 +214,9 @@ public class DataAccessLayer {
 		return temp;
 		
 	}
+	
+	
+	
 
 	public void addCourse(String courseCode, String courseName, int credits) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
@@ -201,6 +225,9 @@ public class DataAccessLayer {
 		ps.executeUpdate();
 		
 	}
+	
+	
+	
 	
 	public int[] checkCreditSemester(String courseCode, String studentID, String semester) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());		
@@ -227,6 +254,9 @@ public class DataAccessLayer {
 		return temp;
 	}
 	
+	
+	
+	
 	public void addStudentOnCourse (String courseCode, String studentID, String semester) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());	
 		String queryAddStudent = "INSERT INTO Studies (courseCode, studentID, semester) Values('"+ courseCode + "','" + studentID + "','" + semester + "')";
@@ -234,6 +264,9 @@ public class DataAccessLayer {
 		ps1.executeUpdate();
 
 	}
+	
+	
+	
 		
 	public boolean removeRegistratedStudent (String studentID, String courseCode) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
@@ -246,6 +279,9 @@ public class DataAccessLayer {
 		return false;	
 	}
 	
+	
+	
+	
 	public void removeCourse(String courseCode) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 	
@@ -255,6 +291,9 @@ public class DataAccessLayer {
 		ps.executeUpdate();
 	
 	}
+	
+	
+	
 	
 	public ArrayList<String> showAllCourses(String courseCode) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
@@ -291,6 +330,9 @@ public class DataAccessLayer {
 			
 		return temp;
 		}
+	
+	
+	
 
 	public void insertIntoHasStuided(String courseCode, String studentID, int grade) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
@@ -300,6 +342,9 @@ public class DataAccessLayer {
 		ps.executeUpdate();
 		
 	}
+	
+	
+	
 	
 	public ArrayList<String>  getResult(String courseCode, String studentID) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());

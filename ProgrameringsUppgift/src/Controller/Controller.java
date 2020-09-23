@@ -38,6 +38,9 @@ public class Controller {
 		applicationWindow.getComboBoxStudentID().removeAllItems();
 		applicationWindow.getComboBoxRegistrationStudentID().removeAllItems();
 		applicationWindow.getComboBoxConnectionStudentID().removeAllItems();
+		applicationWindow.getComboBoxStudentID().setSelectedItem("");
+		applicationWindow.getComboBoxRegistrationStudentID().setSelectedItem("");
+		applicationWindow.getComboBoxConnectionStudentID().setSelectedItem("");
 		
 		for (String s : dal.getAllStudentID()) {
 			applicationWindow.getComboBoxStudentID().addItem(s);
@@ -47,11 +50,15 @@ public class Controller {
 		
 	}
 	
+	
 	public void setComboBoxesCourse() throws Exception {
 		
 		applicationWindow.getComboBoxCourseID().removeAllItems();
 		applicationWindow.getComboBoxRegistrateCourseID().removeAllItems();
 		applicationWindow.getComboBoxConnectionCourseID().removeAllItems();
+		applicationWindow.getComboBoxCourseID().setSelectedItem("");
+		applicationWindow.getComboBoxRegistrateCourseID().setSelectedItem("");
+		applicationWindow.getComboBoxConnectionCourseID().setSelectedItem("");
 		
 		
 		for (String s : dal.getAllCourseCode()) {
@@ -61,7 +68,6 @@ public class Controller {
 		}
 	}
 	
-	
 		
 	public Controller(DataAccessLayer dal, ApplicationWindow applicationWindow) {
 		this.dal = dal; 
@@ -70,6 +76,7 @@ public class Controller {
 	} 
 	
 
+	
 	public void declareEvents () {
 		
 	applicationWindow.getBtnAddstudent().addActionListener(new ActionListener() {
@@ -89,7 +96,6 @@ public class Controller {
 				else {
 					dal.addStudent(studentID, studentName);
 					applicationWindow.getTextFieldStudentName().setText("");
-					applicationWindow.getComboBoxStudentID().setSelectedItem("");
 					applicationWindow.getMessageField().setText("Student added");
 					applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
 					setComboBoxesStudent();
@@ -103,6 +109,9 @@ public class Controller {
 			
 	});
 	
+	
+	
+	
 	applicationWindow.getBtnRemovestudent().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			
@@ -112,9 +121,9 @@ public class Controller {
 
 					dal.removeStudent(studentID);
 					applicationWindow.getMessageField().setText("Student had been delete");
+					applicationWindow.getTextFieldStudentName().setText("");
 					applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
-					setComboBoxesStudent();
-					
+					setComboBoxesStudent();	
 				}
 			
 			catch (Exception e1) {
@@ -123,6 +132,7 @@ public class Controller {
 			}
 		}
 	});
+	
 	
 
 	applicationWindow.getBtnFindstudent().addActionListener(new ActionListener() {
@@ -134,8 +144,7 @@ public class Controller {
 				for(String s : dal.findStudent((String) studentID)) {
 					temp += s;
 					applicationWindow.getTextOutputBox().setText(temp);
-					applicationWindow.getLblHeader().setText("STUDENT");
-					
+					applicationWindow.getLblHeader().setText("STUDENT");	
 				}
 			}
 			catch (Exception e1) {
@@ -146,6 +155,7 @@ public class Controller {
 	});
 	
 	
+	
 	applicationWindow.getBtnShowAllStudents().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 		String temp = "";
@@ -154,8 +164,7 @@ public class Controller {
 			for(String s: dal.findAllStudents()) {
 			 temp += s;
 				applicationWindow.getTextOutputBox().setText(temp);
-				applicationWindow.getLblHeader().setText("ALL STUDENTS");
-				
+				applicationWindow.getLblHeader().setText("ALL STUDENTS");	
 			}
 		} 
 		catch (Exception e1) {
@@ -164,6 +173,7 @@ public class Controller {
 		}
 	}
 });
+
 	
 	applicationWindow.getBtnAddcourse().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -183,7 +193,6 @@ public class Controller {
 					int courseCredits = Integer.parseInt(applicationWindow.getTextFieldCourseCredits().getText());
 					dal.addCourse(courseCode, courseName, courseCredits);
 					applicationWindow.getTextFieldCourseName().setText("");
-					applicationWindow.getComboBoxCourseID().setSelectedItem("");
 					applicationWindow.getTextFieldCourseCredits().setText("");
 					applicationWindow.getMessageField().setText("The course has been added");
 					applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
@@ -199,6 +208,7 @@ public class Controller {
 	});
 	
 
+	
 	applicationWindow.getBtnRemovecourse().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			
@@ -209,6 +219,8 @@ public class Controller {
 					applicationWindow.getMessageField().setText("The course have been deleted");
 					applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
 					applicationWindow.getComboBoxCourseID().removeItem(courseCode);
+					applicationWindow.getTextFieldCourseName().setText("");
+					applicationWindow.getTextFieldCourseCredits().setText("");
 					setComboBoxesCourse();
 				}
 			
@@ -218,6 +230,9 @@ public class Controller {
 			}
 		}
 	});
+	
+	
+	
 	
 	applicationWindow.getBtnFindcourse().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -288,6 +303,9 @@ public class Controller {
 		}
 	});
 		
+	
+	
+	
 	applicationWindow.getBtnConnectionRemove().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 
@@ -310,6 +328,8 @@ public class Controller {
 			}
 		}	
 	});
+	
+	
 	
 	
 	applicationWindow.getBtnCompletedCourse().addActionListener(new ActionListener() {
@@ -344,6 +364,8 @@ public class Controller {
 			}
 		}
 	});
+	
+	
 	
 	
 	applicationWindow.getBtnShowResult().addActionListener(new ActionListener() {

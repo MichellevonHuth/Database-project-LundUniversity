@@ -77,7 +77,7 @@ public class ApplicationWindow extends JFrame {
 		frame.getContentPane().setLayout(null);
 		
 		btnAddstudent = new JButton("ADD");
-		btnAddstudent.setBounds(39, 225, 164, 29);
+		btnAddstudent.setBounds(39, 242, 164, 29);
 		frame.getContentPane().add(btnAddstudent);
 		
 		btnAddcourse = new JButton("ADD");
@@ -89,11 +89,11 @@ public class ApplicationWindow extends JFrame {
 		frame.getContentPane().add(btnRemovecourse);
 		
 		btnRemovestudent = new JButton("DELETE");
-		btnRemovestudent.setBounds(39, 266, 164, 29);
+		btnRemovestudent.setBounds(39, 272, 164, 29);
 		frame.getContentPane().add(btnRemovestudent);
 		
 		btnFindstudent = new JButton("FIND");
-		btnFindstudent.setBounds(215, 225, 164, 29);
+		btnFindstudent.setBounds(215, 242, 164, 29);
 		frame.getContentPane().add(btnFindstudent);
 		
 		btnFindcourse = new JButton("FIND");
@@ -101,7 +101,7 @@ public class ApplicationWindow extends JFrame {
 		frame.getContentPane().add(btnFindcourse);
 		
 		textFieldStudentName = new JTextField();
-		textFieldStudentName.setBounds(163, 173, 204, 26);
+		textFieldStudentName.setBounds(163, 190, 204, 26);
 		frame.getContentPane().add(textFieldStudentName);
 		textFieldStudentName.setColumns(10);
 		
@@ -121,25 +121,25 @@ public class ApplicationWindow extends JFrame {
 		
 		lblStudent = new JLabel("STUDENT");
 		lblStudent.setFont(new Font("Lucida Grande", Font.BOLD, 20));
-		lblStudent.setBounds(194, 88, 127, 16);
+		lblStudent.setBounds(194, 105, 127, 16);
 		frame.getContentPane().add(lblStudent);
 		
 		lblStudentName = new JLabel("Student Name: *");
-		lblStudentName.setBounds(59, 178, 102, 16);
+		lblStudentName.setBounds(59, 195, 102, 16);
 		frame.getContentPane().add(lblStudentName);
 		
 		lblStudentId = new JLabel("Student ID: * ");
-		lblStudentId.setBounds(59, 150, 84, 16);
+		lblStudentId.setBounds(59, 167, 84, 16);
 		frame.getContentPane().add(lblStudentId);
 		
 		comboBoxStudentID = new JComboBox();
 		comboBoxStudentID.setEditable(true);
-		comboBoxStudentID.setBounds(163, 146, 204, 27);
+		comboBoxStudentID.setBounds(163, 163, 204, 27);
 		frame.getContentPane().add(comboBoxStudentID);
 		
 		
 		btnShowAllStudents = new JButton("SHOW ALL STUDENTS");
-		btnShowAllStudents.setBounds(215, 266, 164, 29);
+		btnShowAllStudents.setBounds(215, 272, 164, 29);
 		frame.getContentPane().add(btnShowAllStudents);
 		
 		lblCourse = new JLabel("COURSE");
@@ -169,12 +169,14 @@ public class ApplicationWindow extends JFrame {
 		frame.getContentPane().add(btnShowAllCourses);
 		
 		textOutputBox = new JTextPane();
+		textOutputBox.setEditable(false);
 		textOutputBox.setBounds(532, 88, 375, 630);
 		frame.getContentPane().add(textOutputBox);
 		
 		lblHeader = new JLabel("LUND UNIVERSITY");
-		lblHeader.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-		lblHeader.setBounds(660, 46, 127, 16);
+		lblHeader.setHorizontalAlignment(SwingConstants.CENTER);
+		lblHeader.setFont(new Font("Lucida Grande", Font.BOLD, 20));
+		lblHeader.setBounds(532, 37, 375, 35);
 		frame.getContentPane().add(lblHeader);
 		
 		lblRegStuOnCor = new JLabel("REGISTER STUDENT ON A NEW COURSE");
@@ -211,42 +213,42 @@ public class ApplicationWindow extends JFrame {
 		
 		lblRegStudForComCor = new JLabel("REGISTER A RESULT TO A STUDENT");
 		lblRegStudForComCor.setFont(new Font("Lucida Grande", Font.BOLD, 20));
-		lblRegStudForComCor.setBounds(1023, 439, 375, 61);
+		lblRegStudForComCor.setBounds(1022, 448, 375, 61);
 		frame.getContentPane().add(lblRegStudForComCor);
 		
 		lblRegistrateStudentID = new JLabel("Student ID: *");
-		lblRegistrateStudentID.setBounds(1027, 534, 81, 16);
+		lblRegistrateStudentID.setBounds(1026, 543, 81, 16);
 		frame.getContentPane().add(lblRegistrateStudentID);
 		
 		lblRegistrationCourseID = new JLabel("Course  Code: *");
-		lblRegistrationCourseID.setBounds(1027, 561, 107, 16);
+		lblRegistrationCourseID.setBounds(1026, 570, 107, 16);
 		frame.getContentPane().add(lblRegistrationCourseID);
 		
 		lblGrade = new JLabel("Grade:");
-		lblGrade.setBounds(1027, 593, 61, 16);
+		lblGrade.setBounds(1026, 602, 61, 16);
 		frame.getContentPane().add(lblGrade);
 		
 		comboBoxRegistrationStudentID = new JComboBox();
 		comboBoxRegistrationStudentID.setEditable(true);
-		comboBoxRegistrationStudentID.setBounds(1140, 529, 197, 27);
+		comboBoxRegistrationStudentID.setBounds(1139, 538, 197, 27);
 		frame.getContentPane().add(comboBoxRegistrationStudentID);
 		
 		comboBoxRegistrateCourseID = new JComboBox();
 		comboBoxRegistrateCourseID.setEditable(true);
-		comboBoxRegistrateCourseID.setBounds(1140, 556, 197, 27);
+		comboBoxRegistrateCourseID.setBounds(1139, 565, 197, 27);
 		frame.getContentPane().add(comboBoxRegistrateCourseID);
 		
 		textFieldGrade = new JTextField();
-		textFieldGrade.setBounds(1140, 588, 197, 26);
+		textFieldGrade.setBounds(1139, 597, 197, 26);
 		frame.getContentPane().add(textFieldGrade);
 		textFieldGrade.setColumns(10);
 		
 		btnCompletedCourse = new JButton("REGISTRATE GRADE");
-		btnCompletedCourse.setBounds(1027, 633, 181, 29);
+		btnCompletedCourse.setBounds(1026, 642, 181, 29);
 		frame.getContentPane().add(btnCompletedCourse);
 		
 		btnShowResult = new JButton("SHOW RESULT");
-		btnShowResult.setBounds(1216, 633, 181, 29);
+		btnShowResult.setBounds(1215, 642, 181, 29);
 		frame.getContentPane().add(btnShowResult);
 		
 		comboBoxSemester = new JComboBox();
