@@ -250,8 +250,7 @@ public class ApplicationWindow extends JFrame {
 		comboBoxSemester = new JComboBox();
 		comboBoxSemester.setBounds(1140, 227, 197, 27);
 		frame.getContentPane().add(comboBoxSemester);
-		
-		comboBoxSemester.addItem("Semester 1");
+
 		
 		lblSemester = new JLabel("Semester: *");
 		lblSemester.setBounds(1044, 230, 84, 16);
