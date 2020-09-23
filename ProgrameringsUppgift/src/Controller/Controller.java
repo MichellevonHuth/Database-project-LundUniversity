@@ -41,6 +41,7 @@ public class Controller {
 		applicationWindow.getComboBoxStudentID().setSelectedItem("");
 		applicationWindow.getComboBoxRegistrationStudentID().setSelectedItem("");
 		applicationWindow.getComboBoxConnectionStudentID().setSelectedItem("");
+		applicationWindow.getComboBoxSemester().addItem("Semester 1");
 		
 		for (String s : dal.getAllStudentID()) {
 			applicationWindow.getComboBoxStudentID().addItem(s);
@@ -59,6 +60,7 @@ public class Controller {
 		applicationWindow.getComboBoxCourseID().setSelectedItem("");
 		applicationWindow.getComboBoxRegistrateCourseID().setSelectedItem("");
 		applicationWindow.getComboBoxConnectionCourseID().setSelectedItem("");
+		applicationWindow.getComboBoxSemester().addItem("Semester 1");
 		
 		
 		for (String s : dal.getAllCourseCode()) {
