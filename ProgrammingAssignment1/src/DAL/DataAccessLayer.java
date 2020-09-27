@@ -9,7 +9,7 @@ public class DataAccessLayer {
 	
 	private Connection connection;
 	private ErrorHandler errorhandler; 
-	String connectionString = "jdbc:sqlserver://" +  "localhost" + ";database=Lund;user= "  + "sa" + ";password=" + System.getenv("PASSWORD") + ";trustServerCertificate=true;loginTimeout=30;" ;
+	String connectionString = "jdbc:sqlserver://" +  "localhost" + ";database=master;user= "  + "sa" + ";password=" + System.getenv("PASSWORD") + ";trustServerCertificate=true;loginTimeout=30;" ;
 	
 	
 	public DataAccessLayer() {
@@ -21,8 +21,6 @@ public class DataAccessLayer {
 		}	
 	}
 	
-	
-	
 	public void addStudent(String studentID, String studentName) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		
@@ -31,9 +29,6 @@ public class DataAccessLayer {
 		ps.executeUpdate();
 		
 	}
-	
-	
-	
 	
 	public void removeStudent(String studentID) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());

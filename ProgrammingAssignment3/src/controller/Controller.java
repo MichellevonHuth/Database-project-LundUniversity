@@ -1,8 +1,10 @@
-package grupp12;
+package controller;
 
-import grupp12.DataAccessLayer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import dal.DataAccessLayer;
+import view.Menu;
 
 public class Controller {
 	

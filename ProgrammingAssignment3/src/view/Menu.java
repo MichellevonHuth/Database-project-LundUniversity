@@ -1,4 +1,4 @@
-package grupp12;
+package view;
 
 import java.awt.EventQueue;
 
