@@ -1,7 +1,10 @@
 package controller;
 
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 import dal.DataAccessLayer;
 import view.Menu;
@@ -14,8 +17,8 @@ public class Controller {
 	public DataAccessLayer getExcel() {
 		return dal;
 	}
-	public void setExcel(DataAccessLayer excel) {
-		this.dal = excel;
+	public void setExcel(DataAccessLayer dal) {
+		this.dal = dal;
 	}
 	public Menu getMenu() {
 		return menu;
@@ -24,41 +27,61 @@ public class Controller {
 		this.menu = menu;
 	}
 	
-	public Controller(Menu menu, DataAccessLayer excel) {
-		this.dal = excel;
+	public Controller(Menu menu, DataAccessLayer dal) {
+		this.dal = dal;
 		this.menu = menu;
 		declareEvents();
 	}
 	
 	public void declareEvents() {
 		
-		menu.getComboBoxQuestionsOption().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}	
-		});
 		
-		menu.getBtnSearch().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				String selectedQuestion = (String) menu.getComboBoxQuestionsOption().getSelectedItem();
+		menu.getBtnExcel().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)  {
+				System.out.println("i knappen");
+			File file = new File("C:\\Users\\Administrator\\Documents\\IsProjekt\\SQLExcel.xlsx");
 				
 				try {
-					if(menu.getComboBoxAccessORExcel().equals("Access")) {
-						dal.getAccess(selectedQuestion);
-						
-					} 
-					else if (menu.getComboBoxAccessORExcel().equals("Excel")) {
-						dal.getExcel(selectedQuestion);
-					}	
+					System.out.println("i try");
+					Desktop.getDesktop().open(file);		
 				}
 				
-				catch (Exception e1) {
-					System.out.println("Something went wrong"); 
+				catch(java.lang.IllegalArgumentException f) {
+					if(!file.exists()) {
+						menu.getTextField().setText("Filen finns inte");
+						
+					}
+				}
 				
+				catch (IOException e1) {
+					e1.printStackTrace(); 
 				}
 			}
 		});
+	
+		menu.getBtnAccess().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				File file = new File("C:\\Users\\Administrator\\Documents\\IsProjekt\\SQLAccess.accdb");
+				
+				try {
+					System.out.println("i try");
+					Desktop.getDesktop().open(file);		
+				}
+				
+				catch(java.lang.IllegalArgumentException f) {
+					if(!file.exists()) {
+						menu.getTextField().setText("Filen finns inte");
+						
+					}
+				}
+				
+				catch (IOException e1) {
+					e1.printStackTrace(); 
+				}
+			}
+		});
+
 	
 	}
 }

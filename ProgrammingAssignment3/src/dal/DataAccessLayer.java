@@ -16,7 +16,7 @@ import java.awt.desktop.*;
 			}
 			
 			else if(excel.equals("What value is traded for the most amount of SEK?")) {
-				Desktop.getDesktop().open(new File("C:\\Users\\Administrator\\Documents\\IsProjekt\\WhatValueIsTradedForTheMostAmountOfSEK.xlsx"));
+				 Desktop.getDesktop().open(new File("C:\\Users\\Administrator\\Documents\\IsProjekt\\WhatValueIsTradedForTheMostAmountOfSEK.xlsx"));
 			}
 			
 			else if(excel.equals("At which address and in what city is Fotograferna AB located?") ) {

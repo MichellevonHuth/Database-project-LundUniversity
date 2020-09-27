@@ -14,9 +14,7 @@ public class Application {
 		applicationWindow.getFrame().setVisible(true);
 		applicationWindow.getController().setComboBoxesCourse();
 		applicationWindow.getController().setComboBoxesStudent();
-		applicationWindow.getComboBoxSemester().addItem("Semester 1");
-
 		
-		System.out.println("Hej");
+
 	}
 }

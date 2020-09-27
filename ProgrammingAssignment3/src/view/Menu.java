@@ -2,6 +2,7 @@ package view;
 
 import java.awt.EventQueue;
 
+
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -12,32 +13,17 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Color;
+import controller.Controller;
 
-public class Menu {
+public class Menu extends JFrame {
 
 	private JFrame frmCronusSverigeab;
 	private JTextField textField;
 	private JLabel lblHeader; 
-	private JLabel lblSqlAccessOr; 
-	private JLabel lblSqlSearch;
-	private JComboBox comboBoxQuestionsOption;
-	private JComboBox comboBoxAccessORExcel;
-	private JButton btnSearch; 
+	private JButton btnExcel; 
+	private JButton btnAccess; 
+	private Controller controller; 
 
-	
-
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Menu window = new Menu();
-					window.frmCronusSverigeab.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	public Menu() {
 		initialize();
@@ -45,20 +31,14 @@ public class Menu {
 	private void initialize() {
 		frmCronusSverigeab = new JFrame();
 		frmCronusSverigeab.setTitle("CRONUS SverigeAB$");
-		frmCronusSverigeab.setBounds(100, 100, 750, 600);
+		frmCronusSverigeab.setBounds(100, 100, 750, 452);
 		frmCronusSverigeab.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmCronusSverigeab.getContentPane().setLayout(null);
 		
 		textField = new JTextField();
-		textField.setBounds(44, 188, 669, 305);
+		textField.setBounds(26, 286, 669, 100);
 		frmCronusSverigeab.getContentPane().add(textField);
 		textField.setColumns(10);
-		
-		comboBoxAccessORExcel = new JComboBox();
-		comboBoxAccessORExcel.setBounds(224, 144, 453, 22);
-		frmCronusSverigeab.getContentPane().add(comboBoxAccessORExcel);
-		comboBoxAccessORExcel.addItem("Access");
-		comboBoxAccessORExcel.addItem("Excel");
 		
 		lblHeader = new JLabel("CRONUS SVERIGE AB");
 		lblHeader.setFont(new Font("Verdana", Font.BOLD, 20));
@@ -66,37 +46,27 @@ public class Menu {
 		lblHeader.setBounds(218, 44, 286, 22);
 		frmCronusSverigeab.getContentPane().add(lblHeader);
 		
-		lblSqlAccessOr = new JLabel("SQL Access or Excel: ");
-		lblSqlAccessOr.setFont(new Font("Verdana", Font.BOLD, 14));
-		lblSqlAccessOr.setBounds(52, 142, 225, 22);
-		frmCronusSverigeab.getContentPane().add(lblSqlAccessOr);
+		btnExcel = new JButton("Excel All Queries");
 		
-		comboBoxQuestionsOption = new JComboBox();
-		comboBoxQuestionsOption.setBounds(224, 104, 453, 22);
-		frmCronusSverigeab.getContentPane().add(comboBoxQuestionsOption);
-		comboBoxQuestionsOption.addItem("How much is 100 NOK?");
-		comboBoxQuestionsOption.addItem("What value is traded for the most amount of SEK?");
-		comboBoxQuestionsOption.addItem("At which address and in what city is Fotograferna AB located?");
-		comboBoxQuestionsOption.addItem("Names of all employees who have been ill or sick?");
-		comboBoxQuestionsOption.addItem("Name and family relation for all employees relatives?");
-		comboBoxQuestionsOption.addItem("What customers are handled by employee Andreas Berglund?");
-		comboBoxQuestionsOption.addItem("What bank accounts belong to the customer with customer number 10000?");
-		comboBoxQuestionsOption.addItem("All employees");
-		comboBoxQuestionsOption.addItem("All customers");
+		btnExcel.setBackground(new Color(255, 255, 255));
+		btnExcel.setFont(new Font("Verdana", Font.BOLD, 12));
+		btnExcel.setBounds(249, 110, 180, 44);
+		frmCronusSverigeab.getContentPane().add(btnExcel);
 		
+		JButton btnNewButton = new JButton("Access Find All Employees");
+		btnNewButton.setFont(new Font("Verdana", Font.BOLD, 11));
+		btnNewButton.setBounds(50, 182, 207, 32);
+		frmCronusSverigeab.getContentPane().add(btnNewButton);
 		
+		JButton btnNewButton_1 = new JButton("Access Find All Customers");
+		btnNewButton_1.setFont(new Font("Verdana", Font.BOLD, 11));
+		btnNewButton_1.setBounds(279, 182, 207, 32);
+		frmCronusSverigeab.getContentPane().add(btnNewButton_1);
 		
-		
-		lblSqlSearch = new JLabel("SQL Search: ");
-		lblSqlSearch.setFont(new Font("Verdana", Font.BOLD, 14));
-		lblSqlSearch.setBounds(54, 103, 136, 20);
-		frmCronusSverigeab.getContentPane().add(lblSqlSearch);
-		
-		btnSearch = new JButton("SEARCH");
-		btnSearch.setBackground(new Color(255, 255, 255));
-		btnSearch.setFont(new Font("Verdana", Font.BOLD, 12));
-		btnSearch.setBounds(307, 508, 101, 23);
-		frmCronusSverigeab.getContentPane().add(btnSearch);
+		btnAccess = new JButton("Access All Queries");
+		btnAccess.setFont(new Font("Verdana", Font.BOLD, 11));
+		btnAccess.setBounds(50, 110, 180, 44);
+		frmCronusSverigeab.getContentPane().add(btnAccess);
 	}
 	
 	public JFrame getFrmCronusSverigeab() {
@@ -123,43 +93,24 @@ public class Menu {
 		this.lblHeader = lblHeader;
 	}
 	
-	public JLabel getLblSqlAccessOr() {
-		return lblSqlAccessOr;
+	public JButton getBtnAccess() {
+		return btnAccess;
 	}
 
-	public void setLblSqlAccessOr(JLabel lblSqlAccessOr) {
-		this.lblSqlAccessOr = lblSqlAccessOr;
-	}
-	
-	public JLabel getLblSqlSearch() {
-		return lblSqlSearch;
+	public void setBtnAccess(JButton btnAccess) {
+		this.btnAccess = btnAccess;
 	}
 
-	public void setLblSqlSearch(JLabel lblSqlSearch) {
-		this.lblSqlSearch = lblSqlSearch;
+	public Controller getController() {
+		return controller;
 	}
-	
-	public JComboBox getComboBoxQuestionsOption() {
-		return comboBoxQuestionsOption;
+	public void setController(Controller controller) {
+		this.controller = controller;
 	}
-
-	public void setComboBoxQuestionsOption(JComboBox comboBoxQuestionsOption) {
-		this.comboBoxQuestionsOption = comboBoxQuestionsOption;
+	public JButton getBtnExcel() {
+		return btnExcel;
 	}
-	
-	public JComboBox getComboBoxAccessORExcel() {
-		return comboBoxAccessORExcel;
-	}
-
-	public void setComboBoxAccessORExcel(JComboBox comboBoxAccessORExcel) {
-		this.comboBoxAccessORExcel = comboBoxAccessORExcel;
-	}
-	
-	public JButton getBtnSearch() {
-		return btnSearch;
-	}
-
-	public void setBtnSearch(JButton btnSearch) {
-		this.btnSearch = btnSearch;
+	public void setBtnExcel(JButton btnExcel) {
+		this.btnExcel = btnExcel;
 	}
 }
