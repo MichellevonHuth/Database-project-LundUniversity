@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class DataAccessLayer {
 	
 	private Connection connection;
-	private ErrorHandler errorhandler; 
+
 	String connectionString = "jdbc:sqlserver://" +  "localhost" + ";database=master;user= "  + "sa" + ";password=" + System.getenv("PASSWORD") + ";trustServerCertificate=true;loginTimeout=30;" ;
 	
 	
