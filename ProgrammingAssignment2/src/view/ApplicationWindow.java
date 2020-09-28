@@ -61,33 +61,33 @@ public class ApplicationWindow {
 		table = new JTable();
 		scrollPane_1.setViewportView(table);
 		
-		appHead = new JLabel("Metadata viewer");
+		appHead = new JLabel("Metadata viewer - CRONUS Assignment 2 ");
 		appHead.setFont(new Font("Tahoma", Font.BOLD, 20));
-		appHead.setBounds(223, 40, 174, 58);
+		appHead.setBounds(267, 10, 427, 112);
 		frame.getContentPane().add(appHead);
 		
 		btnAllKeys = new JButton("View all keys");
-		btnAllKeys.setBounds(10, 161, 164, 21);
+		btnAllKeys.setBounds(24, 161, 204, 21);
 		frame.getContentPane().add(btnAllKeys);
 		
 		btnAllConstraints = new JButton("View all tabble constraints");
-		btnAllConstraints.setBounds(10, 192, 164, 21);
+		btnAllConstraints.setBounds(24, 192, 204, 21);
 		frame.getContentPane().add(btnAllConstraints);
 		
 		btnAllTables = new JButton("View all tables");
-		btnAllTables.setBounds(223, 161, 164, 21);
+		btnAllTables.setBounds(392, 161, 204, 21);
 		frame.getContentPane().add(btnAllTables);
 		
 		btnAllEmployeeFacts = new JButton("View all Employee columns");
-		btnAllEmployeeFacts.setBounds(223, 192, 164, 21);
+		btnAllEmployeeFacts.setBounds(392, 192, 204, 21);
 		frame.getContentPane().add(btnAllEmployeeFacts);
 		
 		btnMetaForEmployee = new JButton("View meta for Employees");
-		btnMetaForEmployee.setBounds(431, 161, 164, 21);
+		btnMetaForEmployee.setBounds(780, 161, 204, 21);
 		frame.getContentPane().add(btnMetaForEmployee);
 		
 		btnLargestTable = new JButton("View largest table");
-		btnLargestTable.setBounds(431, 192, 164, 21);
+		btnLargestTable.setBounds(780, 192, 204, 21);
 		frame.getContentPane().add(btnLargestTable);
 		
 	}
