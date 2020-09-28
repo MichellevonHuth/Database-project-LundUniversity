@@ -18,8 +18,8 @@ public class DataAccessLayer {
 	}
 
 	String url = "jdbc:sqlserver://SYST3DEV01;database=CRONUS";
-	String loginName = "user";
-	String password = "123";
+	String loginName = "sa";
+	String password = "reallyStrongPwd123";
 	
 	public DataAccessLayer(){
 		try {

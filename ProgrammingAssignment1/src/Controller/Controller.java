@@ -125,7 +125,7 @@ public class Controller {
 			try {
 
 					dal.removeStudent(studentID);
-					applicationWindow.getMessageField().setText("Student had been delete");
+					applicationWindow.getMessageField().setText("Student have been delete");
 					applicationWindow.getTextFieldStudentName().setText("");
 					applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
 					setComboBoxesStudent();	

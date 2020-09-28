@@ -24,7 +24,7 @@ public class ErrorHandler {
 			switch (errorCode) {
 
 			case 2627:
-				errorMessage = "The object you are trying to add doesn't exist";
+				errorMessage = "The object you are trying to add already exists";
 				break;
 
 			case 17:

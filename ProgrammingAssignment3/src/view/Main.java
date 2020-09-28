@@ -9,12 +9,11 @@ public class Main {
 
 	public static void main(String[] args) {
 		DataAccessLayer dal = new DataAccessLayer(); 
-		Frame menu = new Frame(); 
-		Controller controller = new Controller(menu, dal);
-		menu.setController(controller);
-		menu.getFrmCronusSverigeab().setVisible(true);
+		Frame frame = new Frame(); 
+		Controller controller = new Controller(frame, dal);
+		frame.setController(controller);
+		frame.getFrmCronusSverigeab().setVisible(true);
+		frame.run();
 
 	}
-
-	
 }

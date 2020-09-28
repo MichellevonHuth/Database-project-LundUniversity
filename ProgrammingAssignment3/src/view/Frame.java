@@ -36,7 +36,19 @@ public class Frame extends JFrame {
 	private JTable table;
 	private JScrollPane scrollPane_1;
 	private JLabel lblResponseField; 
-
+	
+	public void	run() {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					getFrmCronusSverigeab().setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
 	
 	public Frame() {
 		initialize();
