@@ -44,7 +44,7 @@ public class DataAccessLayer {
 	
 	public ResultSet viewAllTableConstraints() throws SQLException {
 		
-		String query = "SELECT TABLE_NAME, CONSTRAINT_NAME, CONSTRAINT_TYPE FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS";
+		String query = "SELECT TABLE_NAME as table_name, CONSTRAINT_NAME as constraint_name , CONSTRAINT_TYPE as constraint_type FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS";
 		return dataGenerator(query);
 	}
 	
@@ -63,7 +63,7 @@ public class DataAccessLayer {
 	
 	public ResultSet viewMetaForEmployee() throws SQLException {
 		
-		String query = "SELECT TABLE_CATALOG, TABLE_NAME, COLUMN_NAME, ORDINAL_POSITION, IS_NULLABLE, DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'CRONUS Sverige AB$Employee'";
+		String query = "SELECT TABLE_CATALOG as table_catalog, TABLE_NAME as table_name, COLUMN_NAME as column_name, ORDINAL_POSITION as ordinal_position, IS_NULLABLE as is_nullable, DATA_TYPE as data_type FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'CRONUS Sverige AB$Employee'";
 		return dataGenerator(query);
 	}
 	
