@@ -5,11 +5,18 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class DataAccessLayer {
 	
 	private Connection con; 
+	public Connection getCon() {
+		return con;
+	}
+
+	public void setCon(Connection con) {
+		this.con = con;
+	}
+
 	String url = "jdbc:sqlserver://SYST3DEV01;database=CRONUS";
 	String loginName = "user";
 	String password = "123";
@@ -23,106 +30,59 @@ public class DataAccessLayer {
 		}
 	}
 	
-	public String hejhej() {
-		String temp = "hejhej";
-		return temp;
+	public ResultSet dataGenerator(String query) throws SQLException {
+		PreparedStatement ps = con.prepareStatement(query);
+		ResultSet rs;
+		return rs = ps.executeQuery();
 	}
 	
-	public ArrayList<String> viewAllKeys() throws SQLException {
-		ArrayList<String> temp = new ArrayList<String>();
+	public ResultSet viewAllKeys() throws SQLException {
 		
-		String query = "SELECT * FROM sys.key_constraints WHERE type_desc LIKE '%CONSTRAINT'";
-		PreparedStatement ps = con.prepareStatement(query);		
-		ResultSet resultSet = ps.executeQuery();
+		String query = "SELECT name, object_id, type_desc FROM sys.key_constraints WHERE type_desc LIKE '%CONSTRAINT'";
+//		PreparedStatement ps = con.prepareStatement(query);
+//		ResultSet rs = ps.executeQuery();
 		
-		while (resultSet.next()) {
-			temp.add(resultSet.getString(1) + " | ");
-			temp.add(resultSet.getString(2) + " | ");
-			temp.add(resultSet.getString(3) + " | ");
-			temp.add(resultSet.getString(4) + " | ");
-			temp.add(resultSet.getString(5) + "\n");
-		}
-		return temp;
+		return dataGenerator(query);
 	}
 	
-	public ArrayList<String> viewAllTableConstraints() throws SQLException {
-		ArrayList<String> temp = new ArrayList<String>();
+	public ResultSet viewAllTableConstraints() throws SQLException {
 		
-		String query = "SELECT * FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS";
-		PreparedStatement ps = con.prepareStatement(query);		
-		ResultSet resultSet = ps.executeQuery();
-		
-		while (resultSet.next()) {
-			temp.add(resultSet.getString(1) + " | ");
-			temp.add(resultSet.getString(2) + " | ");
-			temp.add(resultSet.getString(3) + " | ");
-			temp.add(resultSet.getString(4) + " | ");
-			temp.add(resultSet.getString(5) + "\n");
-		}
-		return temp;
+		String query = "SELECT TABLE_NAME, CONSTRAINT_NAME, CONSTRAINT_TYPE FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS";
+//		PreparedStatement ps = con.prepareStatement(query);		
+//		ResultSet resultSet = ps.executeQuery();
+		return dataGenerator(query);
 	}
 	
-	public ArrayList<String> viewAllTables() throws SQLException {
-		ArrayList<String> temp = new ArrayList<String>();
+	public ResultSet viewAllTables() throws SQLException {
 		
 		String query = "SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE LIKE 'BASE TABLE'";
-		PreparedStatement ps = con.prepareStatement(query);		
-		ResultSet resultSet = ps.executeQuery();
-		
-		while (resultSet.next()) {
-			temp.add(resultSet.getString(1) + " | ");
-			temp.add(resultSet.getString(2) + " | ");
-			temp.add(resultSet.getString(3) + " | ");
-			temp.add(resultSet.getString(4) + "\n");
-		}
-		return temp;
+//		PreparedStatement ps = con.prepareStatement(query);		
+//		ResultSet resultSet = ps.executeQuery();
+		return dataGenerator(query);
 	}
 	
 	
-	public ArrayList<String> viewAllEmployeeInfo() throws SQLException {
-		ArrayList<String> temp = new ArrayList<String>(); 
+	public ResultSet viewAllEmployeeInfo() throws SQLException {
 		
 		String query = "SELECT TABLE_NAME as table_name, TABLE_SCHEMA as schema_name, COLUMN_NAME as column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'CRONUS Sverige AB$Employee'";
-		PreparedStatement ps = con.prepareStatement(query);		
-		ResultSet resultSet = ps.executeQuery();
-//		ResultSetMetaData rsmd = resultSet.getMetaData();
-			 
-		while (resultSet.next()) {
-			temp.add(resultSet.getString(1) + " | ");
-			temp.add(resultSet.getString(2) + " | "); 
-			temp.add(resultSet.getString(3) + "\n");
-		}	
-		return temp;
+//		PreparedStatement ps = con.prepareStatement(query);		
+//		ResultSet resultSet = ps.executeQuery();
+		return dataGenerator(query);
 	}
 	
-	public ArrayList<String> viewMetaForEmployee() throws SQLException {
-		ArrayList<String> temp = new ArrayList<String>();
+	public ResultSet viewMetaForEmployee() throws SQLException {
 		
-		String query = "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'CRONUS Sverige AB$Employee'";
-		PreparedStatement ps = con.prepareStatement(query);		
-		ResultSet resultSet = ps.executeQuery();
-		
-		while (resultSet.next()) {
-			temp.add(resultSet.getString(1) + " | ");
-			temp.add(resultSet.getString(2) + " | ");
-			temp.add(resultSet.getString(3) + " | ");
-			temp.add(resultSet.getString(4) + " | ");
-			temp.add(resultSet.getString(5) + "\n");
-		}
-		return temp;
+		String query = "SELECT TABLE_CATALOG, TABLE_NAME, COLUMN_NAME, ORDINAL_POSITION, IS_NULLABLE, DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'CRONUS Sverige AB$Employee'";
+//		PreparedStatement ps = con.prepareStatement(query);		
+//		ResultSet resultSet = ps.executeQuery();
+		return dataGenerator(query);
 	}
 	
-	public ArrayList<String> viewLargestTable() throws SQLException {
-		ArrayList<String> temp = new ArrayList<String>();
+	public ResultSet viewLargestTable() throws SQLException {
 		
 		String query = "SELECT TOP(1) COUNT(*) as nbrRows, [tables].name FROM sys.tables JOIN sys.all_columns ON [tables].[object_id] = [all_columns].[object_id] GROUP BY [tables].[name] ORDER BY nbrRows DESC";
-		PreparedStatement ps = con.prepareStatement(query);		
-		ResultSet resultSet = ps.executeQuery();
-		
-		while (resultSet.next()) {
-			temp.add(resultSet.getString(1) + " | ");
-			temp.add(resultSet.getString(2) + "\n");
-		}
-		return temp;
+//		PreparedStatement ps = con.prepareStatement(query);		
+//		ResultSet resultSet = ps.executeQuery();
+		return dataGenerator(query);
 	}
 }

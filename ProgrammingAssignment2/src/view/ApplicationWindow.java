@@ -5,7 +5,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JTextPane;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -14,15 +13,14 @@ public class ApplicationWindow {
 
 	private JFrame frame;
 	private JLabel appHead; 
-	private JTextPane textPaneOutput;	
 	private JButton btnAllKeys;
 	private JButton btnAllConstraints;
 	private JButton btnAllTables;
 	private JButton btnAllEmployeeFacts;
 	private JButton btnMetaForEmployee;
 	private JButton btnLargestTable;
-	private JScrollPane scrollPane;
 	private JTable table;
+	private JScrollPane scrollPane_1;
 
 	/**
 	 * Run method to run the application which is called in the Main class in the main package. 
@@ -52,21 +50,21 @@ public class ApplicationWindow {
 	private void initialize() {
 		
 		frame = new JFrame();
-		frame.setBounds(100, 100, 635, 660);
+		frame.setBounds(100, 100, 1024, 682);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
+		scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(10, 232, 990, 402);
+		frame.getContentPane().add(scrollPane_1);
+		
+		table = new JTable();
+		scrollPane_1.setViewportView(table);
 		
 		appHead = new JLabel("Metadata viewer");
 		appHead.setFont(new Font("Tahoma", Font.BOLD, 20));
 		appHead.setBounds(223, 40, 174, 58);
 		frame.getContentPane().add(appHead);
-		
-		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 250, 601, 192);
-		frame.getContentPane().add(scrollPane);
-		
-		textPaneOutput = new JTextPane();
-		scrollPane.setViewportView(textPaneOutput);
 		
 		btnAllKeys = new JButton("View all keys");
 		btnAllKeys.setBounds(10, 161, 164, 21);
@@ -92,10 +90,6 @@ public class ApplicationWindow {
 		btnLargestTable.setBounds(431, 192, 164, 21);
 		frame.getContentPane().add(btnLargestTable);
 		
-		table = new JTable();
-		table.setBounds(10, 480, 601, 133);
-		frame.getContentPane().add(table);
-		
 	}
 
 	/**
@@ -115,14 +109,6 @@ public class ApplicationWindow {
 
 	public void setBtnAllKeys(JButton btnAllKeys) {
 		this.btnAllKeys = btnAllKeys;
-	}
-
-	public JTextPane getTextPaneOutput() {
-		return textPaneOutput;
-	}
-
-	public void setTextPaneOutput(JTextPane textPaneOutput) {
-		this.textPaneOutput = textPaneOutput;
 	}
 	
 	public JButton getBtnAllConstraints() {
@@ -173,4 +159,3 @@ public class ApplicationWindow {
 		this.table = table;
 	}
 }
-

@@ -3,6 +3,12 @@ package controller;
 import view.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Vector;
+
+import javax.swing.table.DefaultTableModel;
+
 import dal.*;
 
 public class Controller {
@@ -20,25 +26,46 @@ public class Controller {
 		declareEvents();
 	}
 	
+	private void displayData (ResultSet rs) {
+		 try {
+			((DefaultTableModel) aw.getTable().getModel()).setRowCount(0);   
+				      
+	        //Creating Object []rowData for jTable's Table Model        
+	        int columns = rs.getMetaData().getColumnCount();
+	        Vector headers = new Vector(); 
+	        
+	        for (int i = 1; i <= columns; i++) {
+	        	headers.addElement(rs.getMetaData().getColumnLabel(i));
+	        }
+			((DefaultTableModel) aw.getTable().getModel()).setColumnCount(columns);
+			((DefaultTableModel) aw.getTable().getModel()).setColumnIdentifiers(headers);
+
+
+			while (rs.next())
+	        {  
+	            Object[] row = new Object[columns];
+	            for (int i = 1; i <= columns; i++)
+	            {  
+	                row[i - 1] = rs.getObject(i); // 1
+	            }
+	            ((DefaultTableModel) aw.getTable().getModel()).insertRow(rs.getRow() - 1,row);
+	        }
+		 }
+		 catch (SQLException e) {
+			 e.printStackTrace();
+		 }
+	}
 	public void declareEvents() {
 		
-//		aw.getBtnAllKeys().addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				aw.getTextPaneOutput().setText(dal.showAllContent());
-//			}
-//		});
+
 		
 		aw.getBtnAllEmployeeFacts().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String temp = "";
-				aw.getTextPaneOutput().setText("");
-				
+			
 				try {
-					for (String s: dal.viewAllEmployeeInfo()) {
-						temp += s;
-						aw.getTextPaneOutput().setText(temp);
+					ResultSet rs = dal.viewAllEmployeeInfo();
+					displayData(rs);
 					}
-				}
 				catch (Exception ex) {
 					ex.printStackTrace();
 				}
@@ -47,14 +74,10 @@ public class Controller {
 		
 		aw.getBtnAllKeys().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String temp = "";
-				aw.getTextPaneOutput().setText("");
 				
 				try {
-					for (String s: dal.viewAllKeys()) {
-						temp += s;
-						aw.getTextPaneOutput().setText(temp);
-					}
+					ResultSet rs = dal.viewAllKeys();
+					displayData(rs);
 				}
 				catch (Exception ex) {
 					ex.printStackTrace();
@@ -64,15 +87,11 @@ public class Controller {
 		
 		aw.getBtnAllConstraints().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String temp = "";
-				aw.getTextPaneOutput().setText("");
 				
 				try {
-					for (String s: dal.viewAllTableConstraints()) {
-						temp += s;
-						aw.getTextPaneOutput().setText(temp);
+					ResultSet rs = dal.viewAllTableConstraints();
+					displayData(rs);
 					}
-				}
 				catch (Exception ex) {
 					ex.printStackTrace();
 				}
@@ -82,14 +101,10 @@ public class Controller {
 		
 		aw.getBtnAllTables().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String temp = "";
-				aw.getTextPaneOutput().setText("");
 				
 				try {
-					for (String s: dal.viewAllTables()) {
-						temp += s;
-						aw.getTextPaneOutput().setText(temp);
-					}
+					ResultSet rs = dal.viewAllTables();
+					displayData(rs);
 				}
 				catch (Exception ex) {
 					ex.printStackTrace();
@@ -100,14 +115,10 @@ public class Controller {
 		
 		aw.getBtnMetaForEmployee().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String temp = "";
-				aw.getTextPaneOutput().setText("");
 				
 				try {
-					for (String s: dal.viewMetaForEmployee()) {
-						temp += s;
-						aw.getTextPaneOutput().setText(temp);
-					}
+					ResultSet rs = dal.viewMetaForEmployee();
+					displayData(rs);
 				}
 				catch (Exception ex) {
 					ex.printStackTrace();
@@ -117,14 +128,10 @@ public class Controller {
 		
 		aw.getBtnLargestTable().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String temp = "";
-				aw.getTextPaneOutput().setText("");
 				
 				try {
-					for (String s: dal.viewLargestTable()) {
-						temp += s;
-						aw.getTextPaneOutput().setText(temp);
-					}
+					ResultSet rs = dal.viewLargestTable();
+					displayData(rs);
 				}
 				catch (Exception ex) {
 					ex.printStackTrace();
