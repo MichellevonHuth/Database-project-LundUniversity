@@ -194,6 +194,13 @@ public class Controller {
 					applicationWindow.getTextFieldCourseCredits().setText("");
 					applicationWindow.getComboBoxCourseID().setSelectedItem("");
 				}
+				else if(!strCourseCredits.matches("[0-9]+")) {
+					applicationWindow.getMessageField().setText("Input value is limited to only numbers between 0-9");
+					applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
+					applicationWindow.getTextFieldCourseName().setText("");
+					applicationWindow.getTextFieldCourseCredits().setText("");
+					applicationWindow.getComboBoxCourseID().setSelectedItem("");
+				}
 				else {
 					int courseCredits = Integer.parseInt(applicationWindow.getTextFieldCourseCredits().getText());
 					dal.addCourse(courseCode, courseName, courseCredits);
@@ -348,7 +355,6 @@ public class Controller {
 			String courseCode = (String)applicationWindow.getComboBoxRegistrateCourseID().getSelectedItem();
 			String studentID = (String)applicationWindow.getComboBoxRegistrationStudentID().getSelectedItem();
 			String stringGrade = applicationWindow.getTextFieldGrade().getText();
-			
 			try {
 				if (stringGrade.equals("")) {
 					applicationWindow.getMessageField().setText(errorHandler.errorMessageEmptyFields());
@@ -356,12 +362,23 @@ public class Controller {
 				} 
 				else {
 					int grade = Integer.parseInt(applicationWindow.getTextFieldGrade().getText());
-					dal.insertIntoHasStuided(courseCode, studentID, grade);
-
-					if(grade < 50) {
+					
+					
+					if(grade < 50 && stringGrade.matches("[0-9]+")) {
 						applicationWindow.getMessageField().setText("The student have failed this course");
-						applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
-					} else {
+						applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
+						dal.insertIntoHasStuided(courseCode, studentID, grade);
+					} 
+					else if (grade > 100 && stringGrade.matches("[0-9]+")) {
+						applicationWindow.getMessageField().setText("Maximum grade is 100 points");
+						applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
+					}
+					else if (!stringGrade.matches("[0-9]+")) {
+						applicationWindow.getMessageField().setText("Input is limited to only numbers between 0-9");
+						applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
+					}
+					else {
+						dal.insertIntoHasStuided(courseCode, studentID, grade);
 						dal.removeRegistratedStudent(studentID, courseCode);
 						applicationWindow.getMessageField().setText("The student have completed the course");
 						applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
@@ -371,7 +388,6 @@ public class Controller {
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
 				applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
-				
 			}
 		}
 	});

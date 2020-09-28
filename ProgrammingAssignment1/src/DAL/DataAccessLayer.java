@@ -40,9 +40,6 @@ public class DataAccessLayer {
 		
 	}
 	
-	
-	
-	
 	public ArrayList<String> findAllStudents() throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 			ArrayList<String> temp = new ArrayList<String>();
@@ -60,9 +57,6 @@ public class DataAccessLayer {
 			}
 		return temp;
 	}
-	
-	
-	
 	
 	public ArrayList<String> findStudent(String studentID) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
@@ -83,9 +77,7 @@ public class DataAccessLayer {
 		return temp;
 	}
 	
-	
-	
-	
+
 	public String getLetterGrade(int grade) {
 	
 		if(grade>=85) 
