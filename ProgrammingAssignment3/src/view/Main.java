@@ -9,7 +9,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		DataAccessLayer dal = new DataAccessLayer(); 
-		Menu menu = new Menu(); 
+		Frame menu = new Frame(); 
 		Controller controller = new Controller(menu, dal);
 		menu.setController(controller);
 		menu.getFrmCronusSverigeab().setVisible(true);

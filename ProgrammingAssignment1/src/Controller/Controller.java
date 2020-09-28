@@ -33,6 +33,14 @@ public class Controller {
 	public ApplicationWindow getApplicationWindow() {
 		return applicationWindow;
 	}
+	
+	public Controller(DataAccessLayer dal, ApplicationWindow applicationWindow) {
+		this.dal = dal; 
+		this.applicationWindow = applicationWindow;
+		declareEvents();
+	} 
+	
+	
 	public void setComboBoxesStudent() throws Exception {
 	
 		applicationWindow.getComboBoxStudentID().removeAllItems();
@@ -68,12 +76,7 @@ public class Controller {
 		}
 	}
 	
-		
-	public Controller(DataAccessLayer dal, ApplicationWindow applicationWindow) {
-		this.dal = dal; 
-		this.applicationWindow = applicationWindow;
-		declareEvents();
-	} 
+	
 	
 
 	

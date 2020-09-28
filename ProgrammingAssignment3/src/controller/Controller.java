@@ -8,44 +8,75 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Vector;
 import javax.swing.JFileChooser;
+import javax.swing.table.DefaultTableModel;
+
 import java.lang.AutoCloseable;
 import java.io.Closeable;
 import java.lang.Iterable;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;  
-import org.apache.poi.ss.usermodel.Sheet;  
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import dal.DataAccessLayer;
-import view.Menu;
+import view.Frame;
 
 public class Controller {
 	
 	private DataAccessLayer dal;
-	private Menu menu;
+	private Frame frame;
 	
-	public DataAccessLayer getExcel() {
+	public DataAccessLayer getDal() {
 		return dal;
 	}
-	public void setExcel(DataAccessLayer dal) {
+	public void setDal(DataAccessLayer dal) {
 		this.dal = dal;
 	}
-	public Menu getMenu() {
-		return menu;
+	public Frame getFrame() {
+		return frame;
 	}
-	public void setMenu(Menu menu) {
-		this.menu = menu;
+	public void setFrame(Frame frame) {
+		this.frame = frame;
 	}
 	
-	public Controller(Menu menu, DataAccessLayer dal) {
+	public Controller(Frame frame, DataAccessLayer dal) {
 		this.dal = dal;
-		this.menu = menu;
+		this.frame = frame;
 		declareEvents();
+	}
+	
+	private void displayData (ResultSet rs) {
+		 try {
+			((DefaultTableModel) frame.getTable().getModel()).setRowCount(0);   
+				      
+	        //Creating Object []rowData for jTable's Table Model        
+	        int columns = rs.getMetaData().getColumnCount();
+	        Vector headers = new Vector(); 
+	        
+	        for (int i = 1; i <= columns; i++) {
+	        	headers.addElement(rs.getMetaData().getColumnLabel(i));
+	        }
+			((DefaultTableModel) frame.getTable().getModel()).setColumnCount(columns);
+			((DefaultTableModel) frame.getTable().getModel()).setColumnIdentifiers(headers);
+
+
+			while (rs.next())
+	        {  
+	            Object[] row = new Object[columns];
+	            for (int i = 1; i <= columns; i++)
+	            {  
+	                row[i - 1] = rs.getObject(i); // 1
+	            }
+	            ((DefaultTableModel) frame.getTable().getModel()).insertRow(rs.getRow() - 1,row);
+	        }
+		 }
+		 catch (SQLException e) {
+			 e.printStackTrace();
+		 }
 	}
 	
 	public void declareEvents() {
 		
 		
-		menu.getBtnExcel().addActionListener(new ActionListener() {
+		frame.getBtnExcel().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)  {
 				System.out.println("i knappen");
 			File file = new File("C:\\Users\\Administrator\\Documents\\IsProjekt\\SQLExcel.xlsx");
@@ -57,7 +88,7 @@ public class Controller {
 				
 				catch(java.lang.IllegalArgumentException f) {
 					if(!file.exists()) {
-						menu.getTextField().setText("Filen finns inte");
+						frame.getLblResponseField().setText("Filen finns inte");
 						
 					}
 				}
@@ -68,7 +99,7 @@ public class Controller {
 			}
 		});
 	
-		menu.getBtnAccess().addActionListener(new ActionListener() {
+		frame.getBtnAccess().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				File file = new File("C:\\Users\\Administrator\\Documents\\IsProjekt\\SQLAccess.accdb");
@@ -80,7 +111,7 @@ public class Controller {
 				
 				catch(java.lang.IllegalArgumentException f) {
 					if(!file.exists()) {
-						menu.getTextField().setText("Filen finns inte");
+						frame.getLblResponseField().setText("Filen finns inte");
 						
 					}
 				}
@@ -91,56 +122,30 @@ public class Controller {
 			}
 		});
 		
-	}
-		
-		public File chooseFile() {
-			JFileChooser fileChooser = new JFileChooser(); 
-			int returnValue = menu.getFileChooser().showOpenDialog(null);
-			if(returnValue == JFileChooser.APPROVE_OPTION) {
-				
-				File selectedFile = menu.getFileChooser().getSelectedFile(); 
-				setFile(selectedFile);
-				return selectedFile;
-			}
-			
-			return null; 
-			
-		}
-		
-		public void setFile(File selectedFile) {
-			File file = new File(selectedFile.getAbsolutePath());
-			
-			try {
-				Workbook workbook = Workbook.getWorkbook(file);
-				Sheet sheet = workbook.getSheet(0); 
-				menu.getHeaders().clear(); 
-				
-				for(int i = 0; i< sheet.getColumn(); i++) {
-					Cell cell1 = sheet.getCell(i, 0); 
-					menu.getHeaders().add(cell1, getContents());
+		frame.getBtnAllEmployees().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					ResultSet rs = dal.getAllEmployees();
+					displayData(rs);
 				}
-				
-				menu.getData().clear(); 
-			
-				for(int j = 1; j< sheet.getRows(); j++) {
-					Vector d = new Vector(); 
-					for(int i = 0; i < sheet.getColumns(); i++) {
-						Cell cell = sheet.getCell(i, j); 
-						d.add(cell.getContents()); 
-					
+				catch (Exception ex) {
+					ex.printStackTrace();
 				}
-				
-				d.add("\n"); 
-				menu.getData().add(d); 		
-				
 			}
-			
-				menu.setTable(); 		
+		});
+		
+		frame.getBtnAllCustomers().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					ResultSet rs = dal.getAllCustomers();
+					displayData(rs);
+				}
+				catch (Exception ex) {
+					ex.printStackTrace();
+				}
 			}
-			
-			catch (Exception e) {
-				menu.getTextField().setText("Wrong format of imported file. The format must be: .xls");
-			}
-				
-		} 
-	}
+		});
+		
+	}	
+		
+}

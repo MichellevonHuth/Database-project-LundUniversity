@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -19,65 +20,74 @@ import javax.swing.table.TableModel;
 import java.awt.Font;
 import java.awt.Color;
 import controller.Controller;
+import javax.swing.JTable;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 
-public class Menu extends JFrame {
+public class Frame extends JFrame {
 
 	private JFrame frmCronusSverigeab;
-	private JTextField textField;
 	private JLabel lblHeader; 
 	private JButton btnExcel; 
 	private JButton btnAccess; 
 	private Controller controller; 
-	private TableModel tableModel_content;
-	private TableModel tableModel_contentUppgift2; 
-	private JFileChooser fileChooser; 
-	private JTableHeader headers; 
+	private JButton btnAllEmployees; 
+	private JButton btnAllCustomers; 
+	private JTable table;
+	private JScrollPane scrollPane_1;
+	private JLabel lblResponseField; 
 
-	public Menu() {
+	
+	public Frame() {
 		initialize();
 	}
 	private void initialize() {
 		frmCronusSverigeab = new JFrame();
 		frmCronusSverigeab.setTitle("CRONUS SverigeAB$");
-		frmCronusSverigeab.setBounds(100, 100, 750, 452);
+		frmCronusSverigeab.setBounds(100, 100, 1100, 700);
 		frmCronusSverigeab.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmCronusSverigeab.getContentPane().setLayout(null);
-		
-		textField = new JTextField();
-		textField.setBounds(26, 286, 669, 100);
-		frmCronusSverigeab.getContentPane().add(textField);
-		textField.setColumns(10);
 		
 		lblHeader = new JLabel("CRONUS SVERIGE AB");
 		lblHeader.setFont(new Font("Verdana", Font.BOLD, 20));
 		lblHeader.setHorizontalAlignment(SwingConstants.CENTER);
-		lblHeader.setBounds(218, 44, 286, 22);
+		lblHeader.setBounds(50, 44, 986, 22);
 		frmCronusSverigeab.getContentPane().add(lblHeader);
 		
 		btnExcel = new JButton("Excel All Queries");
-		
 		btnExcel.setBackground(new Color(255, 255, 255));
 		btnExcel.setFont(new Font("Verdana", Font.BOLD, 12));
-		btnExcel.setBounds(249, 110, 180, 44);
+		btnExcel.setBounds(329, 107, 180, 38);
 		frmCronusSverigeab.getContentPane().add(btnExcel);
 		
-		JButton btnNewButton = new JButton("Access Find All Employees");
-		btnNewButton.setFont(new Font("Verdana", Font.BOLD, 11));
-		btnNewButton.setBounds(50, 182, 207, 32);
-		frmCronusSverigeab.getContentPane().add(btnNewButton);
+		btnAllEmployees = new JButton("All Employees");
+		btnAllEmployees.setFont(new Font("Verdana", Font.BOLD, 11));
+		btnAllEmployees.setBounds(558, 107, 180, 38);
+		frmCronusSverigeab.getContentPane().add(btnAllEmployees);
 		
-		JButton btnNewButton_1 = new JButton("Access Find All Customers");
-		btnNewButton_1.setFont(new Font("Verdana", Font.BOLD, 11));
-		btnNewButton_1.setBounds(279, 182, 207, 32);
-		frmCronusSverigeab.getContentPane().add(btnNewButton_1);
+		btnAllCustomers = new JButton("All Customers");
+		btnAllCustomers.setFont(new Font("Verdana", Font.BOLD, 11));
+		btnAllCustomers.setBounds(785, 107, 180, 38);
+		frmCronusSverigeab.getContentPane().add(btnAllCustomers);
 		
 		btnAccess = new JButton("Access All Queries");
 		btnAccess.setFont(new Font("Verdana", Font.BOLD, 11));
-		btnAccess.setBounds(50, 110, 180, 44);
+		btnAccess.setBounds(100, 107, 180, 38);
 		frmCronusSverigeab.getContentPane().add(btnAccess);
 		
-		tableModel_content = (DefaultTableModel) table_content.getModel(); 
-		tableModel_contentUppgift2 = (DefaultTableModel) table_contentUppgift2.getModel(); 
+		scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(50, 186, 990, 377);
+		frmCronusSverigeab.getContentPane().add(scrollPane_1);
+		
+		table = new JTable();
+		scrollPane_1.setViewportView(table);
+		
+		lblResponseField = new JLabel("");
+		lblResponseField.setHorizontalAlignment(SwingConstants.CENTER);
+		lblResponseField.setBounds(50, 600, 982, 38);
+		frmCronusSverigeab.getContentPane().add(lblResponseField);
+		
+
 	}
 	
 	public JFrame getFrmCronusSverigeab() {
@@ -86,15 +96,7 @@ public class Menu extends JFrame {
 
 	public void setFrmCronusSverigeab(JFrame frmCronusSverigeab) {
 		this.frmCronusSverigeab = frmCronusSverigeab;
-	}
-
-	public JTextField getTextField() {
-		return textField;
-	}
-
-	public void setTextField(JTextField textField) {
-		this.textField = textField;
-	}
+	} 
 	
 	public JLabel getLblHeader() {
 		return lblHeader;
@@ -124,28 +126,29 @@ public class Menu extends JFrame {
 	public void setBtnExcel(JButton btnExcel) {
 		this.btnExcel = btnExcel;
 	}
-	public TableModel getTableModel_content() {
-		return tableModel_content;
+	public JButton getBtnAllEmployees() {
+		return btnAllEmployees;
 	}
-	public void setTableModel_content(TableModel tableModel_content) {
-		this.tableModel_content = tableModel_content;
+	public void setBtnAllEmployees(JButton btnAllEmployees) {
+		this.btnAllEmployees = btnAllEmployees;
 	}
-	public TableModel getTableModel_contentUppgift2() {
-		return tableModel_contentUppgift2;
+	public JButton getBtnAllCustomers() {
+		return btnAllCustomers;
 	}
-	public void setTableModel_contentUppgift2(TableModel tableModel_contentUppgift2) {
-		this.tableModel_contentUppgift2 = tableModel_contentUppgift2;
+	public void setBtnAllCustomers(JButton btnAllCustomers) {
+		this.btnAllCustomers = btnAllCustomers;
 	}
-	public JFileChooser getFileChooser() {
-		return fileChooser;
+	public JTable getTable() {
+		return table;
 	}
-	public void setFileChooser(JFileChooser fileChooser) {
-		this.fileChooser = fileChooser;
+
+	public void setTable(JTable table) {
+		this.table = table;
 	}
-	public JTableHeader getHeaders() {
-		return headers;
+	public JLabel getLblResponseField() {
+		return lblResponseField;
 	}
-	public void setHeaders(JTableHeader headers) {
-		this.headers = headers;
+	public void setLblResponseField(JLabel lblResponseField) {
+		this.lblResponseField = lblResponseField;
 	}
 }
