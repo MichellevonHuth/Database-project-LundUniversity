@@ -45,7 +45,11 @@ public class Controller {
 	
 	private void displayData (ResultSet rs) {
 		 try {
+<<<<<<< HEAD
 			((DefaultTableModel) frame.getTable().getModel()).setRowCount(0);   
+=======
+			((DefaultTableModel) menu.getTable().getModel()).setRowCount(0);   
+>>>>>>> 56f7a12ed371429ddfe32dea2319b32b88369a8c
 				      
 	        //Creating Object []rowData for jTable's Table Model        
 	        int columns = rs.getMetaData().getColumnCount();
@@ -54,8 +58,13 @@ public class Controller {
 	        for (int i = 1; i <= columns; i++) {
 	        	headers.addElement(rs.getMetaData().getColumnLabel(i));
 	        }
+<<<<<<< HEAD
 			((DefaultTableModel) frame.getTable().getModel()).setColumnCount(columns);
 			((DefaultTableModel) frame.getTable().getModel()).setColumnIdentifiers(headers);
+=======
+			((DefaultTableModel) menu.getTable().getModel()).setColumnCount(columns);
+			((DefaultTableModel) menu.getTable().getModel()).setColumnIdentifiers(headers);
+>>>>>>> 56f7a12ed371429ddfe32dea2319b32b88369a8c
 
 
 			while (rs.next())
@@ -65,7 +74,11 @@ public class Controller {
 	            {  
 	                row[i - 1] = rs.getObject(i); // 1
 	            }
+<<<<<<< HEAD
 	            ((DefaultTableModel) frame.getTable().getModel()).insertRow(rs.getRow() - 1,row);
+=======
+	            ((DefaultTableModel) menu.getTable().getModel()).insertRow(rs.getRow() - 1,row);
+>>>>>>> 56f7a12ed371429ddfe32dea2319b32b88369a8c
 	        }
 		 }
 		 catch (SQLException e) {
@@ -144,8 +157,32 @@ public class Controller {
 					ex.printStackTrace();
 				}
 			}
+<<<<<<< HEAD
 		});
 		
 	}	
 		
 }
+=======
+			
+			catch (Exception e) {
+				menu.getTextField().setText("Wrong format of imported file. The format must be: .xls");
+			}
+				
+		}
+		
+		
+//		menu.getBtn.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//			
+//				try {
+//					ResultSet rs = dal.viewAllEmployeeInfo();
+//					displayData(rs);
+//					}
+//				catch (Exception ex) {
+//					ex.printStackTrace();
+//				}
+//			}
+//		});
+	}
+>>>>>>> 56f7a12ed371429ddfe32dea2319b32b88369a8c
