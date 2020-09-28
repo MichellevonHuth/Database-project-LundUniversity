@@ -173,5 +173,19 @@ public class Controller {
 				menu.getTextField().setText("Wrong format of imported file. The format must be: .xls");
 			}
 				
-		} 
+		}
+		
+		
+//		menu.getBtn.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//			
+//				try {
+//					ResultSet rs = dal.viewAllEmployeeInfo();
+//					displayData(rs);
+//					}
+//				catch (Exception ex) {
+//					ex.printStackTrace();
+//				}
+//			}
+//		});
 	}

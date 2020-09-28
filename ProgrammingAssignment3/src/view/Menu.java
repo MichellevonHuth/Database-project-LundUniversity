@@ -86,6 +86,10 @@ public class Menu extends JFrame {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		
+		JButton btnSqlData = new JButton("SQL DATA 1");
+		btnSqlData.setBounds(515, 182, 108, 32);
+		frmCronusSverigeab.getContentPane().add(btnSqlData);
+		
 		tableModel_content = (DefaultTableModel) table_content.getModel(); 
 		tableModel_contentUppgift2 = (DefaultTableModel) table_contentUppgift2.getModel(); 
 	}
@@ -158,4 +162,11 @@ public class Menu extends JFrame {
 	public void setHeaders(JTableHeader headers) {
 		this.headers = headers;
 	}
+	public JTable getTable() {
+		return table;
+	}
+	public void setTable(JTable table) {
+		this.table = table;
+	}
+	
 }
