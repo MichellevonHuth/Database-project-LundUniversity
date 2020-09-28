@@ -19,6 +19,8 @@ import javax.swing.table.TableModel;
 import java.awt.Font;
 import java.awt.Color;
 import controller.Controller;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
 
 public class Menu extends JFrame {
 
@@ -32,6 +34,7 @@ public class Menu extends JFrame {
 	private TableModel tableModel_contentUppgift2; 
 	private JFileChooser fileChooser; 
 	private JTableHeader headers; 
+	private JTable table;
 
 	public Menu() {
 		initialize();
@@ -39,7 +42,7 @@ public class Menu extends JFrame {
 	private void initialize() {
 		frmCronusSverigeab = new JFrame();
 		frmCronusSverigeab.setTitle("CRONUS SverigeAB$");
-		frmCronusSverigeab.setBounds(100, 100, 750, 452);
+		frmCronusSverigeab.setBounds(100, 100, 765, 690);
 		frmCronusSverigeab.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmCronusSverigeab.getContentPane().setLayout(null);
 		
@@ -75,6 +78,13 @@ public class Menu extends JFrame {
 		btnAccess.setFont(new Font("Verdana", Font.BOLD, 11));
 		btnAccess.setBounds(50, 110, 180, 44);
 		frmCronusSverigeab.getContentPane().add(btnAccess);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(26, 426, 669, 217);
+		frmCronusSverigeab.getContentPane().add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
 		
 		tableModel_content = (DefaultTableModel) table_content.getModel(); 
 		tableModel_contentUppgift2 = (DefaultTableModel) table_contentUppgift2.getModel(); 

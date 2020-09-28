@@ -8,12 +8,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Vector;
 import javax.swing.JFileChooser;
+import javax.swing.table.DefaultTableModel;
+
 import java.lang.AutoCloseable;
 import java.io.Closeable;
 import java.lang.Iterable;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;  
-import org.apache.poi.ss.usermodel.Sheet;  
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import dal.DataAccessLayer;
 import view.Menu;
@@ -40,6 +41,36 @@ public class Controller {
 		this.dal = dal;
 		this.menu = menu;
 		declareEvents();
+	}
+	
+	private void displayData (ResultSet rs) {
+		 try {
+			((DefaultTableModel) menu.getTable().getModel()).setRowCount(0);   
+				      
+	        //Creating Object []rowData for jTable's Table Model        
+	        int columns = rs.getMetaData().getColumnCount();
+	        Vector headers = new Vector(); 
+	        
+	        for (int i = 1; i <= columns; i++) {
+	        	headers.addElement(rs.getMetaData().getColumnLabel(i));
+	        }
+			((DefaultTableModel) menu.getTable().getModel()).setColumnCount(columns);
+			((DefaultTableModel) menu.getTable().getModel()).setColumnIdentifiers(headers);
+
+
+			while (rs.next())
+	        {  
+	            Object[] row = new Object[columns];
+	            for (int i = 1; i <= columns; i++)
+	            {  
+	                row[i - 1] = rs.getObject(i); // 1
+	            }
+	            ((DefaultTableModel) menu.getTable().getModel()).insertRow(rs.getRow() - 1,row);
+	        }
+		 }
+		 catch (SQLException e) {
+			 e.printStackTrace();
+		 }
 	}
 	
 	public void declareEvents() {
