@@ -136,17 +136,31 @@ public class Controller {
 			String studentID = (String)applicationWindow.getComboBoxStudentID().getSelectedItem();
 			
 			try {
-				if (studentID.isEmpty()) {
+				
+				if (dal.getAllStudentID().isEmpty()) {
 					applicationWindow.getMessageField().setText(errorHandler.errorMessageEmptyFields());
-				}
+					setRedColor();
+				} 
+				
 				else {
-					dal.removeStudent(studentID);
-					applicationWindow.getMessageField().setText("Student have been deleted");
-					setGreenColor();
-					setComboBoxesStudent();	
+				
+				for(String s: dal.getAllStudentID()) {
+					if(studentID.equals(s)) {
+						dal.removeStudent(studentID);
+						applicationWindow.getMessageField().setText("Student have been deleted");
+						setGreenColor();
+						setComboBoxesStudent();
+					}	
+
+					else {
+						applicationWindow.getMessageField().setText("Student does not exist");
+						setRedColor();
+						setComboBoxesStudent();	
+					}
 				}
 				}
-			
+			}
+		
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
 				setRedColor();
@@ -238,13 +252,24 @@ public class Controller {
 				if (courseCode.isEmpty()) {
 					applicationWindow.getMessageField().setText(errorHandler.errorMessageEmptyFields());
 				}
+				
 				else {
-					dal.removeCourse(courseCode);
-					applicationWindow.getMessageField().setText("The course have been deleted");
-					setGreenColor();
-					setComboBoxesCourse();
+					
+					for (String a: dal.getAllCourseCode()){
+						if (courseCode.equals(a)) {
+							dal.removeCourse(courseCode);
+							applicationWindow.getMessageField().setText("The course have been deleted");
+							setGreenColor();
+							setComboBoxesCourse();
+						}
+						else 	 {
+						applicationWindow.getMessageField().setText("The course does not exist");
+						setRedColor();
+						
+						}
 					}
 				}
+			}
 			
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
