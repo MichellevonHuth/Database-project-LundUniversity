@@ -145,23 +145,24 @@ public class Controller {
 				} 
 				
 				else {
-				
-				for(String s: dal.getAllStudentID()) {
-					if(studentID.equals(s)) {
-						dal.removeStudent(studentID);
-						applicationWindow.getMessageField().setText("Student have been deleted");
-						setGreenColor();
-						setComboBoxesStudent();
-					}	
-
-					else {
-						applicationWindow.getMessageField().setText("Student does not exist");
-						setRedColor();
-						setComboBoxesStudent();	
+						for(String s: dal.getAllStudentID()) {
+							
+							if(studentID.equals(s)) {
+								
+								dal.removeStudent(studentID);
+								applicationWindow.getMessageField().setText("Student have been deleted");
+								setGreenColor();
+								setComboBoxesStudent();
+						}	
+	
+							else {
+								applicationWindow.getMessageField().setText("Student does not exist");
+								setRedColor();
+								setComboBoxesStudent();	
+							}
+						}
 					}
 				}
-				}
-			}
 		
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
@@ -176,13 +177,16 @@ public class Controller {
 			
 			String studentID = (String)applicationWindow.getComboBoxStudentID().getSelectedItem();
 			String temp = "";
+			
 			try {
+				
 				for(String s : dal.findStudent((String) studentID)) {
 					temp += s;
 					applicationWindow.getTextOutputBox().setText(temp);
 					applicationWindow.getLblHeader().setText("STUDENT");	
 				}
 			}
+			
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
 				setRedColor();
@@ -196,15 +200,18 @@ public class Controller {
 			String temp = "";
 		
 			try {
-			for(String s: dal.findAllStudents()) {
-			 temp += s;
-				applicationWindow.getTextOutputBox().setText(temp);
-				applicationWindow.getLblHeader().setText("ALL STUDENTS");	
+				
+				for(String s: dal.findAllStudents()) {
+					temp += s;
+					applicationWindow.getTextOutputBox().setText(temp);
+					applicationWindow.getLblHeader().setText("ALL STUDENTS");	
 				}
 			} 
-		catch (Exception e1) {
-			applicationWindow.getMessageField().setText(errorHandler.handleException(e1));	
-			setRedColor();
+			
+			catch (Exception e1) {
+			
+				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));	
+				setRedColor();
 			}
 		}
 	});
@@ -217,14 +224,17 @@ public class Controller {
 			String strCourseCredits = applicationWindow.getTextFieldCourseCredits().getText();
 			
 			try {
+				
 				if (courseName.isEmpty() && courseCode.isEmpty() && strCourseCredits.isEmpty() || courseName.isEmpty() || courseCode.isEmpty() || strCourseCredits.isEmpty()) {
 					applicationWindow.getMessageField().setText(errorHandler.errorMessageEmptyFields());
 					setRedColor();
 				}
+				
 				else if(!strCourseCredits.matches("[0-9]+")) {
 					applicationWindow.getMessageField().setText("Input value is limited to only numbers between 0-9");
 					setRedColor();
 				}
+				
 				else {
 					int courseCredits = Integer.parseInt(applicationWindow.getTextFieldCourseCredits().getText());
 					dal.addCourse(courseCode, courseName, courseCredits);
@@ -233,6 +243,7 @@ public class Controller {
 					setComboBoxesCourse();
 				}
 			}
+			
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
 				setRedColor();	
@@ -247,6 +258,7 @@ public class Controller {
 			String courseCode = (String)applicationWindow.getComboBoxCourseID().getSelectedItem();
 			
 			try {
+				
 				if (courseCode.isEmpty()) {
 					applicationWindow.getMessageField().setText(errorHandler.errorMessageEmptyFields());
 				}
@@ -254,15 +266,17 @@ public class Controller {
 				else {
 					
 					for (String a: dal.getAllCourseCode()){
+						
 						if (courseCode.equals(a)) {
 							dal.removeCourse(courseCode);
 							applicationWindow.getMessageField().setText("The course have been deleted");
 							setGreenColor();
 							setComboBoxesCourse();
 						}
+						
 						else 	 {
-						applicationWindow.getMessageField().setText("The course does not exist");
-						setRedColor();
+							applicationWindow.getMessageField().setText("The course does not exist");
+							setRedColor();
 						
 						}
 					}
@@ -282,13 +296,16 @@ public class Controller {
 			
 			String courseCode = (String)applicationWindow.getComboBoxCourseID().getSelectedItem();
 			String temp = "";
+			
 			try {
+				
 				for(String s : dal.findCourse((String) courseCode)) {
 					temp += s;
 					applicationWindow.getTextOutputBox().setText(temp);	
 					applicationWindow.getLblHeader().setText("COURSE");
 				}
 			}
+			
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
 				setRedColor();
@@ -304,12 +321,14 @@ public class Controller {
 			String courseCode = (String)applicationWindow.getComboBoxCourseID().getSelectedItem();
 		
 			try {
+				
 				for(String s: dal.showAllCourses(courseCode)) {
 					temp1 += s;
 					applicationWindow.getTextOutputBox().setText(temp1);
 					applicationWindow.getLblHeader().setText("ALL COURSES");
 				}
 			} 
+			
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));	
 				setRedColor();
@@ -321,6 +340,7 @@ public class Controller {
 	
 	applicationWindow.getBtnConnectionInsert().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
+			
 			String courseCode = (String)applicationWindow.getComboBoxConnectionCourseID().getSelectedItem();
 			String studentID = (String)applicationWindow.getComboBoxConnectionStudentID().getSelectedItem();
 			String semester = (String)applicationWindow.getComboBoxSemester().getSelectedItem();
@@ -334,12 +354,13 @@ public class Controller {
 					applicationWindow.getMessageField().setText("The student has been added on the course");
 					setGreenColor();
 				}
+				
 				else {
 						applicationWindow.getMessageField().setText(errorHandler.creditsError());
 						setRedColor();
+					}
 				}
-					
-				} 
+			
 			catch(Exception e1) {
 				
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
@@ -357,15 +378,18 @@ public class Controller {
 			
 			try {
 					boolean result = dal.removeRegistratedStudent(studentID, courseCode);
+					
 					if (result) {
-					applicationWindow.getMessageField().setText("The student has been deleted from the course ");
-					setGreenColor();
+						applicationWindow.getMessageField().setText("The student has been deleted from the course ");
+						setGreenColor();
 					}
+					
 					else {
-					applicationWindow.getMessageField().setText("The student isn't registered on this course");
-					setRedColor();
+						applicationWindow.getMessageField().setText("The student isn't registered on this course");
+						setRedColor();
 					}
 				}
+			
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
 				setRedColor();
@@ -376,14 +400,18 @@ public class Controller {
 	
 	applicationWindow.getBtnCompletedCourse().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
+			
 			String courseCode = (String)applicationWindow.getComboBoxRegistrateCourseID().getSelectedItem();
 			String studentID = (String)applicationWindow.getComboBoxRegistrationStudentID().getSelectedItem();
 			String stringGrade = applicationWindow.getTextFieldGrade().getText();
+			
 			try {
+				
 				if (stringGrade.equals("")) {
 					applicationWindow.getMessageField().setText(errorHandler.errorMessageEmptyFields());
 					setRedColor();
 				} 
+				
 				else {
 					int grade = Integer.parseInt(applicationWindow.getTextFieldGrade().getText());
 					
@@ -393,14 +421,17 @@ public class Controller {
 						setRedColor();
 						dal.insertIntoHasStuided(courseCode, studentID, grade);
 					} 
+					
 					else if (grade > 100 && stringGrade.matches("[0-9]+")) {
 						applicationWindow.getMessageField().setText("Maximum grade is 100 points");
 						setRedColor();
 					}
+					
 					else if (!stringGrade.matches("[0-9]+")) {
 						applicationWindow.getMessageField().setText("Input value is limited to only numbers between 0-9");
 						setRedColor();
 					}
+					
 					else {
 						dal.insertIntoHasStuided(courseCode, studentID, grade);
 						dal.removeRegistratedStudent(studentID, courseCode);
@@ -409,6 +440,7 @@ public class Controller {
 					}			
 				}
 			}
+			
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
 				setRedColor();
@@ -419,17 +451,20 @@ public class Controller {
 	
 	applicationWindow.getBtnShowResult().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
+			
 			String courseCode = (String)applicationWindow.getComboBoxRegistrateCourseID().getSelectedItem();
 			String studentID = (String)applicationWindow.getComboBoxRegistrationStudentID().getSelectedItem();
 			String temp = ""; 
 			
 			try {
+				
 				for(String s : dal. getResult(courseCode, studentID)) {
 					temp += s;
 					applicationWindow.getTextOutputBox().setText(temp);	
 					applicationWindow.getLblHeader().setText("RESULT");
 				}
 			}
+			
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
 				setRedColor();

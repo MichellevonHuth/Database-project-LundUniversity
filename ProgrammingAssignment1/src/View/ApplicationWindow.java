@@ -1,17 +1,10 @@
 package View;
 
-import java.sql.*;
-import java.awt.EventQueue;
 import javax.swing.JFrame;
-import DAL.*;
-import DAL.DataAccessLayer;
-import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import Controller.Controller;
 import javax.swing.JLabel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;

@@ -24,31 +24,31 @@ public class Controller {
 		declareEvents();
 	}
 	
-	
+
 	private void displayData (ResultSet rs) {
 		 try {
 			((DefaultTableModel) aw.getTable().getModel()).setRowCount(0);   
-				          
+	              
 	        int columns = rs.getMetaData().getColumnCount();
 	        Vector headers = new Vector(); 
-	        
+	      
 	        for (int i = 1; i <= columns; i++) {
 	        	headers.addElement(rs.getMetaData().getColumnLabel(i));
 	        }
-			((DefaultTableModel) aw.getTable().getModel()).setColumnCount(columns);
+			
+	        ((DefaultTableModel) aw.getTable().getModel()).setColumnCount(columns);
 			((DefaultTableModel) aw.getTable().getModel()).setColumnIdentifiers(headers);
 
-
-			while (rs.next())
-	        {  
+			while (rs.next()) {  
 	            Object[] row = new Object[columns];
-	            for (int i = 1; i <= columns; i++)
-	            {  
+	            for (int i = 1; i <= columns; i++) {  
 	                row[i - 1] = rs.getObject(i); // 1
 	            }
+	           
 	            ((DefaultTableModel) aw.getTable().getModel()).insertRow(rs.getRow() - 1,row);
-	        }
+			}
 		 }
+		
 		 catch (SQLException e) {
 			 e.printStackTrace();
 		 }

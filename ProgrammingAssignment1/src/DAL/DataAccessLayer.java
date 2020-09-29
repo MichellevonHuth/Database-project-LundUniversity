@@ -10,9 +10,11 @@ public class DataAccessLayer {
 	
 	
 	public DataAccessLayer() {
+		
 		try {
 			this.connection = DriverManager.getConnection(connectionString);		
 		}
+		
 		catch(Exception e) {
 			e.printStackTrace();
 		}	
@@ -200,7 +202,7 @@ public class DataAccessLayer {
 	
 	public int[] checkCreditSemester(String courseCode, String studentID, String semester) throws SQLException {
 		
-		int [ ] temp = new int[10];
+		int [] temp = new int[1];
 		
 		String queryGetCreditsPerSemester = "SELECT SUM(credits) AS Credits FROM Studies s, Course c WHERE s.courseCode = c.courseCode AND s.studentID = '" + studentID + "'  AND s.semester = '" + semester + "'  GROUP BY s.studentID, s.semester";
 		String queryGetCreditsForCourse = "SELECT credits FROM Course WHERE courseCode = '" + courseCode + "'";
@@ -230,9 +232,11 @@ public class DataAccessLayer {
 		
 	public boolean removeRegistratedStudent (String studentID, String courseCode) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
+		
 		String query = "DELETE FROM Studies WHERE studentID = '" + studentID +"' AND courseCode= '" + courseCode + "'";
 		PreparedStatement ps = connection.prepareStatement(query);
 		int numberOfRowsAffected = ps.executeUpdate();
+		
 		if (numberOfRowsAffected != 0) {
 			return true;
 		}
