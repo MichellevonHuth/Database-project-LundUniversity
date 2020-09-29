@@ -6,7 +6,7 @@ public class DataAccessLayer {
 	
 	private Connection connection;
 	private ErrorHandler errorhandler; 
-	String connectionString = "jdbc:sqlserver://" +  "SYST3DEV01" + ";database=TestDB;user= "  + "user" + ";password=123;trustServerCertificate=true;loginTimeout=30;" ;
+	String connectionString = "jdbc:sqlserver://SYST3DEV01;database=TestDB;user=user;password=123;trustServerCertificate=true;loginTimeout=30;";
 	
 	
 	public DataAccessLayer() {
@@ -22,7 +22,6 @@ public class DataAccessLayer {
 	
 	
 	public ResultSet dataGenerator(String query) throws SQLException {
-		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		
 		PreparedStatement ps = connection.prepareStatement(query);
 		ResultSet rs;
@@ -32,7 +31,6 @@ public class DataAccessLayer {
 	
 	
 	public void updateGenerator(String query) throws SQLException {
-		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.executeUpdate();
@@ -231,7 +229,6 @@ public class DataAccessLayer {
 	
 		
 	public boolean removeRegistratedStudent (String studentID, String courseCode) throws SQLException {
-		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		
 		String query = "DELETE FROM Studies WHERE studentID = '" + studentID +"' AND courseCode= '" + courseCode + "'";
 		PreparedStatement ps = connection.prepareStatement(query);
@@ -253,35 +250,36 @@ public class DataAccessLayer {
 	
 	
 	public ArrayList<String> showAllCourses(String courseCode) throws SQLException {
-			ArrayList<String> temp = new ArrayList<String>();
 			
-			String query1 = "SELECT * FROM Course";
-			String query2 = "SELECT TOP 5 UPPER (courseCode) AS 'Course Code', (SUM(CASE WHEN grade >= 50 THEN 1 ELSE 0 END)* 100)/ COUNT(courseCode) AS 'Percent Passed'" + "FROM HasStudied " + "GROUP BY courseCode " + "ORDER BY 'Percent Passed'DESC";	
+		ArrayList<String> temp = new ArrayList<String>();
+			
+		String query1 = "SELECT * FROM Course";
+		String query2 = "SELECT TOP 5 UPPER (courseCode) AS 'Course Code', (SUM(CASE WHEN grade >= 50 THEN 1 ELSE 0 END)* 100)/ COUNT(courseCode) AS 'Percent Passed'" + "FROM HasStudied " + "GROUP BY courseCode " + "ORDER BY 'Percent Passed'DESC";	
 
-			ResultSet resultList1 = dataGenerator(query1);
-			ResultSet resultList2 = dataGenerator(query2);
+		ResultSet resultList1 = dataGenerator(query1);
+		ResultSet resultList2 = dataGenerator(query2);
+		
+		while(resultList1.next()) {
+			String courseID = resultList1.getString(1);
+			String courseName = resultList1.getString(2);
+			String credits1 = resultList1.getString(3);
 			
-			while(resultList1.next()) {
-				String courseID = resultList1.getString(1);
-				String courseName = resultList1.getString(2);
-				String credits1 = resultList1.getString(3);
-				
-				temp.add("COURSE ID: " + courseID + "\n");
-				temp.add("COURSE NAME: " + courseName + "\n");
-				temp.add("CREDITS: " + credits1);
-				temp.add("\n" + "\n"); 
-			}
-			
-			temp.add("TOP 5 COURSES WITH HIGHEST THROUGHPUT: " + "\n");
-			
-			while(resultList2.next()) {
-				String getThroughput = resultList2.getString(1);
-				
-				temp.add(getThroughput + "\n");
-			}
-			
-		return temp;
+			temp.add("COURSE ID: " + courseID + "\n");
+			temp.add("COURSE NAME: " + courseName + "\n");
+			temp.add("CREDITS: " + credits1);
+			temp.add("\n" + "\n"); 
 		}
+		
+		temp.add("TOP 5 COURSES WITH HIGHEST THROUGHPUT: " + "\n");
+		
+		while(resultList2.next()) {
+			String getThroughput = resultList2.getString(1);
+			
+			temp.add(getThroughput + "\n");
+		}
+			
+	return temp;
+	}
 	
 
 	public void insertIntoHasStuided(String courseCode, String studentID, int grade) throws SQLException {
@@ -293,6 +291,7 @@ public class DataAccessLayer {
 	
 	
 	public ArrayList<String>  getResult(String courseCode, String studentID) throws SQLException {
+		
 		ArrayList<String> temp = new ArrayList<String>();
 		String query = "SELECT courseCode, studentID, grade FROM HasStudied WHERE courseCode = '" + courseCode + "' AND studentID = '" + studentID +"'";
 		ResultSet resultList = dataGenerator(query);

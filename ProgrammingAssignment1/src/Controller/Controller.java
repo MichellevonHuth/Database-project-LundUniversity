@@ -423,7 +423,7 @@ public class Controller {
 					} 
 					
 					else if (grade > 100 && stringGrade.matches("[0-9]+")) {
-						applicationWindow.getMessageField().setText("Maximum grade is 100 points");
+					applicationWindow.getMessageField().setText("Maximum grade is 100 points");
 						setRedColor();
 					}
 					

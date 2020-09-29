@@ -9,21 +9,12 @@ import java.sql.SQLException;
 public class DataAccessLayer {
 	
 	private Connection con; 
-	public Connection getCon() {
-		return con;
-	}
 
-	public void setCon(Connection con) {
-		this.con = con;
-	}
-
-	String url = "jdbc:sqlserver://SYST3DEV01;database=CRONUS";
-	String loginName = "user";
-	String password = "123";
+	String connectionString = "jdbc:sqlserver://SYST3DEV01;database=CRONUS;user=user;password=123;trustServerCertificate=true;loginTimeout=30;";
 	
 	public DataAccessLayer(){
 		try {
-			con = DriverManager.getConnection(url, loginName, password);
+			con = DriverManager.getConnection(connectionString);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -38,8 +29,8 @@ public class DataAccessLayer {
 	
 	public ResultSet viewAllKeys() throws SQLException {
 		
-		String query = "SELECT COLUMN_NAME as column_name, CONSTRAINT_NAME as constraint_name, type_desc, object_id FROM INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE ccu JOIN sys.key_constraints kc ON ccu.CONSTRAINT_NAME = kc.name WHERE type_desc LIKE '%KEY%'";
-		return dataGenerator(query);
+		String query = "SELECT COLUMN_NAME as column_name, CONSTRAINT_NAME as constraint_name, type as key_tape, type_desc, object_id FROM INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE ccu JOIN sys.objects kc ON ccu.CONSTRAINT_NAME = kc.name WHERE type_desc LIKE '%KEY%'";
+	return dataGenerator(query);
 	}
 	
 	public ResultSet viewAllTableConstraints() throws SQLException {
@@ -57,7 +48,7 @@ public class DataAccessLayer {
 	
 	public ResultSet viewAllEmployeeInfo() throws SQLException {
 		
-		String query = "SELECT TABLE_NAME as table_name, TABLE_SCHEMA as schema_name, COLUMN_NAME as column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'CRONUS Sverige AB$Employee'";
+		String query = "SELECT TABLE_NAME as table_name, COLUMN_NAME as column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'CRONUS Sverige AB$Employee'";
 		return dataGenerator(query);
 	}
 	
@@ -69,7 +60,7 @@ public class DataAccessLayer {
 	
 	public ResultSet viewLargestTable() throws SQLException {
 		
-		String query = "SELECT TOP(1) COUNT(*) as nbrRows, [tables].name FROM sys.tables JOIN sys.all_columns ON [tables].[object_id] = [all_columns].[object_id] GROUP BY [tables].[name] ORDER BY nbrRows DESC";
+		String query = "SELECT TOP(1)COUNT(*) as nbrRows, t.name FROM sys.tables t JOIN sys.all_columns c ON t.object_id = c.object_id GROUP BY t.name ORDER BY nbrRows DESC";
 		return dataGenerator(query);
 	}
 }

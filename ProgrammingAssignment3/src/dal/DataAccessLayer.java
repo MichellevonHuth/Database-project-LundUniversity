@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class DataAccessLayer { 
 		
 		private Connection connection;
-		String connectionString = "jdbc:sqlserver://" +  "localhost" + ";database=CRONUS;user= "  + "sa" + ";password=" + System.getenv("PASSWORD") + ";trustServerCertificate=true;loginTimeout=30;" ;
+		String connectionString = "jdbc:sqlserver://SYST3DEV01;database=CRONUS;user=user;password=123;trustServerCertificate=true;loginTimeout=30;";
 
 		
 		public DataAccessLayer() {
