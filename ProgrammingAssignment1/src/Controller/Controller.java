@@ -76,7 +76,23 @@ public class Controller {
 		}
 	}
 	
+	public void setGreenColor() {
+		applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
+		applicationWindow.getTextFieldStudentName().setText("");
+		applicationWindow.getComboBoxStudentID().setSelectedItem("");
+		applicationWindow.getTextFieldCourseName().setText("");
+		applicationWindow.getTextFieldCourseCredits().setText("");
+		
+	}
 	
+	public void setRedColor () {
+		applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
+		applicationWindow.getTextFieldStudentName().setText("");
+		applicationWindow.getComboBoxStudentID().setSelectedItem("");
+		applicationWindow.getTextFieldCourseName().setText("");
+		applicationWindow.getTextFieldCourseCredits().setText("");
+	
+	}
 	
 
 	
@@ -91,26 +107,23 @@ public class Controller {
 			try {
 				if (studentName.equals("") && studentID.equals("") || (studentID.equals("") || studentName.equals(""))) {
 					applicationWindow.getMessageField().setText(errorHandler.errorMessageEmptyFields());
-					applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
-					applicationWindow.getTextFieldStudentName().setText("");
-					applicationWindow.getComboBoxStudentID().setSelectedItem("");
+					setRedColor();
 				
 				} else if(!studentName.matches("[a-öA-Ö ]+")){
 					applicationWindow.getMessageField().setText(errorHandler.wrongInputName());
-					applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
+					setRedColor();
 				}
 			
 				else {
 					dal.addStudent(studentID, studentName);
-					applicationWindow.getTextFieldStudentName().setText("");
 					applicationWindow.getMessageField().setText("Student added");
-					applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
+					setGreenColor();
 					setComboBoxesStudent();
 				}
 			}
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
-				applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
+				setRedColor();
 			}
 		}
 			
@@ -125,15 +138,14 @@ public class Controller {
 			try {
 
 					dal.removeStudent(studentID);
-					applicationWindow.getMessageField().setText("Student have been delete");
-					applicationWindow.getTextFieldStudentName().setText("");
-					applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
+					applicationWindow.getMessageField().setText("Student have been deleted");
+					setGreenColor();
 					setComboBoxesStudent();	
 				}
 			
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
-				applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
+				setRedColor();
 			}
 		}
 	});
@@ -154,7 +166,7 @@ public class Controller {
 			}
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
-				applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
+				setRedColor();
 			}
 		}
 	});
@@ -174,7 +186,7 @@ public class Controller {
 		} 
 		catch (Exception e1) {
 			applicationWindow.getMessageField().setText(errorHandler.handleException(e1));	
-			applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
+			setRedColor();
 		}
 	}
 });
@@ -189,31 +201,23 @@ public class Controller {
 			try {
 				if (courseName.isEmpty() && courseCode.isEmpty() && strCourseCredits.isEmpty() || courseName.isEmpty() || courseCode.isEmpty() || strCourseCredits.isEmpty()) {
 					applicationWindow.getMessageField().setText(errorHandler.errorMessageEmptyFields());
-					applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
-					applicationWindow.getTextFieldCourseName().setText("");
-					applicationWindow.getTextFieldCourseCredits().setText("");
-					applicationWindow.getComboBoxCourseID().setSelectedItem("");
+					setRedColor();
 				}
 				else if(!strCourseCredits.matches("[0-9]+")) {
 					applicationWindow.getMessageField().setText("Input value is limited to only numbers between 0-9");
-					applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
-					applicationWindow.getTextFieldCourseName().setText("");
-					applicationWindow.getTextFieldCourseCredits().setText("");
-					applicationWindow.getComboBoxCourseID().setSelectedItem("");
+					setRedColor();
 				}
 				else {
 					int courseCredits = Integer.parseInt(applicationWindow.getTextFieldCourseCredits().getText());
 					dal.addCourse(courseCode, courseName, courseCredits);
-					applicationWindow.getTextFieldCourseName().setText("");
-					applicationWindow.getTextFieldCourseCredits().setText("");
-					applicationWindow.getMessageField().setText("The course has been added");
-					applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
+					applicationWindow.getMessageField().setText("Course added");
+					setGreenColor();
 					setComboBoxesCourse();
 				}
 			}
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
-				applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
+				setRedColor();
 				
 			}
 		}
@@ -229,16 +233,13 @@ public class Controller {
 			try {
 					dal.removeCourse(courseCode);
 					applicationWindow.getMessageField().setText("The course have been deleted");
-					applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
-					applicationWindow.getComboBoxCourseID().removeItem(courseCode);
-					applicationWindow.getTextFieldCourseName().setText("");
-					applicationWindow.getTextFieldCourseCredits().setText("");
+					setGreenColor();
 					setComboBoxesCourse();
 				}
 			
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
-				applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
+				setRedColor();
 			}
 		}
 	});
@@ -260,7 +261,7 @@ public class Controller {
 			}
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
-				applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
+				setRedColor();
 			}
 		}
 	
@@ -282,7 +283,7 @@ public class Controller {
 			} 
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));	
-				applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
+				setRedColor();
 			}
 			
 		}
@@ -302,19 +303,18 @@ public class Controller {
 				if(feedback[0] < 45) {
 					dal.addStudentOnCourse(courseCode, studentID, semester); 
 					applicationWindow.getMessageField().setText("The student has been added on the course");
-					applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
+					setGreenColor();
 				}
 				else {
 						applicationWindow.getMessageField().setText(errorHandler.creditsError());
-						applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
+						setRedColor();
 				}
 					
 				} 
 			catch(Exception e1) {
 				
-				
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
-				applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
+				setRedColor();
 			}
 		}
 	});
@@ -333,16 +333,16 @@ public class Controller {
 					boolean result = dal.removeRegistratedStudent(studentID, courseCode);
 					if (result) {
 					applicationWindow.getMessageField().setText("The student has been deleted from the course ");
-					applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
+					setGreenColor();
 					}
 					else {
 					applicationWindow.getMessageField().setText("The student isn't registered on this course");
-					applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
+					setRedColor();
 					}
 				}
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
-				applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
+				setRedColor();
 			}
 		}	
 	});
@@ -358,7 +358,7 @@ public class Controller {
 			try {
 				if (stringGrade.equals("")) {
 					applicationWindow.getMessageField().setText(errorHandler.errorMessageEmptyFields());
-					applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
+					setRedColor();
 				} 
 				else {
 					int grade = Integer.parseInt(applicationWindow.getTextFieldGrade().getText());
@@ -366,28 +366,28 @@ public class Controller {
 					
 					if(grade < 50 && stringGrade.matches("[0-9]+")) {
 						applicationWindow.getMessageField().setText("The student have failed this course");
-						applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
+						setRedColor();
 						dal.insertIntoHasStuided(courseCode, studentID, grade);
 					} 
 					else if (grade > 100 && stringGrade.matches("[0-9]+")) {
 						applicationWindow.getMessageField().setText("Maximum grade is 100 points");
-						applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
+						setRedColor();
 					}
 					else if (!stringGrade.matches("[0-9]+")) {
-						applicationWindow.getMessageField().setText("Input is limited to only numbers between 0-9");
-						applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
+						applicationWindow.getMessageField().setText("Input value is limited to only numbers between 0-9");
+						setRedColor();
 					}
 					else {
 						dal.insertIntoHasStuided(courseCode, studentID, grade);
 						dal.removeRegistratedStudent(studentID, courseCode);
 						applicationWindow.getMessageField().setText("The student have completed the course");
-						applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
+						setGreenColor();
 					}			
 				}
 			}
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
-				applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
+				setRedColor();
 			}
 		}
 	});
@@ -410,7 +410,7 @@ public class Controller {
 			}
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
-				applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
+				setRedColor();
 			}
 		}
 	});

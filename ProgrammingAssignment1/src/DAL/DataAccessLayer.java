@@ -1,8 +1,5 @@
 package DAL;
-import java.sql.Connection;
 import java.sql.*;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class DataAccessLayer {
@@ -21,22 +18,27 @@ public class DataAccessLayer {
 		}	
 	}
 	
-	public void addStudent(String studentID, String studentName) throws SQLException {
+	public ResultSet dataGenerator(String query) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		
-		String query = "INSERT INTO Student (studentID, studentName) Values('"+ studentID + "','" + studentName + "')";
 		PreparedStatement ps = connection.prepareStatement(query);
-		ps.executeUpdate();
+		ResultSet rs;
+		//ps.executeUpdate();
+		
+		return rs = ps.executeQuery();
+	}
+	
+	public void addStudent(String studentID, String studentName) throws SQLException {
+		
+		String query = "INSERT INTO Student (studentID, studentName) Values('"+ studentID + "','" + studentName + "')";
+		dataGenerator(query);
 		
 	}
 	
 	public void removeStudent(String studentID) throws SQLException {
-		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
-	
-		String query1 = "DELETE FROM HasStudied WHERE studentID = '"+ studentID + "'DELETE FROM Studies WHERE studentID = '" + studentID + "' DELETE FROM Student WHERE studentID = '" + studentID + "'";
-	
-		PreparedStatement ps1 = connection.prepareStatement(query1);
-		ps1.executeUpdate();
+		
+		String query = "DELETE FROM HasStudied WHERE studentID = '"+ studentID + "'DELETE FROM Studies WHERE studentID = '" + studentID + "' DELETE FROM Student WHERE studentID = '" + studentID + "'";
+		dataGenerator(query);
 		
 	}
 	
@@ -45,8 +47,10 @@ public class DataAccessLayer {
 			ArrayList<String> temp = new ArrayList<String>();
 			
 			String query = "SELECT * FROM Student";
-			PreparedStatement ps = connection.prepareStatement(query);
-			ResultSet resultList = ps.executeQuery();
+			ResultSet resultList = dataGenerator(query);
+			//PreparedStatement ps = connection.prepareStatement(query);
+			//ResultSet resultList = ps.executeQuery();
+		
 			
 			while(resultList.next()) {
 				String studentName = resultList.getString(1);
@@ -157,9 +161,6 @@ public class DataAccessLayer {
 
 		return temp;
 	}
-	
-	
-	
 	
 	
 	public ArrayList<String> getAllStudentID() throws SQLException {

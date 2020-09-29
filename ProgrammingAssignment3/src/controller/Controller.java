@@ -66,10 +66,8 @@ public class Controller {
 		
 		frame.getBtnExcel().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)  {
-				System.out.println("i knappen");
 			File file = new File("C:\\Users\\Administrator\\Documents\\IsProjekt\\SQLExcel.xlsx");
 				try {
-					System.out.println("i try");
 					Desktop.getDesktop().open(file);		
 				}
 				catch(java.lang.IllegalArgumentException f) {
@@ -86,7 +84,6 @@ public class Controller {
 			public void actionPerformed(ActionEvent e) {
 				File file = new File("C:\\Users\\Administrator\\Documents\\IsProjekt\\SQLAccess.accdb");
 				try {
-					System.out.println("i try");
 					Desktop.getDesktop().open(file);		
 				}
 				catch(java.lang.IllegalArgumentException f) {

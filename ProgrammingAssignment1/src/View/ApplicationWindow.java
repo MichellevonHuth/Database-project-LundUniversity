@@ -18,6 +18,7 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JSeparator;
 import java.awt.Color;
+import javax.swing.JScrollPane;
 
 public class ApplicationWindow extends JFrame {
 
@@ -64,6 +65,7 @@ public class ApplicationWindow extends JFrame {
 	private JComboBox comboBoxStudentID;
 	private JComboBox comboBoxCourseID;
 	private JComboBox comboBoxSemester;
+	private JScrollPane scrollPane;
 
 
 
@@ -168,10 +170,13 @@ public class ApplicationWindow extends JFrame {
 		btnShowAllCourses.setBounds(215, 651, 164, 29);
 		frame.getContentPane().add(btnShowAllCourses);
 		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(532, 88, 375, 630);
+		frame.getContentPane().add(scrollPane);
+		
 		textOutputBox = new JTextPane();
+		scrollPane.setViewportView(textOutputBox);
 		textOutputBox.setEditable(false);
-		textOutputBox.setBounds(532, 88, 375, 630);
-		frame.getContentPane().add(textOutputBox);
 		
 		lblHeader = new JLabel("LUND UNIVERSITY");
 		lblHeader.setHorizontalAlignment(SwingConstants.CENTER);
@@ -201,7 +206,7 @@ public class ApplicationWindow extends JFrame {
 		comboBoxConnectionCourseID.setBounds(1140, 199, 197, 27);
 		frame.getContentPane().add(comboBoxConnectionCourseID);
 		
-		btnConnectionInsert = new JButton("REGISTRATE");
+		btnConnectionInsert = new JButton("REGISTER");
 		btnConnectionInsert.setBounds(1023, 266, 181, 29);
 		frame.getContentPane().add(btnConnectionInsert);
 		
@@ -239,7 +244,7 @@ public class ApplicationWindow extends JFrame {
 		frame.getContentPane().add(textFieldGrade);
 		textFieldGrade.setColumns(10);
 		
-		btnCompletedCourse = new JButton("REGISTRATE GRADE");
+		btnCompletedCourse = new JButton("REGISTER GRADE");
 		btnCompletedCourse.setBounds(1026, 642, 181, 29);
 		frame.getContentPane().add(btnCompletedCourse);
 		

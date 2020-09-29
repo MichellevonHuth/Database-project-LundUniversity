@@ -67,22 +67,25 @@ public class Frame extends JFrame {
 		frmCronusSverigeab.getContentPane().add(lblHeader);
 		
 		btnExcel = new JButton("Excel All Queries");
-		btnExcel.setBackground(new Color(255, 255, 255));
+		btnExcel.setBackground(Color.LIGHT_GRAY);
 		btnExcel.setFont(new Font("Verdana", Font.BOLD, 12));
 		btnExcel.setBounds(329, 107, 180, 38);
 		frmCronusSverigeab.getContentPane().add(btnExcel);
 		
 		btnAllEmployees = new JButton("All Employees");
+		btnAllEmployees.setBackground(Color.LIGHT_GRAY);
 		btnAllEmployees.setFont(new Font("Verdana", Font.BOLD, 11));
 		btnAllEmployees.setBounds(558, 107, 180, 38);
 		frmCronusSverigeab.getContentPane().add(btnAllEmployees);
 		
 		btnAllCustomers = new JButton("All Customers");
+		btnAllCustomers.setBackground(Color.LIGHT_GRAY);
 		btnAllCustomers.setFont(new Font("Verdana", Font.BOLD, 11));
 		btnAllCustomers.setBounds(785, 107, 180, 38);
 		frmCronusSverigeab.getContentPane().add(btnAllCustomers);
 		
 		btnAccess = new JButton("Access All Queries");
+		btnAccess.setBackground(Color.LIGHT_GRAY);
 		btnAccess.setFont(new Font("Verdana", Font.BOLD, 11));
 		btnAccess.setBounds(100, 107, 180, 38);
 		frmCronusSverigeab.getContentPane().add(btnAccess);
@@ -90,7 +93,6 @@ public class Frame extends JFrame {
 		scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(50, 186, 990, 377);
 		frmCronusSverigeab.getContentPane().add(scrollPane_1);
-		
 		table = new JTable();
 		scrollPane_1.setViewportView(table);
 		
