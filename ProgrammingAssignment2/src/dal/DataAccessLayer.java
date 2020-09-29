@@ -18,8 +18,8 @@ public class DataAccessLayer {
 	}
 
 	String url = "jdbc:sqlserver://SYST3DEV01;database=CRONUS";
-	String loginName = "sa";
-	String password = "reallyStrongPwd123";
+	String loginName = "user";
+	String password = "123";
 	
 	public DataAccessLayer(){
 		try {
@@ -38,7 +38,7 @@ public class DataAccessLayer {
 	
 	public ResultSet viewAllKeys() throws SQLException {
 		
-		String query = "SELECT name, object_id, type_desc FROM sys.key_constraints WHERE type_desc LIKE '%CONSTRAINT'";
+		String query = "SELECT COLUMN_NAME as column_name, CONSTRAINT_NAME as constraint_name, type_desc, object_id FROM INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE ccu JOIN sys.key_constraints kc ON ccu.CONSTRAINT_NAME = kc.name WHERE type_desc LIKE '%KEY%'";
 		return dataGenerator(query);
 	}
 	
