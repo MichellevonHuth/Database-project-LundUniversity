@@ -17,9 +17,6 @@ public class Controller {
 	private ApplicationWindow aw; 
 	private DataAccessLayer dal;
 	
-	public Controller() {
-		declareEvents();	
-	}
 
 	public Controller(ApplicationWindow aw, DataAccessLayer dal) {
 		this.aw = aw;
@@ -27,11 +24,11 @@ public class Controller {
 		declareEvents();
 	}
 	
+	
 	private void displayData (ResultSet rs) {
 		 try {
 			((DefaultTableModel) aw.getTable().getModel()).setRowCount(0);   
-				      
-	        //Creating Object []rowData for jTable's Table Model        
+				          
 	        int columns = rs.getMetaData().getColumnCount();
 	        Vector headers = new Vector(); 
 	        
@@ -56,10 +53,9 @@ public class Controller {
 			 e.printStackTrace();
 		 }
 	}
+	
+	
 	public void declareEvents() {
-		
-
-		
 		aw.getBtnAllEmployeeFacts().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
@@ -73,6 +69,7 @@ public class Controller {
 			}
 		});
 		
+		
 		aw.getBtnAllKeys().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -85,6 +82,7 @@ public class Controller {
 				}
 			}
 		});
+		
 		
 		aw.getBtnAllConstraints().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -114,6 +112,7 @@ public class Controller {
 			}
 		});
 		
+		
 		aw.getBtnMetaForEmployee().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -126,6 +125,7 @@ public class Controller {
 				}
 			}
 		});
+		
 		
 		aw.getBtnLargestTable().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

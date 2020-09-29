@@ -18,6 +18,7 @@ public class DataAccessLayer {
 		}	
 	}
 	
+	
 	public ResultSet dataGenerator(String query) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		
@@ -27,12 +28,14 @@ public class DataAccessLayer {
 		return rs = ps.executeQuery();
 	}
 	
+	
 	public void updateGenerator(String query) throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.executeUpdate();
 	}
+	
 	
 	public void addStudent(String studentID, String studentName) throws SQLException {
 		
@@ -41,12 +44,14 @@ public class DataAccessLayer {
 		
 	}
 	
+	
 	public void removeStudent(String studentID) throws SQLException {
 		
 		String query = "DELETE FROM HasStudied WHERE studentID = '"+ studentID + "'DELETE FROM Studies WHERE studentID = '" + studentID + "' DELETE FROM Student WHERE studentID = '" + studentID + "'";
 		updateGenerator(query);
 		
 	}
+	
 	
 	public ArrayList<String> findAllStudents() throws SQLException {
 			ArrayList<String> temp = new ArrayList<String>();
@@ -64,6 +69,7 @@ public class DataAccessLayer {
 		return temp;
 	}
 	
+	
 	public ArrayList<String> findStudent(String studentID) throws SQLException {
 		ArrayList<String> temp = new ArrayList<String>();
 		
@@ -80,7 +86,7 @@ public class DataAccessLayer {
 		return temp;
 	}
 	
-
+	
 	public String getLetterGrade(int grade) {
 	
 		if(grade>=85) 
@@ -96,9 +102,7 @@ public class DataAccessLayer {
 		}
 		return "Fail!";
 	}
-	
-	
-	
+		
 	
 	public ArrayList<String> findCourse(String courseID) throws SQLException {
 		ArrayList<String> temp = new ArrayList<String>();
@@ -170,9 +174,6 @@ public class DataAccessLayer {
 	}
 	
 	
-	
-	
-	
 	public ArrayList<String> getAllCourseCode() throws SQLException {
 			
 		ArrayList<String> temp = new ArrayList<String>();
@@ -189,16 +190,12 @@ public class DataAccessLayer {
 	}
 	
 	
-	
-
 	public void addCourse(String courseCode, String courseName, int credits) throws SQLException {
 
 		String query = "INSERT INTO Course (courseCode, courseName, credits) Values('"+ courseCode + "','" + courseName + "','" + credits + "')";
 		updateGenerator(query);
 		
 	}
-	
-	
 	
 	
 	public int[] checkCreditSemester(String courseCode, String studentID, String semester) throws SQLException {
@@ -223,16 +220,12 @@ public class DataAccessLayer {
 	}
 	
 	
-	
-	
 	public void addStudentOnCourse (String courseCode, String studentID, String semester) throws SQLException {
 
 		String query = "INSERT INTO Studies (courseCode, studentID, semester) Values('"+ courseCode + "','" + studentID + "','" + semester + "')";
 		updateGenerator(query);
 
 	}
-	
-	
 	
 		
 	public boolean removeRegistratedStudent (String studentID, String courseCode) throws SQLException {
@@ -247,16 +240,12 @@ public class DataAccessLayer {
 	}
 	
 	
-	
-	
 	public void removeCourse(String courseCode) throws SQLException {
 	
 		String query = "DELETE FROM Course WHERE courseCode = '"+ courseCode + "'";
 		updateGenerator(query);
 	
 	}
-	
-	
 	
 	
 	public ArrayList<String> showAllCourses(String courseCode) throws SQLException {
@@ -290,8 +279,6 @@ public class DataAccessLayer {
 		return temp;
 		}
 	
-	
-	
 
 	public void insertIntoHasStuided(String courseCode, String studentID, int grade) throws SQLException {
 		
@@ -299,8 +286,6 @@ public class DataAccessLayer {
 		updateGenerator(query);
 		
 	}
-	
-	
 	
 	
 	public ArrayList<String>  getResult(String courseCode, String studentID) throws SQLException {

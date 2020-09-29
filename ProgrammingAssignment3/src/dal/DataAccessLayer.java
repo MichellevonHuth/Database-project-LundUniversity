@@ -8,8 +8,9 @@ import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import java.util.ArrayList;
-	public class DataAccessLayer 
-	{ 
+	
+public class DataAccessLayer { 
+		
 		private Connection connection;
 		String connectionString = "jdbc:sqlserver://" +  "localhost" + ";database=CRONUS;user= "  + "sa" + ";password=" + System.getenv("PASSWORD") + ";trustServerCertificate=true;loginTimeout=30;" ;
 
@@ -29,12 +30,16 @@ import java.util.ArrayList;
 			ResultSet rs;
 			return rs = ps.executeQuery();
 		}
+		
+		
 		public ResultSet getAllEmployees() throws SQLException {
 			String query = "SELECT [First Name], [Last Name],Address,  [Social Security No_]FROM [CRONUS Sverige AB$Employee]"; 
 			return dataGenerator(query);
 		}
+		
+		
 		public ResultSet getAllCustomers() throws SQLException {
 			String query = "SELECT  Name, Address, City, No_ FROM [CRONUS Sverige AB$Customer]";
 			return dataGenerator(query);
 		}
-	}
+}

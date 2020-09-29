@@ -16,29 +16,16 @@ import java.sql.SQLException;
 import dal.DataAccessLayer;
 import view.Frame;
 public class Controller {
+	
 	private DataAccessLayer dal;
 	private Frame frame;
-	public DataAccessLayer getDal() {
-		return dal;
-	}
-	public void setDal(DataAccessLayer dal) {
-		this.dal = dal;
-	}
-	public Frame getFrame() {
-		return frame;
-	}
-	public void setFrame(Frame frame) {
-		this.frame = frame;
-	}
-	public Controller(Frame frame, DataAccessLayer dal) {
-		this.dal = dal;
-		this.frame = frame;
-		declareEvents();
-	}
+	
+	
+	
 	private void displayData (ResultSet rs) {
 		 try {
 			((DefaultTableModel) frame.getTable().getModel()).setRowCount(0);   
-	        //Creating Object []rowData for jTable's Table Model        
+	              
 	        int columns = rs.getMetaData().getColumnCount();
 	        Vector headers = new Vector(); 
 	        for (int i = 1; i <= columns; i++) {
@@ -61,9 +48,9 @@ public class Controller {
 			 e.printStackTrace();
 		 }
 	}
+	
+	
 	public void declareEvents() {
-
-		
 		frame.getBtnExcel().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)  {
 			File file = new File("C:\\Users\\Administrator\\Documents\\IsProjekt\\SQLExcel.xlsx");
@@ -80,6 +67,8 @@ public class Controller {
 				}
 			}
 		});
+		
+		
 		frame.getBtnAccess().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				File file = new File("C:\\Users\\Administrator\\Documents\\IsProjekt\\SQLAccess.accdb");
@@ -96,6 +85,8 @@ public class Controller {
 				}
 			}
 		});
+		
+		
 		frame.getBtnAllEmployees().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -107,6 +98,8 @@ public class Controller {
 				}
 			}
 		});
+		
+		
 		frame.getBtnAllCustomers().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {

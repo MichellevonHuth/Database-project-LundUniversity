@@ -6,7 +6,7 @@ public class ErrorHandler {
 	
 	public String handleException(Exception ex) {
 		String errorMessage;
-		ex.printStackTrace();
+
 		
 		
 		if (ex instanceof NullPointerException) {

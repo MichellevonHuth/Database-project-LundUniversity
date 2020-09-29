@@ -11,28 +11,32 @@ import DAL.DataAccessLayer;
 import View.ApplicationWindow;
 import javax.swing.JFrame;
 
-
-
-
 public class Controller {
 	
 	private DataAccessLayer dal;
 	private ApplicationWindow applicationWindow;
 	ErrorHandler errorHandler = new ErrorHandler();
-
 	
+
 	public DataAccessLayer getDataAccessLayer( ) {
 		return dal;
 	}
+	
+	
 	public void setDataAccessLayer (DataAccessLayer dal) {
 		this.dal = dal;
 	}
+	
+	
 	public void setApplicationWindow(ApplicationWindow applicationWindow) {
 		this.applicationWindow = applicationWindow;
 	}
+	
+	
 	public ApplicationWindow getApplicationWindow() {
 		return applicationWindow;
 	}
+	
 	
 	public Controller(DataAccessLayer dal, ApplicationWindow applicationWindow) {
 		this.dal = dal; 
@@ -54,8 +58,7 @@ public class Controller {
 			applicationWindow.getComboBoxStudentID().addItem(s);
 			applicationWindow.getComboBoxRegistrationStudentID().addItem(s);
 			applicationWindow.getComboBoxConnectionStudentID().addItem(s);
-		}
-		
+		}	
 	}
 	
 	
@@ -68,13 +71,13 @@ public class Controller {
 		applicationWindow.getComboBoxRegistrateCourseID().setSelectedItem("");
 		applicationWindow.getComboBoxConnectionCourseID().setSelectedItem("");
 		
-		
 		for (String s : dal.getAllCourseCode()) {
 			applicationWindow.getComboBoxCourseID().addItem(s);
 			applicationWindow.getComboBoxRegistrateCourseID().addItem(s);
 			applicationWindow.getComboBoxConnectionCourseID().addItem(s);
 		}
 	}
+	
 	
 	public void setGreenColor() {
 		applicationWindow.getMessageField().setForeground(new Color(0, 153, 0));
@@ -85,6 +88,7 @@ public class Controller {
 		
 	}
 	
+	
 	public void setRedColor () {
 		applicationWindow.getMessageField().setForeground(new Color(204, 0, 0));
 		applicationWindow.getTextFieldStudentName().setText("");
@@ -94,18 +98,17 @@ public class Controller {
 	
 	}
 	
-
 	
 	public void declareEvents () {
 		
-	applicationWindow.getBtnAddstudent().addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			String studentName = applicationWindow.getTextFieldStudentName().getText();
-			String studentID = (String)applicationWindow.getComboBoxStudentID().getSelectedItem();
+		applicationWindow.getBtnAddstudent().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String studentName = applicationWindow.getTextFieldStudentName().getText();
+				String studentID = (String)applicationWindow.getComboBoxStudentID().getSelectedItem();
 			
 			
-			try {
-				if (studentName.isEmpty() && studentID.isEmpty() || (studentID.isEmpty() || studentName.isEmpty())) {
+				try {
+					if (studentName.isEmpty() && studentID.isEmpty() || (studentID.isEmpty() || studentName.isEmpty())) {
 					applicationWindow.getMessageField().setText(errorHandler.errorMessageEmptyFields());
 					setRedColor();
 				
@@ -125,12 +128,11 @@ public class Controller {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
 				setRedColor();
 			}
-		}
-			
+		}		
 	});
 	
-
-	applicationWindow.getBtnRemovestudent().addActionListener(new ActionListener() {
+		
+		applicationWindow.getBtnRemovestudent().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			
 			String studentID = (String)applicationWindow.getComboBoxStudentID().getSelectedItem();
@@ -168,8 +170,7 @@ public class Controller {
 		}
 	});
 	
-	
-
+		
 	applicationWindow.getBtnFindstudent().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			
@@ -190,24 +191,23 @@ public class Controller {
 	});
 	
 	
-	
 	applicationWindow.getBtnShowAllStudents().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-		String temp = "";
+			String temp = "";
 		
-		try {
+			try {
 			for(String s: dal.findAllStudents()) {
 			 temp += s;
 				applicationWindow.getTextOutputBox().setText(temp);
 				applicationWindow.getLblHeader().setText("ALL STUDENTS");	
-			}
-		} 
+				}
+			} 
 		catch (Exception e1) {
 			applicationWindow.getMessageField().setText(errorHandler.handleException(e1));	
 			setRedColor();
+			}
 		}
-	}
-});
+	});
 
 	
 	applicationWindow.getBtnAddcourse().addActionListener(new ActionListener() {
@@ -235,13 +235,11 @@ public class Controller {
 			}
 			catch (Exception e1) {
 				applicationWindow.getMessageField().setText(errorHandler.handleException(e1));
-				setRedColor();
-				
+				setRedColor();	
 			}
 		}
 	});
 	
-
 	
 	applicationWindow.getBtnRemovecourse().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -279,8 +277,6 @@ public class Controller {
 	});
 	
 	
-	
-	
 	applicationWindow.getBtnFindcourse().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			
@@ -300,7 +296,6 @@ public class Controller {
 		}
 	
 	});
-
 
 	
 	applicationWindow.getBtnShowAllCourses().addActionListener(new ActionListener() {
@@ -322,7 +317,7 @@ public class Controller {
 			
 		}
 	});	
-	
+
 	
 	applicationWindow.getBtnConnectionInsert().addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -352,8 +347,6 @@ public class Controller {
 			}
 		}
 	});
-		
-	
 	
 	
 	applicationWindow.getBtnConnectionRemove().addActionListener(new ActionListener() {
@@ -361,7 +354,6 @@ public class Controller {
 
 			String courseCode = (String)applicationWindow.getComboBoxConnectionCourseID().getSelectedItem();
 			String studentID = (String)applicationWindow.getComboBoxConnectionStudentID().getSelectedItem();
-			
 			
 			try {
 					boolean result = dal.removeRegistratedStudent(studentID, courseCode);
@@ -380,8 +372,6 @@ public class Controller {
 			}
 		}	
 	});
-	
-	
 	
 	
 	applicationWindow.getBtnCompletedCourse().addActionListener(new ActionListener() {
@@ -425,8 +415,6 @@ public class Controller {
 			}
 		}
 	});
-	
-	
 	
 	
 	applicationWindow.getBtnShowResult().addActionListener(new ActionListener() {
