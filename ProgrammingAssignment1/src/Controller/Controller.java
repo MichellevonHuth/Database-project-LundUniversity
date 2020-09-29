@@ -105,7 +105,7 @@ public class Controller {
 			
 			
 			try {
-				if (studentName.equals("") && studentID.equals("") || (studentID.equals("") || studentName.equals(""))) {
+				if (studentName.isEmpty() && studentID.isEmpty() || (studentID.isEmpty() || studentName.isEmpty())) {
 					applicationWindow.getMessageField().setText(errorHandler.errorMessageEmptyFields());
 					setRedColor();
 				
@@ -136,11 +136,15 @@ public class Controller {
 			String studentID = (String)applicationWindow.getComboBoxStudentID().getSelectedItem();
 			
 			try {
-
+				if (studentID.isEmpty()) {
+					applicationWindow.getMessageField().setText(errorHandler.errorMessageEmptyFields());
+				}
+				else {
 					dal.removeStudent(studentID);
 					applicationWindow.getMessageField().setText("Student have been deleted");
 					setGreenColor();
 					setComboBoxesStudent();	
+				}
 				}
 			
 			catch (Exception e1) {
@@ -231,10 +235,15 @@ public class Controller {
 			String courseCode = (String)applicationWindow.getComboBoxCourseID().getSelectedItem();
 			
 			try {
+				if (courseCode.isEmpty()) {
+					applicationWindow.getMessageField().setText(errorHandler.errorMessageEmptyFields());
+				}
+				else {
 					dal.removeCourse(courseCode);
 					applicationWindow.getMessageField().setText("The course have been deleted");
 					setGreenColor();
 					setComboBoxesCourse();
+					}
 				}
 			
 			catch (Exception e1) {

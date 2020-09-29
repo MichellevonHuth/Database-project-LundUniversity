@@ -6,7 +6,7 @@ public class DataAccessLayer {
 	
 	private Connection connection;
 	private ErrorHandler errorhandler; 
-	String connectionString = "jdbc:sqlserver://" +  "localhost" + ";database=TestDB;user= "  + "sa" + ";password=" + System.getenv("PASSWORD") + ";trustServerCertificate=true;loginTimeout=30;" ;
+	String connectionString = "jdbc:sqlserver://" +  "SYST3DEV01" + ";database=TestDB;user= "  + "user" + ";password=123;trustServerCertificate=true;loginTimeout=30;" ;
 	
 	
 	public DataAccessLayer() {
@@ -23,34 +23,36 @@ public class DataAccessLayer {
 		
 		PreparedStatement ps = connection.prepareStatement(query);
 		ResultSet rs;
-		//ps.executeUpdate();
 		
 		return rs = ps.executeQuery();
+	}
+	
+	public void updateGenerator(String query) throws SQLException {
+		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
+		
+		PreparedStatement ps = connection.prepareStatement(query);
+		ps.executeUpdate();
 	}
 	
 	public void addStudent(String studentID, String studentName) throws SQLException {
 		
 		String query = "INSERT INTO Student (studentID, studentName) Values('"+ studentID + "','" + studentName + "')";
-		dataGenerator(query);
+		updateGenerator(query);
 		
 	}
 	
 	public void removeStudent(String studentID) throws SQLException {
 		
 		String query = "DELETE FROM HasStudied WHERE studentID = '"+ studentID + "'DELETE FROM Studies WHERE studentID = '" + studentID + "' DELETE FROM Student WHERE studentID = '" + studentID + "'";
-		dataGenerator(query);
+		updateGenerator(query);
 		
 	}
 	
 	public ArrayList<String> findAllStudents() throws SQLException {
-		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 			ArrayList<String> temp = new ArrayList<String>();
 			
 			String query = "SELECT * FROM Student";
 			ResultSet resultList = dataGenerator(query);
-			//PreparedStatement ps = connection.prepareStatement(query);
-			//ResultSet resultList = ps.executeQuery();
-		
 			
 			while(resultList.next()) {
 				String studentName = resultList.getString(1);
@@ -63,13 +65,10 @@ public class DataAccessLayer {
 	}
 	
 	public ArrayList<String> findStudent(String studentID) throws SQLException {
-		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		ArrayList<String> temp = new ArrayList<String>();
 		
 		String query = "SELECT * FROM Student WHERE studentID = '" + studentID + "'";
-		
-		PreparedStatement ps = connection.prepareStatement(query);
-		ResultSet resultList = ps.executeQuery();
+		ResultSet resultList = dataGenerator(query);
 
 		while(resultList.next()) {
 			String getStudentID = resultList.getString(1);
@@ -102,7 +101,6 @@ public class DataAccessLayer {
 	
 	
 	public ArrayList<String> findCourse(String courseID) throws SQLException {
-		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		ArrayList<String> temp = new ArrayList<String>();
 
 		String query1 = "SELECT * FROM Course WHERE courseCode = '" + courseID + "'";
@@ -110,19 +108,12 @@ public class DataAccessLayer {
 		String query3 = "SELECT s.studentID, s.grade FROM Course c, HasStudied s WHERE c.courseCode = s.courseCode AND c.courseCode = '" + courseID + "'";
 		String query4 = "SELECT count(grade) FROM HasStudied WHERE courseCode = '" + courseID + "' AND grade >=85";
 		String query5 = "SELECT count(grade) FROM HasStudied WHERE courseCode = '" + courseID + "'";
-
-		PreparedStatement ps1 = connection.prepareStatement(query1);
-		PreparedStatement ps2 = connection.prepareStatement(query2);
-		PreparedStatement ps3 = connection.prepareStatement(query3);
-		PreparedStatement ps4 = connection.prepareStatement(query4);
-		PreparedStatement ps5 = connection.prepareStatement(query5);
 		
-		ResultSet resultList1 = ps1.executeQuery();
-		ResultSet resultList2 = ps2.executeQuery();
-		ResultSet resultList3 = ps3.executeQuery();
-		ResultSet resultList4 = ps4.executeQuery();
-		ResultSet resultList5 = ps5.executeQuery();
-		
+		ResultSet resultList1 = dataGenerator(query1);
+		ResultSet resultList2 = dataGenerator(query2);
+		ResultSet resultList3 = dataGenerator(query3);
+		ResultSet resultList4 = dataGenerator(query4);
+		ResultSet resultList5 = dataGenerator(query5);
 		
 		while(resultList1.next()) {
 			String getCourseCode = resultList1.getString(1);
@@ -165,13 +156,10 @@ public class DataAccessLayer {
 	
 	public ArrayList<String> getAllStudentID() throws SQLException {
 		
-		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		ArrayList<String> temp = new ArrayList<String>();
 		
 		String query = "SELECT studentID FROM Student";
-		
-		PreparedStatement ps = connection.prepareStatement(query);
-		ResultSet resultList= ps.executeQuery();
+		ResultSet resultList = dataGenerator(query);
 		
 		while(resultList.next()) {
 			String studentID = resultList.getString(1);
@@ -186,13 +174,10 @@ public class DataAccessLayer {
 	
 	
 	public ArrayList<String> getAllCourseCode() throws SQLException {
-		
-		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
-		
+			
 		ArrayList<String> temp = new ArrayList<String>();
 		String query = "SELECT courseCode FROM Course";
-		PreparedStatement ps = connection.prepareStatement(query);
-		ResultSet resultList= ps.executeQuery();
+		ResultSet resultList = dataGenerator(query);
 		
 		while(resultList.next()) {
 			String courseCode = resultList.getString(1);
@@ -207,10 +192,9 @@ public class DataAccessLayer {
 	
 
 	public void addCourse(String courseCode, String courseName, int credits) throws SQLException {
-		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
+
 		String query = "INSERT INTO Course (courseCode, courseName, credits) Values('"+ courseCode + "','" + courseName + "','" + credits + "')";
-		PreparedStatement ps = connection.prepareStatement(query);
-		ps.executeUpdate();
+		updateGenerator(query);
 		
 	}
 	
@@ -218,23 +202,19 @@ public class DataAccessLayer {
 	
 	
 	public int[] checkCreditSemester(String courseCode, String studentID, String semester) throws SQLException {
-		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());		
 		
 		int [ ] temp = new int[10];
 		
 		String queryGetCreditsPerSemester = "SELECT SUM(credits) AS Credits FROM Studies s, Course c WHERE s.courseCode = c.courseCode AND s.studentID = '" + studentID + "'  AND s.semester = '" + semester + "'  GROUP BY s.studentID, s.semester";
 		String queryGetCreditsForCourse = "SELECT credits FROM Course WHERE courseCode = '" + courseCode + "'";
 
-		PreparedStatement ps2 = connection.prepareStatement(queryGetCreditsPerSemester);
-		PreparedStatement ps3 = connection.prepareStatement(queryGetCreditsForCourse);
+		ResultSet resultList1 = dataGenerator(queryGetCreditsPerSemester);
+		ResultSet resultList2 = dataGenerator(queryGetCreditsForCourse);
 		
-		ResultSet rs2 = ps2.executeQuery();
-		ResultSet rs3 = ps3.executeQuery();
-
 		
-		while(rs2.next() && rs3.next()) {
-			int getCreditsPerSemester = Integer.parseInt(rs2.getString(1));
-			int getCreditsForCourse = Integer.parseInt(rs3.getString(1));
+		while(resultList1.next() && resultList2.next()) {
+			int getCreditsPerSemester = Integer.parseInt(resultList1.getString(1));
+			int getCreditsForCourse = Integer.parseInt(resultList2.getString(1));
 			int sum = getCreditsPerSemester + getCreditsForCourse;
 			temp[0] = sum;
 		}
@@ -246,10 +226,9 @@ public class DataAccessLayer {
 	
 	
 	public void addStudentOnCourse (String courseCode, String studentID, String semester) throws SQLException {
-		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());	
-		String queryAddStudent = "INSERT INTO Studies (courseCode, studentID, semester) Values('"+ courseCode + "','" + studentID + "','" + semester + "')";
-		PreparedStatement ps1 = connection.prepareStatement(queryAddStudent);
-		ps1.executeUpdate();
+
+		String query = "INSERT INTO Studies (courseCode, studentID, semester) Values('"+ courseCode + "','" + studentID + "','" + semester + "')";
+		updateGenerator(query);
 
 	}
 	
@@ -271,12 +250,9 @@ public class DataAccessLayer {
 	
 	
 	public void removeCourse(String courseCode) throws SQLException {
-		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 	
 		String query = "DELETE FROM Course WHERE courseCode = '"+ courseCode + "'";
-	
-		PreparedStatement ps = connection.prepareStatement(query);
-		ps.executeUpdate();
+		updateGenerator(query);
 	
 	}
 	
@@ -284,19 +260,14 @@ public class DataAccessLayer {
 	
 	
 	public ArrayList<String> showAllCourses(String courseCode) throws SQLException {
-		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 			ArrayList<String> temp = new ArrayList<String>();
 			
 			String query1 = "SELECT * FROM Course";
 			String query2 = "SELECT TOP 5 UPPER (courseCode) AS 'Course Code', (SUM(CASE WHEN grade >= 50 THEN 1 ELSE 0 END)* 100)/ COUNT(courseCode) AS 'Percent Passed'" + "FROM HasStudied " + "GROUP BY courseCode " + "ORDER BY 'Percent Passed'DESC";	
 
+			ResultSet resultList1 = dataGenerator(query1);
+			ResultSet resultList2 = dataGenerator(query2);
 			
-			PreparedStatement ps1 = connection.prepareStatement(query1);
-			PreparedStatement ps2 = connection.prepareStatement(query2);
-			
-			ResultSet resultList1 = ps1.executeQuery();
-			ResultSet resultList2 = ps2.executeQuery();
-		
 			while(resultList1.next()) {
 				String courseID = resultList1.getString(1);
 				String courseName = resultList1.getString(2);
@@ -323,11 +294,9 @@ public class DataAccessLayer {
 	
 
 	public void insertIntoHasStuided(String courseCode, String studentID, int grade) throws SQLException {
-		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		
 		String query = "INSERT INTO hasStudied (courseCode, studentID, grade) Values('"+ courseCode + "','" + studentID + "','" + grade + "')";
-		PreparedStatement ps = connection.prepareStatement(query);
-		ps.executeUpdate();
+		updateGenerator(query);
 		
 	}
 	
@@ -335,11 +304,9 @@ public class DataAccessLayer {
 	
 	
 	public ArrayList<String>  getResult(String courseCode, String studentID) throws SQLException {
-		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		ArrayList<String> temp = new ArrayList<String>();
 		String query = "SELECT courseCode, studentID, grade FROM HasStudied WHERE courseCode = '" + courseCode + "' AND studentID = '" + studentID +"'";
-		PreparedStatement ps = connection.prepareStatement(query);
-		ResultSet resultList= ps.executeQuery();
+		ResultSet resultList = dataGenerator(query);
 		
 			while(resultList.next()) {
 			String getCourseCode = resultList.getString(1);
