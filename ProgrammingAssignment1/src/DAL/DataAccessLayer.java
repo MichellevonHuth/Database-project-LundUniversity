@@ -5,8 +5,7 @@ import java.util.ArrayList;
 public class DataAccessLayer {
 	
 	private Connection connection;
-	private ErrorHandler errorhandler; 
-	String connectionString = "jdbc:sqlserver://SYST3DEV01;database=TestDB;user=user;password=123;trustServerCertificate=true;loginTimeout=30;";
+	String connectionString = "jdbc:sqlserver://SYST3DEV01;database=TestDB;user=sa;password=reallyStrongPwd123;trustServerCertificate=true;loginTimeout=30;";
 	
 	
 	public DataAccessLayer() {
@@ -254,7 +253,7 @@ public class DataAccessLayer {
 		ArrayList<String> temp = new ArrayList<String>();
 			
 		String query1 = "SELECT * FROM Course";
-		String query2 = "SELECT TOP 5 UPPER (courseCode) AS 'Course Code', (SUM(CASE WHEN grade >= 50 THEN 1 ELSE 0 END)* 100)/ COUNT(courseCode) AS 'Percent Passed'" + "FROM HasStudied " + "GROUP BY courseCode " + "ORDER BY 'Percent Passed'DESC";	
+		String query2 = "SELECT TOP 5 (courseCode) AS 'Course Code', (SUM(CASE WHEN grade >= 50 THEN 1 ELSE 0 END)* 100)/ COUNT(studentID) AS 'Passed'" + "FROM HasStudied " + "GROUP BY courseCode " + "ORDER BY 'Passed'DESC";	
 
 		ResultSet resultList1 = dataGenerator(query1);
 		ResultSet resultList2 = dataGenerator(query2);
