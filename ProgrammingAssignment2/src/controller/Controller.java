@@ -37,13 +37,13 @@ public class Controller {
 	        ((DefaultTableModel) aw.getTable().getModel()).setRowCount(0);   
 	        ((DefaultTableModel) aw.getTable().getModel()).setColumnCount(columns);
 			((DefaultTableModel) aw.getTable().getModel()).setColumnIdentifiers(headers);
-			System.out.println(columns);
+			
 			while (rs.next()) {  
 	            Object[] row = new Object[columns];
 	            for (int i = 1; i <= columns; i++) {  
 	                row[i-1] = rs.getObject(i); // 1
 	            }
-	            System.out.println(rs.getRow());
+
 	            ((DefaultTableModel) aw.getTable().getModel()).insertRow(rs.getRow() - 1 ,row);
 			}
 			
